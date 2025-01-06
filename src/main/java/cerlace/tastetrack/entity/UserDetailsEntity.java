@@ -2,6 +2,7 @@ package cerlace.tastetrack.entity;
 
 import cerlace.tastetrack.enums.Activity;
 import cerlace.tastetrack.enums.Goal;
+import cerlace.tastetrack.utils.interfaces.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,10 +22,10 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "user_details")
-public class UserDetailsEntity {
+public class UserDetailsEntity implements Identifiable {
     @Id
-    @Column
-    private Long user_id;
+    @Column(name = "user_id")
+    private Long id;
     @Column
     private Float height;
     @Column

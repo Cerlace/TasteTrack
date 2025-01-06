@@ -1,6 +1,7 @@
 package cerlace.tastetrack.entity;
 
 import cerlace.tastetrack.enums.Gender;
+import cerlace.tastetrack.utils.interfaces.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,7 +23,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

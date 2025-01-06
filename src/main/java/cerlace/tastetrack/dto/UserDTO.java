@@ -1,5 +1,6 @@
 package cerlace.tastetrack.dto;
 
+import cerlace.tastetrack.utils.interfaces.Identifiable;
 import cerlace.tastetrack.enums.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Data
-public class UserDTO {
+public class UserDTO implements Identifiable {
     private Long id;
     private String fullName;
     private Date birthDate;
