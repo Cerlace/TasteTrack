@@ -1,6 +1,7 @@
 package cerlace.tastetrack.dao.impl;
 
 import cerlace.tastetrack.dao.DAO;
+import cerlace.tastetrack.utils.interfaces.Identifiable;
 import cerlace.tastetrack.utils.ExecutorUtil;
 import cerlace.tastetrack.utils.HibernateUtil;
 import org.slf4j.Logger;
@@ -8,7 +9,7 @@ import org.slf4j.Logger;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public abstract class AbstractDAO<T> implements DAO<T> {
+public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
     private static final String SAVE_LOG_MESSAGE = "Start saving object {}";
     private static final String GET_LOG_MESSAGE = "Start getting row with id = {}";
     private static final String UPDATE_LOG_MESSAGE = "Start updating row with id = {}";
@@ -51,6 +52,7 @@ public abstract class AbstractDAO<T> implements DAO<T> {
     @Override
     public T update(Long id, T entity) {
         logger.info(UPDATE_LOG_MESSAGE, id);
+        entity.setId(id);
         return ExecutorUtil.executeHibernate(this.entityManager, em -> {
             T updatedEntity = this.entityManager.find(clazz, id);
             if (updatedEntity != null) {
