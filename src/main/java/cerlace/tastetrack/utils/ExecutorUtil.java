@@ -1,5 +1,6 @@
 package cerlace.tastetrack.utils;
 
+import cerlace.tastetrack.utils.interfaces.HibernateExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

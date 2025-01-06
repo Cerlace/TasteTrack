@@ -1,4 +1,4 @@
-package cerlace.tastetrack.utils;
+package cerlace.tastetrack.utils.interfaces;
 
 import javax.persistence.EntityManager;
 
