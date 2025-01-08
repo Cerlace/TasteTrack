@@ -8,10 +8,6 @@
     <link rel='stylesheet' type='text/css' media='screen' href='table.css'>
 </head>
 <body>
-
-<a href="<%= ServletConstants.USER_DETAILS_SAVE_SERVLET %>">
-    <button><h1>SAVE USER DETAILS PAGE</h1></button>
-</a><br/>
 <br/>
 <h1>User details list:</h1>
 <table>
@@ -31,7 +27,7 @@
         <td>
             Goal
         </td>
-        <td colspan="2">
+        <td>
             Action
         </td>
     </tr>
@@ -53,16 +49,6 @@
         </td>
         <td>
             <%= userDetails.getGoal() %>
-        </td>
-        <td>
-            <form name="delete"
-                  method="post"
-                  action="<%= ServletConstants.USER_DETAILS_DELETE_SERVLET %>">
-                <button name="<%= ServletConstants.USER_DETAILS_ID_PARAM %>"
-                        value="<%= userDetails.getId() %>">
-                    Delete
-                </button>
-            </form>
         </td>
         <td>
             <form name="update"

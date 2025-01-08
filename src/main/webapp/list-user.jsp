@@ -10,7 +10,7 @@
 <body>
 
 <a href="<%= ServletConstants.USER_SAVE_SERVLET %>">
-    <button><h1>SAVE USER PAGE</h1></button>
+    <button><h1>SAVE USER</h1></button>
 </a><br/>
 <br/>
 <h1>Users list:</h1>
@@ -30,6 +30,9 @@
         </td>
         <td>
             Email
+        </td>
+        <td>
+            Details
         </td>
         <td colspan="2">
             Action
@@ -53,6 +56,16 @@
         </td>
         <td>
             <%= user.getEmail() %>
+        </td>
+        <td>
+            <form name="getDetails"
+                  method="post"
+                  action="<%= ServletConstants.USER_DETAILS_LIST_SERVLET %>">
+                <button name="<%= ServletConstants.USER_DETAILS_ID_PARAM %>"
+                        value="<%= user.getId() %>">
+                    Get
+                </button>
+            </form>
         </td>
         <td>
             <form name="delete"

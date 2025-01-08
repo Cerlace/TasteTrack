@@ -1,7 +1,6 @@
 <%@ page import="cerlace.tastetrack.dto.UserDTO" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
 <%@ page import="cerlace.tastetrack.enums.Gender" %>
-<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
