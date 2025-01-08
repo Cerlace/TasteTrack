@@ -44,7 +44,7 @@
             <%= user.getFullName() %>
         </td>
         <td>
-            <%= user.getBirthDate() %>
+            <%= ServletConstants.DATE_FORMATTER.format(user.getBirthDate()) %>
         </td>
         <td>
             <%= user.getGender() %>

@@ -1,6 +1,11 @@
 package cerlace.tastetrack.servlet;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 public class ServletConstants {
+    public static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+
     public static final String ADMIN_PAGE_JSP = "/admin-page.jsp";
     public static final String ADMIN_PAGE_SERVLET = "admin-page";
 

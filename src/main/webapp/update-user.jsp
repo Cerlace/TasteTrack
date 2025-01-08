@@ -35,7 +35,7 @@
         Fill new user birthdate:
         <input name="<%= ServletConstants.USER_BIRTHDATE_PARAM %>"
                type="date"
-               value="<%= new SimpleDateFormat("yyyy-MM-dd").format(user.getBirthDate()) %>"
+               value="<%= ServletConstants.DATE_FORMATTER.format(user.getBirthDate()) %>"
                required>
     </label><br/>
     Select new gender:<br>
