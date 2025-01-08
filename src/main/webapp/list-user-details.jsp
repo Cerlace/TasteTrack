@@ -9,7 +9,9 @@
 </head>
 <body>
 
-<a href="<%= ServletConstants.USER_DETAILS_SAVE_SERVLET %>"><h1>SAVE USER DETAILS PAGE</h1></a><br/>
+<a href="<%= ServletConstants.USER_DETAILS_SAVE_SERVLET %>">
+    <button><h1>SAVE USER DETAILS PAGE</h1></button>
+</a><br/>
 <br/>
 <h1>User details list:</h1>
 <table>
@@ -78,6 +80,8 @@
     %>
 </table>
 <br/>
-<a href=<%= ServletConstants.ADMIN_PAGE_SERVLET %>>RETURN TO ADMIN PAGE</a><br/>
+<a href=<%= ServletConstants.ADMIN_PAGE_SERVLET %>>
+    <button><h1>RETURN TO ADMIN PAGE</h1></button>
+</a><br/>
 </body>
 </html>

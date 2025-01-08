@@ -82,6 +82,8 @@
     <button>Send</button>
 </form>
 <br/>
-<a href="<%= ServletConstants.USER_DETAILS_LIST_SERVLET %>">RETURN TO USER DETAILS LIST </a><br/>
+<a href=<%= ServletConstants.USER_DETAILS_LIST_SERVLET %>>
+    <button><h1>RETURN TO USER DETAILS LIST</h1></button>
+</a><br/>
 </body>
 </html>

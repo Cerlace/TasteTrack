@@ -57,6 +57,8 @@
     <button>Send</button>
 </form>
 <br/>
-<a href="<%= ServletConstants.USER_LIST_SERVLET %>">RETURN TO USER LIST </a><br/>
+<a href=<%= ServletConstants.USER_LIST_SERVLET %>>
+    <button><h1>RETURN TO USER LIST</h1></button>
+</a><br/>
 </body>
 </html>
