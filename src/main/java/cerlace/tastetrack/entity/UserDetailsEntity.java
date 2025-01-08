@@ -24,7 +24,7 @@ import javax.persistence.Table;
 @Table(name = "user_details")
 public class UserDetailsEntity implements Identifiable {
     @Id
-    @Column(name = "user_id")
+    @Column
     private Long id;
     @Column
     private Float height;
