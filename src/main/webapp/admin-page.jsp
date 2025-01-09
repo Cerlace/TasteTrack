@@ -14,6 +14,8 @@
     <button><h1>USER DETAILS</h1></button>
 </a><br/>
 <br/>
-
+<a href="<%= ServletConstants.INGREDIENT_LIST_SERVLET %>">
+    <button><h1>INGREDIENTS</h1></button>
+</a><br/>
 </body>
 </html>
