@@ -1,6 +1,7 @@
 package cerlace.tastetrack.enums;
 
 public enum ProductType {
+    OTHER,
     MEAT,
     FISH,
     VEGETABLES,
@@ -12,6 +13,5 @@ public enum ProductType {
     DAIRY,
     SPICES,
     OILS,
-    SWEETS,
-    OTHER
+    SWEETS
 }
