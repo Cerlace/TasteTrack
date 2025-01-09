@@ -7,5 +7,8 @@
 
     <include file="/db_migrations/v-1.0/04-01-2025-01-user-table-setup.xml"/>
     <include file="/db_migrations/v-1.0/04-01-2025-02-user-details-table-setup.xml"/>
-    <include file="db_migrations/v-1.0/05-01-2025-01-user-details-table-join.xml"/>
+    <include file="/db_migrations/v-1.0/05-01-2025-01-user-details-table-join.xml"/>
+    <include file="/db_migrations/v-1.0/05-01-2025-02-ingredient-table-setup.xml"/>
+    <include file="/db_migrations/v-1.0/05-01-2025-03-dish-table-setup.xml"/>
+    <include file="/db_migrations/v-1.0/05-01-2025-04-meal-table-setup.xml"/>
 </databaseChangeLog>
