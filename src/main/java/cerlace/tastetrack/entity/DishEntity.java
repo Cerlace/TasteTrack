@@ -3,8 +3,11 @@ package cerlace.tastetrack.entity;
 import cerlace.tastetrack.utils.interfaces.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +23,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Data
+@Getter
+@Setter
+@ToString(exclude = "dishIngredients")
+@EqualsAndHashCode(exclude = "dishIngredients")
 @Entity
 @Table(name = "dish")
 public class DishEntity implements Identifiable {
