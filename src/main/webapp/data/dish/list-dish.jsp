@@ -5,7 +5,8 @@
 <html>
 <head>
     <title>Dishes list</title>
-    <link rel='stylesheet' type='text/css' media='screen' href='table.css'>
+    <link rel='stylesheet' type='text/css' media='screen'
+          href='${pageContext.request.contextPath}/table.css'>
 </head>
 <body>
 
