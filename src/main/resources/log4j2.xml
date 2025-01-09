@@ -27,10 +27,8 @@
             <AppenderRef ref="RollingFile"/>
         </Logger>
         <Root level="INFO">
-            <AppenderRef ref="RollingFile"/>
-        </Root>
-        <Root level="ERROR">
-            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef level="ERROR" ref="CONSOLE"/>
+            <AppenderRef level="INFO" ref="RollingFile"/>
         </Root>
     </Loggers>
 
