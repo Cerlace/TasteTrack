@@ -48,9 +48,8 @@ public class UserEntity implements Identifiable {
      * Сеттер для поля {@code userDetails}, реализация которого позволяет
      * корректно обновлять значение в связанной таблице.
      * @param userDetails новое значение {@code userDetails}
-     * @return объект {@code UserEntity}
      */
-    public UserEntity setUserDetails(UserDetailsEntity userDetails) {
+    public void setUserDetails(UserDetailsEntity userDetails) {
         if (userDetails == null) {
             if (this.userDetails != null) {
                 this.userDetails.setUser(null);
@@ -59,6 +58,5 @@ public class UserEntity implements Identifiable {
             userDetails.setUser(this);
         }
         this.userDetails = userDetails;
-        return this;
     }
 }
