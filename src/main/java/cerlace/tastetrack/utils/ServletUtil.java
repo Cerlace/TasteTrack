@@ -1,5 +1,6 @@
 package cerlace.tastetrack.utils;
 
+import cerlace.tastetrack.dto.DishDTO;
 import cerlace.tastetrack.dto.IngredientDTO;
 import cerlace.tastetrack.dto.UserDTO;
 import cerlace.tastetrack.dto.UserDetailsDTO;
@@ -18,6 +19,24 @@ import java.util.Date;
 import java.util.Optional;
 
 public class ServletUtil {
+    /**
+     * Создает объект типа {@code DishDTO}, заполняя поля значениями из параметров,
+     * полученных из объекта HttpServletRequest
+     *
+     * @param req объект HttpServletRequest
+     * @return объект типа {@code DishDTO}
+     */
+    public static DishDTO mapDish(HttpServletRequest req) {
+        return DishDTO.builder()
+                .name(getStringParam(req, ServletConstants.DISH_NAME_PARAM))
+                .calories(getFloatParam(req, ServletConstants.DISH_CALORIES_PARAM))
+                .proteins(getFloatParam(req, ServletConstants.DISH_PROTEINS_PARAM))
+                .fats(getFloatParam(req, ServletConstants.DISH_FATS_PARAM))
+                .carbohydrates(getFloatParam(req, ServletConstants.DISH_CARBOHYDRATES_PARAM))
+                .recipe(getStringParam(req, ServletConstants.DISH_RECIPE_PARAM))
+                .build();
+    }
+
     /**
      * Создает объект типа {@code IngredientDTO}, заполняя поля значениями из параметров,
      * полученных из объекта HttpServletRequest

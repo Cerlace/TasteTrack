@@ -17,7 +17,7 @@
            value="<%= ingredient.getId() %>"
            required>
     <label>
-        Fill new user full name:
+        Fill new ingredient name:
         <input name="<%= ServletConstants.INGREDIENT_NAME_PARAM %>"
                type="text"
                value="<%= ingredient.getName() %>"
