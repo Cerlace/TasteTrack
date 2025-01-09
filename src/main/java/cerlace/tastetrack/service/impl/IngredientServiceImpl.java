@@ -7,12 +7,12 @@ import cerlace.tastetrack.entity.IngredientEntity;
 import cerlace.tastetrack.mapper.IngredientMapper;
 import cerlace.tastetrack.service.IngredientService;
 
-public class IngredientsServiceImpl extends AbstractService<IngredientDTO, IngredientEntity>
+public class IngredientServiceImpl extends AbstractService<IngredientDTO, IngredientEntity>
         implements IngredientService {
     private final IngredientDAO ingredientDAO;
     private final IngredientMapper ingredientMapper;
 
-    public IngredientsServiceImpl() {
+    public IngredientServiceImpl() {
         super(new IngredientDAOImpl(), IngredientMapper.INSTANCE);
         this.ingredientDAO = (IngredientDAO) super.getDao();
         this.ingredientMapper = (IngredientMapper) super.getMapper();
