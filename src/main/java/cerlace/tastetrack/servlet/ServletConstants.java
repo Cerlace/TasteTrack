@@ -81,6 +81,6 @@ public class ServletConstants {
     public static final String MEAL_LIST_ATTRIBUTE = "mealList";
     public static final String MEAL_ATTRIBUTE = "mealObject";
     public static final String MEAL_ID_PARAM = "mealId";
-    public static final String MEAL_NAME_PARAM = "mealDate";
+    public static final String MEAL_DATE_PARAM = "mealDate";
     public static final String MEAL_TIME_PARAM = "mealTime";
 }

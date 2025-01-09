@@ -2,11 +2,13 @@ package cerlace.tastetrack.utils;
 
 import cerlace.tastetrack.dto.DishDTO;
 import cerlace.tastetrack.dto.IngredientDTO;
+import cerlace.tastetrack.dto.MealDTO;
 import cerlace.tastetrack.dto.UserDTO;
 import cerlace.tastetrack.dto.UserDetailsDTO;
 import cerlace.tastetrack.enums.Activity;
 import cerlace.tastetrack.enums.Gender;
 import cerlace.tastetrack.enums.Goal;
+import cerlace.tastetrack.enums.MealTime;
 import cerlace.tastetrack.enums.ProductType;
 import cerlace.tastetrack.servlet.ServletConstants;
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +21,19 @@ import java.util.Date;
 import java.util.Optional;
 
 public class ServletUtil {
+    /**
+     * Создает объект типа {@code MealDTO}, заполняя поля значениями из параметров,
+     * полученных из объекта HttpServletRequest
+     *
+     * @param req объект HttpServletRequest
+     * @return объект типа {@code MealDTO}
+     */
+    public static MealDTO mapMeal(HttpServletRequest req) {
+        return MealDTO.builder()
+                .date(getDateParam(req, ServletConstants.MEAL_DATE_PARAM))
+                .mealTime(MealTime.valueOf(getStringParam(req, ServletConstants.MEAL_TIME_PARAM)))
+                .build();
+    }
     /**
      * Создает объект типа {@code DishDTO}, заполняя поля значениями из параметров,
      * полученных из объекта HttpServletRequest
