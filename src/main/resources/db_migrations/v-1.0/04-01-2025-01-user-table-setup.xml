@@ -12,7 +12,7 @@
             </column>
             <column name="full_name" type="varchar(255)"/>
             <column name="birth_date" type="date"/>
-            <column name="gender" type="varchar(255)"/>
+            <column name="gender" type="int"/>
             <column name="email" type="varchar(255)"/>
         </createTable>
     </changeSet>

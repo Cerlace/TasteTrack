@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -35,10 +34,10 @@ public class UserDetailsEntity implements Identifiable {
     @Column
     private Float weight;
     @Column
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated
     private Activity activity;
     @Column
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated
     private Goal goal;
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId

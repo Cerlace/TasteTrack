@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +34,7 @@ public class UserEntity implements Identifiable {
     @Column(name = "birth_date")
     private Date birthDate;
     @Column
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated
     private Gender gender;
     @Column
     private String email;

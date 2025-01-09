@@ -12,8 +12,8 @@
             </column>
             <column name="height" type="float"/>
             <column name="weight" type="float"/>
-            <column name="activity" type="varchar(255)"/>
-            <column name="goal" type="varchar(255)"/>
+            <column name="activity" type="int"/>
+            <column name="goal" type="int"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
