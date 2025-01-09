@@ -11,4 +11,5 @@
     <include file="/db_migrations/v-1.0/05-01-2025-02-ingredient-table-setup.xml"/>
     <include file="/db_migrations/v-1.0/05-01-2025-03-dish-table-setup.xml"/>
     <include file="/db_migrations/v-1.0/05-01-2025-04-meal-table-setup.xml"/>
+    <include file="/db_migrations/v-1.0/07-01-2025-01-dish-ingredient-table-setup.xml"/>
 </databaseChangeLog>

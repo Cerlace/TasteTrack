@@ -13,7 +13,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,4 +34,7 @@ public class IngredientEntity implements Identifiable {
     @Column(name = "product_type", nullable = false)
     @Enumerated
     private ProductType productType;
+    @Builder.Default
+    @OneToMany(mappedBy = "dish")
+    private Set<DishIngredientEntity> dishIngredients = new HashSet<>();
 }

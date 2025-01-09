@@ -12,7 +12,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,4 +41,7 @@ public class DishEntity implements Identifiable {
     @Column(nullable = false)
     @Lob
     private String recipe;
+    @Builder.Default
+    @OneToMany(mappedBy = "ingredient")
+    private Set<DishIngredientEntity> dishIngredients = new HashSet<>();
 }
