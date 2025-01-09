@@ -1,6 +1,7 @@
 package cerlace.tastetrack.entity;
 
 import cerlace.tastetrack.enums.ProductType;
+import cerlace.tastetrack.utils.interfaces.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,7 +21,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "ingredient")
-public class IngredientEntity {
+public class IngredientEntity implements Identifiable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
