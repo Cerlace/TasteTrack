@@ -1,0 +1,20 @@
+package cerlace.tastetrack.service.impl;
+
+import cerlace.tastetrack.dao.IngredientDAO;
+import cerlace.tastetrack.dao.impl.IngredientDAOImpl;
+import cerlace.tastetrack.dto.IngredientDTO;
+import cerlace.tastetrack.entity.IngredientEntity;
+import cerlace.tastetrack.mapper.IngredientMapper;
+import cerlace.tastetrack.service.IngredientService;
+
+public class IngredientsServiceImpl extends AbstractService<IngredientDTO, IngredientEntity>
+        implements IngredientService {
+    private final IngredientDAO ingredientDAO;
+    private final IngredientMapper ingredientMapper;
+
+    public IngredientsServiceImpl() {
+        super(new IngredientDAOImpl(), IngredientMapper.INSTANCE);
+        this.ingredientDAO = (IngredientDAO) super.getDao();
+        this.ingredientMapper = (IngredientMapper) super.getMapper();
+    }
+}
