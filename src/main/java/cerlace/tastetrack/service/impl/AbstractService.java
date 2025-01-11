@@ -6,43 +6,44 @@ import cerlace.tastetrack.service.CrudService;
 
 import java.util.List;
 
-public abstract class AbstractService<T, E> implements CrudService<T> {
+public abstract class AbstractService<DtoT, EntityT, DaoT extends DAO<EntityT>>
+        implements CrudService<DtoT> {
 
-    private final DAO<E> dao;
-    private final IMapper<T, E> mapper;
+    private final DaoT dao;
+    private final IMapper<DtoT, EntityT> mapper;
 
-    protected AbstractService(DAO<E> dao, IMapper<T, E> mapper) {
+    protected AbstractService(DaoT dao, IMapper<DtoT, EntityT> mapper) {
         this.dao = dao;
         this.mapper = mapper;
     }
 
-    protected DAO<E> getDao() {
+    protected DaoT getDao() {
         return this.dao;
     }
 
-    protected IMapper<T, E> getMapper() {
+    protected IMapper<DtoT, EntityT> getMapper() {
         return this.mapper;
     }
 
     @Override
-    public T save(T dto) {
-        E entity = mapper.toEntity(dto);
+    public DtoT save(DtoT dto) {
+        EntityT entity = mapper.toEntity(dto);
         return mapper.toDTO(dao.save(entity));
     }
 
     @Override
-    public T get(Long id) {
+    public DtoT get(Long id) {
         return mapper.toDTO(dao.get(id));
     }
 
     @Override
-    public List<T> getAll() {
+    public List<DtoT> getAll() {
         return mapper.toDTOList(dao.getAll());
     }
 
     @Override
-    public T update(Long id, T dto) {
-        E entity = mapper.toEntity(dto);
+    public DtoT update(Long id, DtoT dto) {
+        EntityT entity = mapper.toEntity(dto);
         return mapper.toDTO(dao.update(id, entity));
     }
 

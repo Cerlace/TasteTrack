@@ -7,14 +7,10 @@ import cerlace.tastetrack.entity.DishEntity;
 import cerlace.tastetrack.mapper.DishMapper;
 import cerlace.tastetrack.service.DishService;
 
-public class DishServiceImpl extends AbstractService<DishDTO, DishEntity>
+public class DishServiceImpl extends AbstractService<DishDTO, DishEntity, DishDAO>
         implements DishService {
-    private final DishDAO dishDAO;
-    private final DishMapper dishMapper;
 
     public DishServiceImpl() {
         super(new DishDAOImpl(), DishMapper.INSTANCE);
-        this.dishDAO = (DishDAO) super.getDao();
-        this.dishMapper = (DishMapper) super.getMapper();
     }
 }
