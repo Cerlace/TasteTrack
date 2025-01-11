@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class DishIngredientDTO {
+    private Long id;
     private DishDTO dish;
     private IngredientDTO ingredient;
     private Float amount;

@@ -7,17 +7,15 @@
 
     <changeSet id="07-01-2025-dish-ingredient-table-setup-1" author="Daniil">
         <createTable tableName="dish_ingredient">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
             <column name="dish_id" type="bigint"/>
             <column name="ingredient_id" type="bigint"/>
             <column name="amount" type="float"/>
         </createTable>
     </changeSet>
     <changeSet id="07-01-2025-dish-ingredient-table-setup-2" author="Daniil">
-        <addPrimaryKey tableName="dish_ingredient"
-                       columnNames="dish_id, ingredient_id"
-                       constraintName="PK_dish_ingredient"/>
-    </changeSet>
-    <changeSet id="07-01-2025-dish-ingredient-table-setup-3" author="Daniil">
         <addForeignKeyConstraint
                 baseTableName="dish_ingredient"
                 baseColumnNames="dish_id"
@@ -25,7 +23,7 @@
                 referencedColumnNames="id"
                 constraintName="FK_dish_ingredient_dish"/>
     </changeSet>
-    <changeSet id="07-01-2025-dish-ingredient-table-setup-4" author="Daniil">
+    <changeSet id="07-01-2025-dish-ingredient-table-setup-3" author="Daniil">
         <addForeignKeyConstraint
                 baseTableName="dish_ingredient"
                 baseColumnNames="ingredient_id"
