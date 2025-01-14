@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
+
+    <include file="/db_migrations/v-0.1/04-01-2025-01-user-table-setup.xml"/>
+    <include file="/db_migrations/v-0.1/04-01-2025-02-user-details-table-setup.xml"/>
+    <include file="/db_migrations/v-0.1/05-01-2025-01-user-details-table-join.xml"/>
+    <include file="/db_migrations/v-0.1/05-01-2025-02-ingredient-table-setup.xml"/>
+    <include file="/db_migrations/v-0.1/05-01-2025-03-dish-table-setup.xml"/>
+    <include file="/db_migrations/v-0.1/05-01-2025-04-meal-table-setup.xml"/>
+    <include file="/db_migrations/v-0.1/07-01-2025-01-dish-ingredient-table-setup.xml"/>
+</databaseChangeLog>
