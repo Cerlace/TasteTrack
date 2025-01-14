@@ -1,6 +1,8 @@
 <%@ page import="cerlace.tastetrack.dto.UserDTO" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
 <%@ page import="cerlace.tastetrack.enums.Gender" %>
+<%@ page import="cerlace.tastetrack.enums.Activity" %>
+<%@ page import="cerlace.tastetrack.enums.Goal" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -52,6 +54,68 @@
                value="<%= Gender.FEMALE %>"
             <%= user.getGender() == Gender.FEMALE ? "checked" : "" %>>
         Female
+    </label><br/>
+    <label>
+        Fill new user height:
+        <input name="<%= ServletConstants.USER_HEIGHT_PARAM %>"
+               type="number"
+               step="0.1"
+               value="<%= user.getHeight() %>"
+               required>
+    </label><br/>
+    <label>
+        Fill new user weight:
+        <input name="<%= ServletConstants.USER_WEIGHT_PARAM %>"
+               type="number"
+               step="0.1"
+               value="<%= user.getWeight() %>"
+               required>
+    </label><br/>
+    Select new user activity level:<br>
+    <label>
+        <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+               type="radio"
+               value="<%= Activity.LOW %>"
+               required
+            <%= user.getActivity() == Activity.LOW ? "checked" : "" %>>
+        Low
+    </label>
+    <label>
+        <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+               type="radio"
+               value="<%= Activity.AVERAGE %>"
+            <%= user.getActivity() == Activity.AVERAGE ? "checked" : "" %>>
+        Average
+    </label>
+    <label>
+        <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+               type="radio"
+               value="<%= Activity.HIGH %>"
+            <%= user.getActivity() == Activity.HIGH ? "checked" : "" %>>
+        High
+    </label><br/>
+    Select new user goal:<br>
+    <label>
+        <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+               type="radio"
+               value="<%= Goal.LOSE_WEIGHT %>"
+               required
+            <%= user.getGoal() == Goal.LOSE_WEIGHT ? "checked" : "" %>>
+        Lose weight
+    </label>
+    <label>
+        <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+               type="radio"
+               value="<%= Goal.KEEP_WEIGHT %>"
+            <%= user.getGoal() == Goal.KEEP_WEIGHT ? "checked" : "" %>>
+        Keep weight
+    </label>
+    <label>
+        <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+               type="radio"
+               value="<%= Goal.GAIN_WEIGHT %>"
+            <%= user.getGoal() == Goal.GAIN_WEIGHT ? "checked" : "" %>>
+        Gain weight
     </label><br/>
     <button>Send</button>
 </form>

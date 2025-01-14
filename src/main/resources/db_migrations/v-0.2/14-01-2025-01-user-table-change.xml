@@ -8,4 +8,12 @@
     <changeSet id="14-01-2025-user-details-table-drop-1" author="Daniil">
         <dropTable tableName="user_details"/>
     </changeSet>
+    <changeSet id="14-01-2025-user-table-add-columns-2" author="Daniil">
+        <addColumn tableName="user">
+            <column name="height" type="float"/>
+            <column name="weight" type="float"/>
+            <column name="activity" type="int"/>
+            <column name="goal" type="int"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

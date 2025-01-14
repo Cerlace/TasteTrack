@@ -5,7 +5,6 @@ import cerlace.tastetrack.service.IngredientService;
 import cerlace.tastetrack.service.impl.IngredientServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

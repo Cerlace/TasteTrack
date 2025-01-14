@@ -33,7 +33,16 @@
             Email
         </td>
         <td>
-            Details
+            Height
+        </td>
+        <td>
+            Weight
+        </td>
+        <td>
+            Activity
+        </td>
+        <td>
+            Goal
         </td>
         <td colspan="2">
             Action
@@ -59,14 +68,16 @@
             <%= user.getEmail() %>
         </td>
         <td>
-            <form name="getDetails"
-                  method="post"
-                  action="<%= ServletConstants.USER_DETAILS_LIST_SERVLET %>">
-                <button name="<%= ServletConstants.USER_DETAILS_ID_PARAM %>"
-                        value="<%= user.getId() %>">
-                    Get
-                </button>
-            </form>
+            <%= user.getHeight() %>
+        </td>
+        <td>
+            <%= user.getWeight() %>
+        </td>
+        <td>
+            <%= user.getActivity() %>
+        </td>
+        <td>
+            <%= user.getGoal() %>
         </td>
         <td>
             <form name="delete"

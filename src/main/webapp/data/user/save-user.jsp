@@ -1,5 +1,7 @@
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
 <%@ page import="cerlace.tastetrack.enums.Gender" %>
+<%@ page import="cerlace.tastetrack.enums.Activity" %>
+<%@ page import="cerlace.tastetrack.enums.Goal" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -30,6 +32,60 @@
     <label>
         <input name="<%= ServletConstants.USER_GENDER_PARAM %>" type="radio" value="<%= Gender.FEMALE %>">
         Female
+    </label><br/>
+    <label>
+        Fill user height:
+        <input name="<%= ServletConstants.USER_HEIGHT_PARAM %>"
+               type="number"
+               step="0.1"
+               required>
+    </label><br/>
+    <label>
+        Fill user weight:
+        <input name="<%= ServletConstants.USER_WEIGHT_PARAM %>"
+               type="number"
+               step="0.1"
+               required>
+    </label><br/>
+    Select user activity level:<br>
+    <label>
+        <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+               type="radio"
+               value="<%= Activity.LOW %>"
+               required>
+        Low
+    </label>
+    <label>
+        <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+               type="radio"
+               value="<%= Activity.AVERAGE %>">
+        Average
+    </label>
+    <label>
+        <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+               type="radio"
+               value="<%= Activity.HIGH %>">
+        High
+    </label><br/>
+    Select user goal:<br>
+    <label>
+        <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+               type="radio"
+               value="<%= Goal.LOSE_WEIGHT %>"
+               required>
+        Lose weight
+    </label>
+    <label>
+        <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+               type="radio"
+               value="<%= Goal.KEEP_WEIGHT %>">
+        Keep weight
+    </label>
+    <label>
+        <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+               type="radio"
+               value="<%= Goal.GAIN_WEIGHT %>">
+        Gain weight
     </label><br/>
     <button>Send</button>
 </form>
