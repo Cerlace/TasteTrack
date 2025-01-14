@@ -24,19 +24,10 @@ public class ServletConstants {
     public static final String USER_BIRTHDATE_PARAM = "userBirthDate";
     public static final String USER_GENDER_PARAM = "userGender";
     public static final String USER_EMAIL_PARAM = "userEmail";
-
-    public static final String USER_DETAILS_LIST_JSP = "/data/user-details/list-user-details.jsp";
-    public static final String USER_DETAILS_UPDATE_JSP = "/data/user-details/update-user-details.jsp";
-    public static final String USER_DETAILS_LIST_SERVLET = "list-user-details";
-    public static final String USER_DETAILS_UPDATE_SERVLET = "update-user-details";
-
-    public static final String USER_DETAILS_LIST_ATTRIBUTE = "userDetailsList";
-    public static final String USER_DETAILS_ATTRIBUTE = "userDetailsObject";
-    public static final String USER_DETAILS_ID_PARAM = "userDetailsId";
-    public static final String USER_DETAILS_HEIGHT_PARAM = "userDetailsHeight";
-    public static final String USER_DETAILS_WEIGHT_PARAM = "userDetailsWeight";
-    public static final String USER_DETAILS_ACTIVITY_PARAM = "userDetailsActivity";
-    public static final String USER_DETAILS_GOAL_PARAM = "userDetailsGoal";
+    public static final String USER_HEIGHT_PARAM = "userHeight";
+    public static final String USER_WEIGHT_PARAM = "userWeight";
+    public static final String USER_ACTIVITY_PARAM = "userActivity";
+    public static final String USER_GOAL_PARAM = "userGoal";
 
     public static final String INGREDIENT_LIST_JSP = "/data/ingredient/list-ingredient.jsp";
     public static final String INGREDIENT_SAVE_JSP = "/data/ingredient/save-ingredient.jsp";
@@ -97,7 +88,5 @@ public class ServletConstants {
     public static final String DISH_INGREDIENT_LIST_ATTRIBUTE = "dishIngredientList";
     public static final String DISH_INGREDIENT_ATTRIBUTE = "dishIngredientObject";
     public static final String DISH_INGREDIENT_ID_PARAM = "dishIngredientId";
-    public static final String DISH_INGREDIENT_DISH_ID_PARAM = "dishIngredientDishName";
-    public static final String DISH_INGREDIENT_INGREDIENT_ID_PARAM = "dishIngredientIngredientName";
     public static final String DISH_INGREDIENT_AMOUNT_PARAM = "dishIngredientAmount";
 }

@@ -10,10 +10,6 @@
     <button><h1>USERS</h1></button>
 </a><br/>
 <br/>
-<a href="<%= ServletConstants.USER_DETAILS_LIST_SERVLET %>">
-    <button><h1>USER DETAILS</h1></button>
-</a><br/>
-<br/>
 <a href="<%= ServletConstants.INGREDIENT_LIST_SERVLET %>">
     <button><h1>INGREDIENTS</h1></button>
 </a><br/>

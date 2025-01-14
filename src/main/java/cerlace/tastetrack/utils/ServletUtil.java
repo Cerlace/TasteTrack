@@ -5,7 +5,6 @@ import cerlace.tastetrack.dto.DishIngredientDTO;
 import cerlace.tastetrack.dto.IngredientDTO;
 import cerlace.tastetrack.dto.MealDTO;
 import cerlace.tastetrack.dto.UserDTO;
-import cerlace.tastetrack.dto.UserDetailsDTO;
 import cerlace.tastetrack.enums.Activity;
 import cerlace.tastetrack.enums.Gender;
 import cerlace.tastetrack.enums.Goal;
@@ -99,25 +98,12 @@ public class ServletUtil {
                 .birthDate(getDateParam(req, ServletConstants.USER_BIRTHDATE_PARAM))
                 .gender(Gender.valueOf(getStringParam(req, ServletConstants.USER_GENDER_PARAM)))
                 .email(getStringParam(req, ServletConstants.USER_EMAIL_PARAM))
-                .build();
-    }
-
-    /**
-     * Создает объект типа {@code UserDetailsDTO}, заполняя поля значениями из параметров,
-     * полученных из объекта HttpServletRequest
-     *
-     * @param req объект HttpServletRequest
-     * @return объект типа {@code UserDetailsDTO}
-     */
-    public static UserDetailsDTO mapUserDetails(HttpServletRequest req) {
-        return UserDetailsDTO.builder()
-                .id(getLongParam(req, ServletConstants.USER_DETAILS_ID_PARAM))
-                .height(getFloatParam(req, ServletConstants.USER_DETAILS_HEIGHT_PARAM))
-                .weight(getFloatParam(req, ServletConstants.USER_DETAILS_WEIGHT_PARAM))
+                .height(getFloatParam(req, ServletConstants.USER_HEIGHT_PARAM))
+                .weight(getFloatParam(req, ServletConstants.USER_WEIGHT_PARAM))
                 .activity(Activity.valueOf(
-                        getStringParam(req, ServletConstants.USER_DETAILS_ACTIVITY_PARAM)))
+                        getStringParam(req, ServletConstants.USER_ACTIVITY_PARAM)))
                 .goal(Goal.valueOf(
-                        getStringParam(req, ServletConstants.USER_DETAILS_GOAL_PARAM)))
+                        getStringParam(req, ServletConstants.USER_GOAL_PARAM)))
                 .build();
     }
 
