@@ -24,6 +24,9 @@
             Dish name
         </td>
         <td>
+            Dish ingredients
+        </td>
+        <td>
             Calories
         </td>
         <td>
@@ -51,6 +54,16 @@
         </td>
         <td>
             <%= dish.getName() %>
+        </td>
+        <td>
+            <form name="list-ingredients"
+                  method="get"
+                  action="<%= ServletConstants.DISH_INGREDIENT_LIST_SERVLET %>">
+                <button name="<%= ServletConstants.DISH_ID_PARAM %>"
+                        value="<%= dish.getId() %>">
+                    Ingredient list
+                </button>
+            </form>
         </td>
         <td>
             <%= dish.getCalories() %>

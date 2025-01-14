@@ -41,9 +41,11 @@ public class ServletConstants {
     public static final String INGREDIENT_LIST_JSP = "/data/ingredient/list-ingredient.jsp";
     public static final String INGREDIENT_SAVE_JSP = "/data/ingredient/save-ingredient.jsp";
     public static final String INGREDIENT_UPDATE_JSP = "/data/ingredient/update-ingredient.jsp";
+    public static final String INGREDIENT_SELECT_JSP = "/data/ingredient/select-ingredient.jsp";
     public static final String INGREDIENT_LIST_SERVLET = "list-ingredient";
     public static final String INGREDIENT_SAVE_SERVLET = "save-ingredient";
     public static final String INGREDIENT_UPDATE_SERVLET = "update-ingredient";
+    public static final String INGREDIENT_SELECT_SERVLET = "/select-ingredient";
     public static final String INGREDIENT_DELETE_SERVLET = "delete-ingredient";
 
     public static final String INGREDIENT_LIST_ATTRIBUTE = "ingredientList";
@@ -83,4 +85,19 @@ public class ServletConstants {
     public static final String MEAL_ID_PARAM = "mealId";
     public static final String MEAL_DATE_PARAM = "mealDate";
     public static final String MEAL_TIME_PARAM = "mealTime";
+
+    public static final String DISH_INGREDIENT_LIST_JSP = "/data/dish-ingredient/list-dish-ingredient.jsp";
+    public static final String DISH_INGREDIENT_SAVE_JSP = "/data/dish-ingredient/save-dish-ingredient.jsp";
+    public static final String DISH_INGREDIENT_UPDATE_JSP = "/data/dish-ingredient/update-dish-ingredient.jsp";
+    public static final String DISH_INGREDIENT_LIST_SERVLET = "list-dish-ingredient";
+    public static final String DISH_INGREDIENT_SAVE_SERVLET = "save-dish-ingredient";
+    public static final String DISH_INGREDIENT_UPDATE_SERVLET = "update-dish-ingredient";
+    public static final String DISH_INGREDIENT_DELETE_SERVLET = "delete-dish-ingredient";
+
+    public static final String DISH_INGREDIENT_LIST_ATTRIBUTE = "dishIngredientList";
+    public static final String DISH_INGREDIENT_ATTRIBUTE = "dishIngredientObject";
+    public static final String DISH_INGREDIENT_ID_PARAM = "dishIngredientId";
+    public static final String DISH_INGREDIENT_DISH_ID_PARAM = "dishIngredientDishName";
+    public static final String DISH_INGREDIENT_INGREDIENT_ID_PARAM = "dishIngredientIngredientName";
+    public static final String DISH_INGREDIENT_AMOUNT_PARAM = "dishIngredientAmount";
 }
