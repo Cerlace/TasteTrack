@@ -10,12 +10,12 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
-    private static final String SAVE_LOG_MESSAGE = "Start saving object {}";
-    private static final String GET_LOG_MESSAGE = "Start getting row with id = {}";
-    private static final String UPDATE_LOG_MESSAGE = "Start updating row with id = {}";
-    private static final String DELETE_LOG_MESSAGE = "Start deleting row with id = {}";
-    private static final String GET_ALL_LOG_MESSAGE = "Start getting all rows";
-    private static final String CLOSING_ENTITY_MANAGER = "Closing entity manager";
+    protected static final String SAVE_LOG_MESSAGE = "Start saving object {}";
+    protected static final String GET_LOG_MESSAGE = "Start getting row with id = {}";
+    protected static final String UPDATE_LOG_MESSAGE = "Start updating row with id = {}";
+    protected static final String DELETE_LOG_MESSAGE = "Start deleting row with id = {}";
+    protected static final String GET_ALL_LOG_MESSAGE = "Start getting all rows";
+    protected static final String CLOSING_ENTITY_MANAGER = "Closing entity manager";
 
     private final Class<T> clazz;
     private final Logger logger;
@@ -25,6 +25,10 @@ public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
         this.clazz = clazz;
         this.logger = logger;
         this.entityManager = HibernateUtil.getEntityManager();
+    }
+
+    protected EntityManager getEntityManager() {
+        return this.entityManager;
     }
 
     @Override
