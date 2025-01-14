@@ -4,11 +4,14 @@ import cerlace.tastetrack.dao.DAO;
 import cerlace.tastetrack.utils.interfaces.Identifiable;
 import cerlace.tastetrack.utils.ExecutorUtil;
 import cerlace.tastetrack.utils.HibernateUtil;
+import lombok.AccessLevel;
+import lombok.Getter;
 import org.slf4j.Logger;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Getter(AccessLevel.PROTECTED)
 public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
     protected static final String SAVE_LOG_MESSAGE = "Start saving object {}";
     protected static final String GET_LOG_MESSAGE = "Start getting row with id = {}";
@@ -25,10 +28,6 @@ public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
         this.clazz = clazz;
         this.logger = logger;
         this.entityManager = HibernateUtil.getEntityManager();
-    }
-
-    protected EntityManager getEntityManager() {
-        return this.entityManager;
     }
 
     @Override
