@@ -2,14 +2,14 @@ package cerlace.tastetrack.service;
 
 import java.util.List;
 
-public interface CrudService<T> {
+public interface CrudService<DtoT> {
     /**
      * Конвертирует DTO в Entity
      * и передает на слой DAO для сохранения.
      * @param dto DTO, который нужно записать в БД
      * @return записанный в БД объект с id
      */
-    T save(T dto);
+    DtoT save(DtoT dto);
 
     /**
      * Получает из слоя DAO объект Entity по id и
@@ -17,14 +17,14 @@ public interface CrudService<T> {
      * @param id идентификатор записи в БД
      * @return полученная запись или null в случае, если запись не найдена
      */
-    T get(Long id);
+    DtoT get(Long id);
 
     /**
      * Получает из слоя DAO список всех объектов Entity в БД,
      * конвертирует их в объекты DTO.
      * @return список объектов DTO
      */
-    List<T> getAll();
+    List<DtoT> getAll();
 
     /**
      * Конвертирует DTO в Entity и передает
@@ -33,7 +33,7 @@ public interface CrudService<T> {
      * @param id идентификатор записи в БД
      * @return обновленный в БД объект
      */
-    T update(Long id, T dto);
+    DtoT update(Long id, DtoT dto);
 
     /**
      * С помощью слоя DAO инициирует удаление объекта из БД

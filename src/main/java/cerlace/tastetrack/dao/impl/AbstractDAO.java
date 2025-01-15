@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Getter(AccessLevel.PROTECTED)
-public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
+public abstract class AbstractDAO<EntityT extends Identifiable> implements DAO<EntityT> {
     protected static final String SAVE_LOG_MESSAGE = "Start saving object {}";
     protected static final String GET_LOG_MESSAGE = "Start getting row with id = {}";
     protected static final String UPDATE_LOG_MESSAGE = "Start updating row with id = {}";
@@ -20,18 +20,18 @@ public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
     protected static final String GET_ALL_LOG_MESSAGE = "Start getting all rows";
     protected static final String CLOSING_ENTITY_MANAGER = "Closing entity manager";
 
-    private final Class<T> clazz;
+    private final Class<EntityT> clazz;
     private final Logger logger;
     private final EntityManager entityManager;
 
-    public AbstractDAO(Class<T> clazz, Logger logger) {
+    public AbstractDAO(Class<EntityT> clazz, Logger logger) {
         this.clazz = clazz;
         this.logger = logger;
         this.entityManager = HibernateUtil.getEntityManager();
     }
 
     @Override
-    public T save(T entity) {
+    public EntityT save(EntityT entity) {
         logger.info(SAVE_LOG_MESSAGE, entity);
         return ExecutorUtil.executeHibernate(this.entityManager, em -> {
             em.persist(entity);
@@ -40,24 +40,24 @@ public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
     }
 
     @Override
-    public T get(Long id) {
+    public EntityT get(Long id) {
         logger.info(GET_LOG_MESSAGE, id);
         return entityManager.find(clazz, id);
     }
 
     @Override
-    public List<T> getAll() {
+    public List<EntityT> getAll() {
         logger.info(GET_ALL_LOG_MESSAGE);
         String query = "FROM " + clazz.getSimpleName();
         return entityManager.createQuery(query, clazz).getResultList();
     }
 
     @Override
-    public T update(Long id, T entity) {
+    public EntityT update(Long id, EntityT entity) {
         logger.info(UPDATE_LOG_MESSAGE, id);
         entity.setId(id);
         return ExecutorUtil.executeHibernate(this.entityManager, em -> {
-            T updatedEntity = this.entityManager.find(clazz, id);
+            EntityT updatedEntity = this.entityManager.find(clazz, id);
             if (updatedEntity != null) {
                 updatedEntity = em.merge(entity);
             }
@@ -69,7 +69,7 @@ public abstract class AbstractDAO<T extends Identifiable> implements DAO<T> {
     public boolean delete(Long id) {
         logger.info(DELETE_LOG_MESSAGE, id);
         return Boolean.TRUE.equals(ExecutorUtil.executeHibernate(this.entityManager, em -> {
-            T entity = em.find(clazz, id);
+            EntityT entity = em.find(clazz, id);
             if (entity != null) {
                 em.remove(entity);
                 return true;

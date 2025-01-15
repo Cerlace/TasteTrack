@@ -8,7 +8,8 @@ import cerlace.tastetrack.entity.UserEntity;
 import cerlace.tastetrack.mapper.UserMapper;
 import cerlace.tastetrack.service.UserService;
 
-public class UserServiceImpl extends AbstractService<UserDTO, UserEntity, UserDAO> implements UserService {
+public class UserServiceImpl extends AbstractService<UserDTO, UserEntity, UserDAO>
+        implements UserService {
 
     public UserServiceImpl() {
         super(new UserDAOImpl(), UserMapper.INSTANCE);
