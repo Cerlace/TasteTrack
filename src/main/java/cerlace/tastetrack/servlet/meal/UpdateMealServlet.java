@@ -5,7 +5,7 @@ import cerlace.tastetrack.service.MealService;
 import cerlace.tastetrack.service.impl.MealServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +21,7 @@ public class UpdateMealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = ServletUtil.getLongParam(req, ServletConstants.MEAL_ID_PARAM);
+        Long id = RequestMapperUtil.getLongParam(req, ServletConstants.MEAL_ID_PARAM);
         MealDTO mealDTO = mealService.get(id);
         req.setAttribute(ServletConstants.MEAL_ATTRIBUTE, mealDTO);
 
@@ -34,8 +34,8 @@ public class UpdateMealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         mealService.update(
-                ServletUtil.getLongParam(req, ServletConstants.MEAL_ID_PARAM),
-                ServletUtil.mapMeal(req));
+                RequestMapperUtil.getLongParam(req, ServletConstants.MEAL_ID_PARAM),
+                RequestMapperUtil.getDTO(req, MealDTO.class));
 
         resp.sendRedirect(ServletConstants.MEAL_LIST_SERVLET);
     }

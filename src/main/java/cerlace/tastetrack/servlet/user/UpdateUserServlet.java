@@ -5,7 +5,7 @@ import cerlace.tastetrack.service.UserService;
 import cerlace.tastetrack.service.impl.UserServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +21,7 @@ public class UpdateUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = ServletUtil.getLongParam(req, ServletConstants.USER_ID_PARAM);
+        Long id = RequestMapperUtil.getLongParam(req, ServletConstants.USER_ID_PARAM);
         UserDTO userDTO = userService.get(id);
         req.setAttribute(ServletConstants.USER_ATTRIBUTE, userDTO);
 
@@ -34,8 +34,8 @@ public class UpdateUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         userService.update(
-                ServletUtil.getLongParam(req, ServletConstants.USER_ID_PARAM),
-                ServletUtil.mapUser(req));
+                RequestMapperUtil.getLongParam(req, ServletConstants.USER_ID_PARAM),
+                RequestMapperUtil.getDTO(req, UserDTO.class));
 
         resp.sendRedirect(ServletConstants.USER_LIST_SERVLET);
     }

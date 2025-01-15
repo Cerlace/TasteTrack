@@ -4,7 +4,7 @@ import cerlace.tastetrack.service.DishIngredientService;
 import cerlace.tastetrack.service.impl.DishIngredientServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +19,7 @@ public class DeleteDishIngredientServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.dishIngredientService.delete(
-                ServletUtil.getLongParam(req, ServletConstants.DISH_INGREDIENT_ID_PARAM));
+                RequestMapperUtil.getLongParam(req, ServletConstants.DISH_INGREDIENT_ID_PARAM));
 
         resp.sendRedirect(ServletConstants.DISH_INGREDIENT_LIST_SERVLET +
                 "?" + ServletConstants.DISH_ID_PARAM +

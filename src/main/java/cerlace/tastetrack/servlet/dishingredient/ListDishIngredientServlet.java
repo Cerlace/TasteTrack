@@ -5,7 +5,7 @@ import cerlace.tastetrack.service.DishIngredientService;
 import cerlace.tastetrack.service.impl.DishIngredientServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ public class ListDishIngredientServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long dishId = ServletUtil.getLongParam(req, ServletConstants.DISH_ID_PARAM);
+        Long dishId = RequestMapperUtil.getLongParam(req, ServletConstants.DISH_ID_PARAM);
 
         final List<DishIngredientDTO> dishIngredientDTOList =
                 this.dishIngredientService.getAllIngredientsOfDish(dishId);

@@ -5,7 +5,7 @@ import cerlace.tastetrack.service.IngredientService;
 import cerlace.tastetrack.service.impl.IngredientServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +21,7 @@ public class UpdateIngredientServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = ServletUtil.getLongParam(req, ServletConstants.INGREDIENT_ID_PARAM);
+        Long id = RequestMapperUtil.getLongParam(req, ServletConstants.INGREDIENT_ID_PARAM);
         IngredientDTO ingredientDTO = ingredientService.get(id);
         req.setAttribute(ServletConstants.INGREDIENT_ATTRIBUTE, ingredientDTO);
 
@@ -34,8 +34,8 @@ public class UpdateIngredientServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ingredientService.update(
-                ServletUtil.getLongParam(req, ServletConstants.INGREDIENT_ID_PARAM),
-                ServletUtil.mapIngredient(req));
+                RequestMapperUtil.getLongParam(req, ServletConstants.INGREDIENT_ID_PARAM),
+                RequestMapperUtil.getDTO(req, IngredientDTO.class));
 
         resp.sendRedirect(ServletConstants.INGREDIENT_LIST_SERVLET);
     }

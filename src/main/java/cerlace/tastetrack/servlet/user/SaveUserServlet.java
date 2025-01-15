@@ -1,10 +1,11 @@
 package cerlace.tastetrack.servlet.user;
 
+import cerlace.tastetrack.dto.UserDTO;
 import cerlace.tastetrack.service.UserService;
 import cerlace.tastetrack.service.impl.UserServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ public class SaveUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        userService.save(ServletUtil.mapUser(req));
+        userService.save(RequestMapperUtil.getDTO(req, UserDTO.class));
 
         resp.sendRedirect(ServletConstants.USER_LIST_SERVLET);
     }

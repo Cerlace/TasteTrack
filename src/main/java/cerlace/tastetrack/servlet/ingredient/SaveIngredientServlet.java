@@ -1,10 +1,11 @@
 package cerlace.tastetrack.servlet.ingredient;
 
+import cerlace.tastetrack.dto.IngredientDTO;
 import cerlace.tastetrack.service.IngredientService;
 import cerlace.tastetrack.service.impl.IngredientServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ public class SaveIngredientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ingredientService.save(ServletUtil.mapIngredient(req));
+        ingredientService.save(RequestMapperUtil.getDTO(req, IngredientDTO.class));
 
         resp.sendRedirect(ServletConstants.INGREDIENT_LIST_SERVLET);
     }

@@ -1,10 +1,11 @@
 package cerlace.tastetrack.servlet.dish;
 
+import cerlace.tastetrack.dto.DishDTO;
 import cerlace.tastetrack.service.DishService;
 import cerlace.tastetrack.service.impl.DishServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
-import cerlace.tastetrack.utils.ServletUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -27,7 +28,7 @@ public class SaveDishServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        dishService.save(ServletUtil.mapDish(req));
+        dishService.save(RequestMapperUtil.getDTO(req, DishDTO.class));
 
         resp.sendRedirect(ServletConstants.DISH_LIST_SERVLET);
     }
