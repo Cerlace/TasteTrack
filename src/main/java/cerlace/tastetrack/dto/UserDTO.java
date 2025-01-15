@@ -2,21 +2,21 @@ package cerlace.tastetrack.dto;
 
 import cerlace.tastetrack.enums.Activity;
 import cerlace.tastetrack.enums.Goal;
-import cerlace.tastetrack.utils.interfaces.Identifiable;
 import cerlace.tastetrack.enums.Gender;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Data
-public class UserDTO implements Identifiable {
-    private Long id;
+@EqualsAndHashCode(callSuper = true)
+public class UserDTO extends BaseDTO {
     private String fullName;
     private Date birthDate;
     private Gender gender;

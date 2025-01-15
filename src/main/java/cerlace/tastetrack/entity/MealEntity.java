@@ -1,33 +1,27 @@
 package cerlace.tastetrack.entity;
 
 import cerlace.tastetrack.enums.MealTime;
-import cerlace.tastetrack.utils.interfaces.Identifiable;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "meal")
-public class MealEntity implements Identifiable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long id;
-    @Column(nullable = false)
+public class MealEntity extends BaseEntity {
+   @Column(nullable = false)
     private Date date;
     @Column(name = "meal_time", nullable = false)
     @Enumerated

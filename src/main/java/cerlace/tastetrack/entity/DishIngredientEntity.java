@@ -1,31 +1,25 @@
 package cerlace.tastetrack.entity;
 
-import cerlace.tastetrack.utils.interfaces.Identifiable;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "dish_ingredient")
-public class DishIngredientEntity implements Identifiable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long id;
+public class DishIngredientEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "dish_id")
     private DishEntity dish;

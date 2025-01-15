@@ -2,18 +2,19 @@ package cerlace.tastetrack.dto;
 
 import cerlace.tastetrack.enums.MealTime;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 @Data
-public class MealDTO {
-    private Long id;
+@EqualsAndHashCode(callSuper = true)
+public class MealDTO extends BaseDTO {
     private Date date;
     private MealTime mealTime;
 }
