@@ -9,10 +9,14 @@
           href='${pageContext.request.contextPath}/table.css'>
 </head>
 <body>
-
-<a href="<%= ServletConstants.MEAL_SAVE_SERVLET %>">
-    <button><h1>SAVE MEAL</h1></button>
-</a><br/>
+<form name="save"
+      method="get"
+      action="<%= ServletConstants.MEAL_SAVE_SERVLET %>">
+    <button name="<%= ServletConstants.USER_ID_PARAM %>"
+            value="<%= request.getParameter(ServletConstants.USER_ID_PARAM) %>">
+        <h1>SAVE MEAL</h1>
+    </button>
+</form>
 <br/>
 <h1>Meals list:</h1>
 <table>
@@ -25,6 +29,9 @@
         </td>
         <td>
             Meal time
+        </td>
+        <td>
+            Dish name
         </td>
         <td colspan="2">
             Action
@@ -42,6 +49,9 @@
         </td>
         <td>
             <%= meal.getMealTime() %>
+        </td>
+        <td>
+            <%= meal.getDish().getName() %>
         </td>
         <td>
             <form name="delete"

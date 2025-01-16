@@ -16,6 +16,10 @@
            type="hidden"
            value="<%= meal.getId() %>"
            required>
+    <input name="<%= ServletConstants.USER_ID_PARAM %>"
+           type="hidden"
+           value="<%= meal.getUser().getId() %>"
+           required>
     <label>
         Fill meal date:
         <input name="<%= ServletConstants.MEAL_DATE_PARAM %>"
@@ -46,6 +50,8 @@
             <%= meal.getMealTime() == MealTime.DINNER ? "checked" : "" %>>
         Dinner
     </label><br/>
+    <jsp:include page="<%= ServletConstants.DISH_SELECT_SERVLET %>"/>
+    <br/>
     <button>Send</button>
 </form>
 <br/>

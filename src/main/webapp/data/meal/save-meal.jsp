@@ -10,6 +10,10 @@
 <form name="save"
       method="post"
       action="<%= ServletConstants.MEAL_SAVE_SERVLET %>">
+    <input name="<%= ServletConstants.USER_ID_PARAM %>"
+           type="hidden"
+           value="<%= request.getParameter(ServletConstants.USER_ID_PARAM) %>"
+           required>
     <label>
         Fill meal date:
         <input name="<%= ServletConstants.MEAL_DATE_PARAM %>" type="date" required>
@@ -27,6 +31,8 @@
         <input name="<%= ServletConstants.MEAL_TIME_PARAM %>" type="radio" value="<%= MealTime.DINNER %>">
         Dinner
     </label><br/>
+    <jsp:include page="<%= ServletConstants.DISH_SELECT_SERVLET %>"/>
+    <br/>
     <button>Send</button>
 </form>
 <br/>

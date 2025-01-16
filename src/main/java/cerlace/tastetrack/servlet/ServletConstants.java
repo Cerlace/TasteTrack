@@ -48,9 +48,11 @@ public class ServletConstants {
     public static final String DISH_LIST_JSP = "/data/dish/list-dish.jsp";
     public static final String DISH_SAVE_JSP = "/data/dish/save-dish.jsp";
     public static final String DISH_UPDATE_JSP = "/data/dish/update-dish.jsp";
+    public static final String DISH_SELECT_JSP = "/data/dish/select-dish.jsp";
     public static final String DISH_LIST_SERVLET = "list-dish";
     public static final String DISH_SAVE_SERVLET = "save-dish";
     public static final String DISH_UPDATE_SERVLET = "update-dish";
+    public static final String DISH_SELECT_SERVLET = "/select-dish";
     public static final String DISH_DELETE_SERVLET = "delete-dish";
 
     public static final String DISH_LIST_ATTRIBUTE = "dishList";

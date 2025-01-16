@@ -18,8 +18,5 @@
     <button><h1>DISHES</h1></button>
 </a><br/>
 <br/>
-<a href="<%= ServletConstants.MEAL_LIST_SERVLET %>">
-    <button><h1>MEALS</h1></button>
-</a><br/>
 </body>
 </html>

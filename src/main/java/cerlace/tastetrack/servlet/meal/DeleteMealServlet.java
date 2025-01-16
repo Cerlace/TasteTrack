@@ -20,7 +20,9 @@ public class DeleteMealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         this.mealService.delete(
                 RequestMapperUtil.getLongParam(req, ServletConstants.MEAL_ID_PARAM));
-        resp.sendRedirect(ServletConstants.MEAL_LIST_SERVLET);
+        resp.sendRedirect(ServletConstants.MEAL_LIST_SERVLET +
+                "?" + ServletConstants.USER_ID_PARAM +
+                "=" + req.getParameter(ServletConstants.USER_ID_PARAM));
     }
 
     @Override

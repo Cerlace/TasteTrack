@@ -30,7 +30,9 @@ public class SaveMealServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         mealService.save(RequestMapperUtil.getDTO(req, MealDTO.class));
 
-        resp.sendRedirect(ServletConstants.MEAL_LIST_SERVLET);
+        resp.sendRedirect(ServletConstants.MEAL_LIST_SERVLET +
+                "?" + ServletConstants.USER_ID_PARAM +
+                "=" + req.getParameter(ServletConstants.USER_ID_PARAM));
     }
 
     @Override

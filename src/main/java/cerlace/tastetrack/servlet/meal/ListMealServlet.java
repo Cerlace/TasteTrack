@@ -5,6 +5,7 @@ import cerlace.tastetrack.service.MealService;
 import cerlace.tastetrack.service.impl.MealServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
+import cerlace.tastetrack.utils.RequestMapperUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,7 +22,9 @@ public class ListMealServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final List<MealDTO> mealDTOList = this.mealService.getAll();
+        Long userId = RequestMapperUtil.getLongParam(req, ServletConstants.USER_ID_PARAM);
+
+        final List<MealDTO> mealDTOList = this.mealService.getAllMealsOfUser(userId);
 
         req.setAttribute(ServletConstants.MEAL_LIST_ATTRIBUTE, mealDTOList);
 

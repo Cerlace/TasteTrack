@@ -44,6 +44,9 @@
         <td>
             Goal
         </td>
+        <td>
+            User meals
+        </td>
         <td colspan="2">
             Action
         </td>
@@ -78,6 +81,16 @@
         </td>
         <td>
             <%= user.getGoal() %>
+        </td>
+        <td>
+            <form name="list-meals"
+                  method="get"
+                  action="<%= ServletConstants.MEAL_LIST_SERVLET %>">
+                <button name="<%= ServletConstants.USER_ID_PARAM %>"
+                        value="<%= user.getId() %>">
+                    Meals list
+                </button>
+            </form>
         </td>
         <td>
             <form name="delete"
