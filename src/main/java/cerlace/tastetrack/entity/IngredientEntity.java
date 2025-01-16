@@ -34,6 +34,6 @@ public class IngredientEntity extends BaseEntity {
     @Enumerated
     private ProductType productType;
     @Builder.Default
-    @OneToMany(mappedBy = "dish")
+    @OneToMany(mappedBy = "ingredient")
     private Set<DishIngredientEntity> dishIngredients = new HashSet<>();
 }

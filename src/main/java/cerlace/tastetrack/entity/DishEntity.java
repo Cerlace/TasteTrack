@@ -41,6 +41,6 @@ public class DishEntity extends BaseEntity {
     @Lob
     private String recipe;
     @Builder.Default
-    @OneToMany(mappedBy = "ingredient")
+    @OneToMany(mappedBy = "dish")
     private Set<DishIngredientEntity> dishIngredients = new HashSet<>();
 }
