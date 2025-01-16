@@ -17,4 +17,6 @@ import java.util.Date;
 public class MealDTO extends BaseDTO {
     private Date date;
     private MealTime mealTime;
+    private UserDTO user;
+    private DishDTO dish;
 }
