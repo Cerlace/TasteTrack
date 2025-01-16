@@ -9,8 +9,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,6 +43,6 @@ public class DishEntity extends BaseEntity {
     @Lob
     private String recipe;
     @Builder.Default
-    @OneToMany(mappedBy = "dish")
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
     private Set<DishIngredientEntity> dishIngredients = new HashSet<>();
 }
