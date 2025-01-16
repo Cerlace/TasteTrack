@@ -6,4 +6,5 @@
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
 
     <include file="/db_migrations/v-0.2/14-01-2025-01-user-table-change.xml"/>
+    <include file="/db_migrations/v-0.2/16-01-2025-01-meal-table-join.xml"/>
 </databaseChangeLog>

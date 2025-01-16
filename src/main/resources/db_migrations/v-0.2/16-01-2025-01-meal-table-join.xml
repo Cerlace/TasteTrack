@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
+
+    <changeSet id="16-01-2025-meal-table-join-1" author="Daniil">
+        <addColumn tableName="meal">
+            <column name="user_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="16-01-2025-meal-table-join-2" author="Daniil">
+        <addForeignKeyConstraint
+                baseTableName="meal"
+                baseColumnNames="user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"
+                constraintName="FK_meal_user"/>
+    </changeSet>
+    <changeSet id="16-01-2025-meal-table-join-4" author="Daniil">
+        <addColumn tableName="meal">
+            <column name="dish_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="16-01-2025-meal-table-join-3" author="Daniil">
+        <addForeignKeyConstraint
+                baseTableName="meal"
+                baseColumnNames="dish_id"
+                referencedTableName="dish"
+                referencedColumnNames="id"
+                constraintName="FK_meal_dish"/>
+    </changeSet>
+</databaseChangeLog>

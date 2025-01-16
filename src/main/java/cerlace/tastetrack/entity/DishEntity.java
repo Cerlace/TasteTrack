@@ -12,7 +12,6 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,8 +23,8 @@ import java.util.Set;
 @SuperBuilder
 @Getter
 @Setter
-@ToString(exclude = "dishIngredients")
-@EqualsAndHashCode(exclude = "dishIngredients", callSuper = true)
+@ToString(exclude = {"dishIngredients", "meals"})
+@EqualsAndHashCode(exclude = {"dishIngredients", "meals"}, callSuper = true)
 @Entity
 @Table(name = "dish")
 public class DishEntity extends BaseEntity {
@@ -45,4 +44,7 @@ public class DishEntity extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "dish", cascade = CascadeType.REMOVE)
     private Set<DishIngredientEntity> dishIngredients = new HashSet<>();
+    @Builder.Default
+    @OneToMany(mappedBy = "dish")
+    private Set<MealEntity> meals = new HashSet<>();
 }
