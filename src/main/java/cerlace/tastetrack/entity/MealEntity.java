@@ -30,9 +30,9 @@ public class MealEntity extends BaseEntity {
     @Enumerated
     private MealTime mealTime;
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "dish_id")
+    @JoinColumn(name = "dish_id", nullable = false)
     private DishEntity dish;
 }

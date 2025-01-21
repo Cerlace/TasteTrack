@@ -22,11 +22,11 @@ import javax.persistence.Table;
 @Table(name = "dish_ingredient")
 public class DishIngredientEntity extends BaseEntity {
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "dish_id")
+    @JoinColumn(name = "dish_id", nullable = false)
     private DishEntity dish;
     @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "ingredient_id")
+    @JoinColumn(name = "ingredient_id", nullable = false)
     private IngredientEntity ingredient;
-    @Column
+    @Column(nullable = false)
     private Float amount;
 }

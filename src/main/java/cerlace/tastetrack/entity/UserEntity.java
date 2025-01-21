@@ -32,23 +32,23 @@ import java.util.Set;
 @Entity
 @Table(name = "user")
 public class UserEntity extends BaseEntity {
-@Column(name = "full_name")
+    @Column(name = "full_name", nullable = false)
     private String fullName;
-    @Column(name = "birth_date")
+    @Column(name = "birth_date", nullable = false)
     private Date birthDate;
-    @Column
+    @Column(nullable = false)
     @Enumerated
     private Gender gender;
-    @Column
+    @Column(nullable = false)
     private String email;
-    @Column
+    @Column(nullable = false)
     private Float height;
-    @Column
+    @Column(nullable = false)
     private Float weight;
-    @Column
+    @Column(nullable = false)
     @Enumerated
     private Activity activity;
-    @Column
+    @Column(nullable = false)
     @Enumerated
     private Goal goal;
     @Builder.Default

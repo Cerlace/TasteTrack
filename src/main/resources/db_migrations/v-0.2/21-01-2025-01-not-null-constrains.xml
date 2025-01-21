@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
+
+    <changeSet id="21-01-2025-not-null-constrains-to-user-1" author="Daniil">
+        <addNotNullConstraint tableName="user" columnName="full_name" columnDataType="varchar(255)"/>
+        <addNotNullConstraint tableName="user" columnName="birth_date" columnDataType="date"/>
+        <addNotNullConstraint tableName="user" columnName="gender" columnDataType="int"/>
+        <addNotNullConstraint tableName="user" columnName="email" columnDataType="varchar(255)"/>
+        <addNotNullConstraint tableName="user" columnName="height" columnDataType="float"/>
+        <addNotNullConstraint tableName="user" columnName="weight" columnDataType="float"/>
+        <addNotNullConstraint tableName="user" columnName="activity" columnDataType="int"/>
+        <addNotNullConstraint tableName="user" columnName="goal" columnDataType="int"/>
+    </changeSet>
+    <changeSet id="21-01-2025-not-null-constrains-to-meal-2" author="Daniil">
+        <addNotNullConstraint tableName="meal" columnName="user_id" columnDataType="bigint"/>
+        <addNotNullConstraint tableName="meal" columnName="dish_id" columnDataType="bigint"/>
+    </changeSet>
+    <changeSet id="21-01-2025-not-null-constrains-to-dish-ingredient-3" author="Daniil">
+        <addNotNullConstraint tableName="dish_ingredient" columnName="amount" columnDataType="float"/>
+        <addNotNullConstraint tableName="dish_ingredient" columnName="dish_id" columnDataType="bigint"/>
+        <addNotNullConstraint tableName="dish_ingredient" columnName="ingredient_id" columnDataType="bigint"/>
+    </changeSet>
+</databaseChangeLog>
