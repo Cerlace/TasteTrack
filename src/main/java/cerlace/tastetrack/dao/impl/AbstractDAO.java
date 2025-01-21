@@ -35,6 +35,7 @@ public abstract class AbstractDAO<EntityT extends Identifiable> implements DAO<E
         logger.info(SAVE_LOG_MESSAGE, entity);
         return ExecutorUtil.executeHibernate(this.entityManager, em -> {
             em.persist(entity);
+            em.refresh(entity);
             return entity;
         });
     }

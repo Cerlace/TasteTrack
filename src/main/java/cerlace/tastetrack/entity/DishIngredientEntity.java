@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -20,10 +21,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "dish_ingredient")
 public class DishIngredientEntity extends BaseEntity {
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "dish_id")
     private DishEntity dish;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "ingredient_id")
     private IngredientEntity ingredient;
     @Column

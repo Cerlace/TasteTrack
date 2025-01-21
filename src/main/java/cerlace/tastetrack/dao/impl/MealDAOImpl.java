@@ -2,7 +2,6 @@ package cerlace.tastetrack.dao.impl;
 
 import cerlace.tastetrack.dao.MealDAO;
 import cerlace.tastetrack.entity.MealEntity;
-import cerlace.tastetrack.utils.ExecutorUtil;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
@@ -16,15 +15,6 @@ public class MealDAOImpl extends AbstractDAO<MealEntity> implements MealDAO {
 
     public MealDAOImpl() {
         super(MealEntity.class, LoggerFactory.getLogger(MealDAOImpl.class));
-    }
-
-    @Override
-    public MealEntity save(MealEntity entity) {
-        getLogger().info(SAVE_LOG_MESSAGE, entity);
-        return ExecutorUtil.executeHibernate(super.getEntityManager(), em -> {
-            em.merge(entity);
-            return entity;
-        });
     }
 
     @Override
