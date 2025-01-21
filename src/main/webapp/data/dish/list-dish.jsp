@@ -56,7 +56,7 @@
             <%= dish.getName() %>
         </td>
         <td>
-            <form name="list-ingredients"
+            <form name="list-dish-ingredients"
                   method="get"
                   action="<%= ServletConstants.DISH_INGREDIENT_LIST_SERVLET %>">
                 <button name="<%= ServletConstants.DISH_ID_PARAM %>"

@@ -57,6 +57,10 @@
             <form name="delete"
                   method="post"
                   action="<%= ServletConstants.MEAL_DELETE_SERVLET %>">
+                <input name="<%= ServletConstants.USER_ID_PARAM %>"
+                       type="hidden"
+                       value="<%= meal.getUser().getId() %>"
+                       required>
                 <button name="<%= ServletConstants.MEAL_ID_PARAM %>"
                         value="<%= meal.getId() %>">
                     Delete
@@ -79,8 +83,8 @@
     %>
 </table>
 <br/>
-<a href=<%= ServletConstants.ADMIN_PAGE_SERVLET %>>
-    <button><h1>RETURN TO ADMIN PAGE</h1></button>
+<a href=<%= ServletConstants.USER_LIST_SERVLET %>>
+    <button><h1>RETURN TO USERS LIST PAGE</h1></button>
 </a><br/>
 </body>
 </html>

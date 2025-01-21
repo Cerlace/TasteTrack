@@ -78,8 +78,8 @@
     %>
 </table>
 <br/>
-<a href=<%= ServletConstants.ADMIN_PAGE_SERVLET %>>
-    <button><h1>RETURN TO ADMIN PAGE</h1></button>
+<a href=<%= ServletConstants.DISH_LIST_SERVLET %>>
+    <button><h1>RETURN TO DISH LIST PAGE</h1></button>
 </a><br/>
 </body>
 </html>

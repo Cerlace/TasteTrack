@@ -25,8 +25,14 @@
     <button>Send</button>
 </form>
 <br/>
-<a href=<%= ServletConstants.DISH_INGREDIENT_LIST_SERVLET %>>
-    <button><h1>RETURN TO DISH INGREDIENT LIST</h1></button>
-</a><br/>
+<form name="list-dish-ingredients"
+      method="get"
+      action="<%= ServletConstants.DISH_INGREDIENT_LIST_SERVLET %>">
+    <button name="<%= ServletConstants.DISH_ID_PARAM %>"
+            value="<%= request.getParameter(ServletConstants.DISH_ID_PARAM) %>">
+        <h1>RETURN TO DISH INGREDIENT LIST</h1>
+    </button>
+</form>
+<br/>
 </body>
 </html>

@@ -55,8 +55,14 @@
     <button>Send</button>
 </form>
 <br/>
-<a href=<%= ServletConstants.MEAL_LIST_SERVLET %>>
-    <button><h1>RETURN TO MEAL LIST</h1></button>
-</a><br/>
+<form name="list-meals"
+      method="get"
+      action="<%= ServletConstants.MEAL_LIST_SERVLET %>">
+    <button name="<%= ServletConstants.USER_ID_PARAM %>"
+            value="<%= meal.getUser().getId() %>">
+        <h1>RETURN TO MEAL LIST</h1>
+    </button>
+</form>
+<br/>
 </body>
 </html>
