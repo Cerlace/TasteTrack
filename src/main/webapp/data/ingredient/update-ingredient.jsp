@@ -5,43 +5,61 @@
 <html>
 <head>
     <title>Update ingredient</title>
+    <link rel='stylesheet' type='text/css' media='screen'
+          href='${pageContext.request.contextPath}/style.css'>
 </head>
 <body>
-<% IngredientDTO ingredient = (IngredientDTO) request.getAttribute(ServletConstants.INGREDIENT_ATTRIBUTE); %>
-<h2>Update ingredient:</h2>
-<form name="update"
-      method="post"
-      action="<%= ServletConstants.INGREDIENT_UPDATE_SERVLET %>">
-    <input name="<%= ServletConstants.INGREDIENT_ID_PARAM %>"
-           type="hidden"
-           value="<%= ingredient.getId() %>"
-           required>
-    <label>
-        Fill new ingredient name:
-        <input name="<%= ServletConstants.INGREDIENT_NAME_PARAM %>"
-               type="text"
-               value="<%= ingredient.getName() %>"
+<jsp:include page="<%= ServletConstants.SIDEBAR_JSP %>"/>
+<div class="content">
+    <% IngredientDTO ingredient = (IngredientDTO) request.getAttribute(ServletConstants.INGREDIENT_ATTRIBUTE); %>
+    <form name="update"
+          method="post"
+          action="<%= ServletConstants.INGREDIENT_UPDATE_SERVLET %>">
+        <h2>Update ingredient:</h2>
+        <input name="<%= ServletConstants.INGREDIENT_ID_PARAM %>"
+               type="hidden"
+               value="<%= ingredient.getId() %>"
                required>
-    </label><br/>
-    <label>
-        Choose product type:
-        <select name="<%= ServletConstants.INGREDIENT_PRODUCT_TYPE_PARAM %>" required>
-            <%
-                for (ProductType productType : ProductType.values()) {
-            %>
-            <option <%= ingredient.getProductType() == productType ? "selected" : "" %> >
-                <%= productType %>
-            </option>
-            <%
-                }
-            %>
-        </select>
-    </label>
-    <button>Send</button>
-</form>
-<br/>
-<a href=<%= ServletConstants.INGREDIENT_LIST_SERVLET %>>
-    <button><h1>RETURN TO INGREDIENT LIST</h1></button>
-</a><br/>
+        <div class="input-group">
+            <label for="name-input">
+                Fill ingredient name:
+            </label>
+            <input id="name-input"
+                   name="<%= ServletConstants.INGREDIENT_NAME_PARAM %>"
+                   type="text"
+                   value="<%= ingredient.getName() %>"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="type-input">
+                Choose product type:
+            </label>
+            <select id="type-input"
+                    name="<%= ServletConstants.INGREDIENT_PRODUCT_TYPE_PARAM %>" required>
+                <%
+                    for (ProductType productType : ProductType.values()) {
+                %>
+                <option <%= ingredient.getProductType() == productType ? "selected" : "" %> >
+                    <%= productType %>
+                </option>
+                <%
+                    }
+                %>
+            </select>
+        </div>
+        <button type="submit"
+                class="medium-action-button">
+            Send
+        </button>
+    </form>
+    <form name="list-ingredients"
+          method="get"
+          action="<%= ServletConstants.INGREDIENT_LIST_SERVLET %>">
+        <button type="submit"
+                class="medium-action-button">
+            Return to ingredients
+        </button>
+    </form>
+</div>
 </body>
 </html>

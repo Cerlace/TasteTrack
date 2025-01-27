@@ -5,10 +5,13 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <body>
-<label>
-    <% DishIngredientDTO updatingIngredient = (DishIngredientDTO) request.getAttribute(ServletConstants.DISH_INGREDIENT_ATTRIBUTE); %>
-    Select ingredient:
-    <select name="<%= ServletConstants.INGREDIENT_ID_PARAM %>" required>
+<% DishIngredientDTO updatingIngredient = (DishIngredientDTO) request.getAttribute(ServletConstants.DISH_INGREDIENT_ATTRIBUTE); %>
+<div class="input-group">
+    <label for="ingredient-select">
+        Select ingredient:
+    </label>
+    <select id="ingredient-select"
+            name="<%= ServletConstants.INGREDIENT_ID_PARAM %>" required>
         <% List<IngredientDTO> ingredients = (List<IngredientDTO>) request.getAttribute(ServletConstants.INGREDIENT_LIST_ATTRIBUTE);
             for (IngredientDTO ingredient : ingredients) {
         %>
@@ -21,6 +24,6 @@
             }
         %>
     </select>
-</label>
+</div>
 </body>
 </html>

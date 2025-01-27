@@ -1,0 +1,195 @@
+body {
+    background-color: #ffffff; /* Белый фон */
+    font-family: Arial, sans-serif; /* Шрифт */
+    margin: 0;
+    padding: 20px;
+}
+
+.sidebar {
+    display: block;
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden;
+    background-color: #f4f4f4; /* Светлый фон для боковой панели */
+    padding: 20px; /* Отступы внутри боковой панели */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Тень для боковой панели */
+}
+
+.content {
+    margin-left: 180px;
+    padding-left: 20px; /* Отступы внутри основного контента */
+}
+
+.line-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.line-element-right {
+    display: inline-block;
+    float: right;
+}
+
+h1, h2 {
+    color: #4CAF50; /* Зеленый цвет заголовков */
+}
+
+button {
+    background-color: #4CAF50; /* Зеленая кнопка */
+    color: white; /* Белый текст на кнопках */
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    border-radius: 5px; /* Закругленные углы */
+}
+
+button:hover {
+    background-color: #45a049; /* Более темный зеленый при наведении */
+}
+
+/* Стили для кнопок меню */
+.menu-button {
+    font-size: 1em; /* Увеличенный размер шрифта */
+    margin: 10px 0; /* Отступы между кнопками */
+    width: 100%;
+    min-height: 60px;
+}
+
+/* Стили для кнопок действий */
+.medium-action-button {
+    font-size: 1em; /* Размер шрифта для кнопок действий */
+    margin: 10px; /* Отступы между кнопками действий */
+    width: 150px;
+    min-height: 60px;
+}
+
+/* Стили для кнопок действий */
+.small-action-button {
+    font-size: 0.8em; /* Размер шрифта для кнопок действий */
+    margin: 5px; /* Отступы между кнопками действий */
+    width: 100px;
+    min-height: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Убирает двойные границы */
+    text-align: center;
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Светло-серая граница */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Светло-серый фон для четных строк */
+}
+
+form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex; /* Используем Flexbox для формы */
+    flex-direction: column; /* Вертикальное направление для элементов формы */
+    align-items: center;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+textarea {
+    border: 1px solid #4CAF50; /* Зеленая рамка */
+    border-radius: 5px; /* Закругленные углы */
+    padding: 10px; /* Отступы внутри поля */
+    font-size: 16px; /* Размер шрифта */
+    width: 300px; /* Фиксированная ширина */
+    height: 40px; /* Фиксированная высота */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+    margin-bottom: 10px; /* Отступ между полями */
+    color: #44583E; /* Цвет текста внутри поля ввода */
+}
+
+textarea {
+    border: 1px solid #4CAF50; /* Зеленая рамка */
+    border-radius: 5px; /* Закругленные углы */
+    padding: 10px; /* Отступы внутри поля */
+    font-size: 16px; /* Размер шрифта */
+    width: 800px; /* Фиксированная ширина */
+    height: 200px; /* Фиксированная высота */
+    resize: none; /* Запрет на изменение размера пользователем */
+    overflow-y: auto; /* Вертикальная прокрутка при переполнении */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+    color: #44583E; /* Цвет текста внутри поля ввода */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+    border-color: #45a049; /* Более темная рамка при фокусе */
+    outline: none; /* Убираем стандартное выделение */
+}
+
+input[type="radio"] {
+    margin-right: 5px; /* Отступ справа от радио-кнопки */
+}
+
+/* Для меток (label) рядом с радио-кнопками */
+label {
+    display: block;
+    color: #4CAF50; /* Зеленый цвет текста меток */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: normal;
+}
+
+.input-group {
+    margin-bottom: 5px; /* Отступ между группами полей */
+    color: #4CAF50; /* Зеленый цвет текста меток */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: bold;
+}
+
+/* Стили для кнопок увеличения/уменьшения значений в input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-inner-spin-button {
+    cursor: pointer; /* Курсор при наведении */
+}
+
+select {
+    border: 1px solid #4CAF50; /* Зеленая рамка */
+    border-radius: 5px; /* Закругленные углы */
+    padding: 10px; /* Отступы внутри поля */
+    font-size: 16px; /* Размер шрифта */
+    width: 300px; /* Фиксированная ширина */
+    height: 40px; /* Фиксированная высота */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+    margin-bottom: 10px; /* Отступ между полями */
+    color: #44583E; /* Цвет текста внутри поля ввода */
+    appearance: none; /* Убираем стандартный стиль браузера для select */
+    background-color: white; /* Фоновый цвет */
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"%3E%3Cpolygon points="0,0 10,0 5,5" fill="%234CAF50"/%3E%3C/svg%3E'); /* Стрелка вниз */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Позиция стрелки */
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: #45a049; /* Более темная рамка при фокусе */
+    outline: none; /* Убираем стандартное выделение */
+}
+
+option {
+    padding: 10px; /* Отступы для опций (не всегда работает во всех браузерах) */
+    font-family: Arial, sans-serif; /* Шрифт для опций */
+    font-size: 16px; /* Размер шрифта для опций */
+}

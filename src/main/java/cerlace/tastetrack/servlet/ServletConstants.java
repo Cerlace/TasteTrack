@@ -6,8 +6,7 @@ import java.text.SimpleDateFormat;
 public class ServletConstants {
     public static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static final String ADMIN_PAGE_JSP = "/admin-page.jsp";
-    public static final String ADMIN_PAGE_SERVLET = "admin-page";
+    public static final String SIDEBAR_JSP = "/sidebar.jsp";
 
     public static final String USER_LIST_JSP = "/data/user/list-user.jsp";
     public static final String USER_SAVE_JSP = "/data/user/save-user.jsp";
