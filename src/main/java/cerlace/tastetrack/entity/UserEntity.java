@@ -39,7 +39,7 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     @Enumerated
     private Gender gender;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
     private Float height;

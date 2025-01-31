@@ -14,6 +14,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -22,7 +23,8 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "meal")
+@Table(name = "meal", uniqueConstraints =
+@UniqueConstraint(columnNames = {"user_id", "dish_id", "meal_time", "date"}))
 public class MealEntity extends BaseEntity {
     @Column(nullable = false)
     private Date date;

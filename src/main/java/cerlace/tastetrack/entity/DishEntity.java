@@ -28,7 +28,7 @@ import java.util.Set;
 @Entity
 @Table(name = "dish")
 public class DishEntity extends BaseEntity {
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Column(nullable = false)
     private Float calories;

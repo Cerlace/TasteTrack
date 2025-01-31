@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
+
+    <changeSet id="30-01-2025-unique-constrains-to-user-1" author="Daniil">
+        <addUniqueConstraint tableName="user"
+                             columnNames="email"
+                             constraintName="UK_user_email"/>
+    </changeSet>
+    <changeSet id="30-01-2025-unique-constrains-to-ingredient-2" author="Daniil">
+        <addUniqueConstraint tableName="ingredient"
+                             columnNames="name"
+                             constraintName="UK_ingredient_name"/>
+    </changeSet>
+    <changeSet id="30-01-2025-unique-constrains-to-dish-3" author="Daniil">
+        <addUniqueConstraint tableName="dish"
+                             columnNames="name"
+                             constraintName="UK_dish_name"/>
+    </changeSet>
+    <changeSet id="30-01-2025-unique-constrains-to-dish-ingredient-4" author="Daniil">
+        <addUniqueConstraint tableName="dish_ingredient"
+                             columnNames="dish_id, ingredient_id"
+                             constraintName="UK_dish_ingredient"/>
+    </changeSet>
+    <changeSet id="30-01-2025-unique-constrains-to-meal-5" author="Daniil">
+        <addUniqueConstraint tableName="meal"
+                             columnNames="user_id, dish_id, meal_time, date"
+                             constraintName="UK_user_dish_meal-time_date"/>
+    </changeSet>
+</databaseChangeLog>

@@ -28,7 +28,7 @@ import java.util.Set;
 @Entity
 @Table(name = "ingredient")
 public class IngredientEntity extends BaseEntity {
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Column(name = "product_type", nullable = false)
     @Enumerated
