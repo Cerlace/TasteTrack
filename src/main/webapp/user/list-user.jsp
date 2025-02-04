@@ -29,7 +29,7 @@
     <table>
         <tr>
             <td>
-                <fmt:message key="table.user.column.id"/>
+                <fmt:message key="column.id"/>
             </td>
             <td>
                 <fmt:message key="table.user.column.full-name"/>
