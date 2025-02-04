@@ -32,11 +32,6 @@ body {
     justify-content: space-between;
 }
 
-.line-element-right {
-    display: inline-block;
-    float: right;
-}
-
 .lang-switcher {
     display: flex;
     border-radius: 5px; /* Закругленные углы */
