@@ -6,6 +6,7 @@ import cerlace.tastetrack.service.impl.DishIngredientServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
 import cerlace.tastetrack.utils.RequestMapperUtil;
+import cerlace.tastetrack.utils.ServletUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,8 +29,9 @@ public class SaveDishIngredientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        dishIngredientService.save(RequestMapperUtil.getDTO(req, DishIngredientDTO.class));
-
+        ServletUtil.handleAppExceptions(req, () ->
+                dishIngredientService.save(RequestMapperUtil.getDTO(req, DishIngredientDTO.class))
+        );
         resp.sendRedirect(ServletConstants.DISH_INGREDIENT_LIST_SERVLET +
                 "?" + ServletConstants.DISH_ID_PARAM +
                 "=" + req.getParameter(ServletConstants.DISH_ID_PARAM));
@@ -37,7 +39,7 @@ public class SaveDishIngredientServlet extends HttpServlet {
 
     @Override
     public void destroy() {
-        this.dishIngredientService.closeDao();
+        dishIngredientService.closeDao();
         HibernateUtil.close();
         super.destroy();
     }

@@ -9,7 +9,8 @@
           href='${pageContext.request.contextPath}/style.css'>
 </head>
 <body>
-<jsp:include page="<%= ServletConstants.SIDEBAR_JSP %>"/>
+<jsp:include page="${ServletConstants.SIDEBAR_JSP}"/>
+<jsp:include page="${ServletConstants.ALERT_BLOCK_JSP}"/>
 <div class="content">
     <div class="line-container">
         <h1>Dish ingredient list:</h1>

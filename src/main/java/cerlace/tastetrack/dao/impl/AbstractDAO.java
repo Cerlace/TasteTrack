@@ -2,7 +2,6 @@ package cerlace.tastetrack.dao.impl;
 
 import cerlace.tastetrack.dao.DAO;
 import cerlace.tastetrack.utils.interfaces.Identifiable;
-import cerlace.tastetrack.utils.ExecutorUtil;
 import cerlace.tastetrack.utils.HibernateUtil;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -33,9 +32,9 @@ public abstract class AbstractDAO<EntityT extends Identifiable> implements DAO<E
     @Override
     public EntityT save(EntityT entity) {
         logger.info(SAVE_LOG_MESSAGE, entity);
-        return ExecutorUtil.executeHibernate(this.entityManager, em -> {
-            em.persist(entity);
-            em.refresh(entity);
+        return HibernateUtil.executeHibernateTransaction(entityManager, () -> {
+            entityManager.persist(entity);
+            entityManager.refresh(entity);
             return entity;
         });
     }
@@ -57,10 +56,10 @@ public abstract class AbstractDAO<EntityT extends Identifiable> implements DAO<E
     public EntityT update(Long id, EntityT entity) {
         logger.info(UPDATE_LOG_MESSAGE, id);
         entity.setId(id);
-        return ExecutorUtil.executeHibernate(this.entityManager, em -> {
-            EntityT updatedEntity = this.entityManager.find(clazz, id);
+        return HibernateUtil.executeHibernateTransaction(entityManager, () -> {
+            EntityT updatedEntity = entityManager.find(clazz, id);
             if (updatedEntity != null) {
-                updatedEntity = em.merge(entity);
+                updatedEntity = entityManager.merge(entity);
             }
             return updatedEntity;
         });
@@ -69,10 +68,10 @@ public abstract class AbstractDAO<EntityT extends Identifiable> implements DAO<E
     @Override
     public boolean delete(Long id) {
         logger.info(DELETE_LOG_MESSAGE, id);
-        return Boolean.TRUE.equals(ExecutorUtil.executeHibernate(this.entityManager, em -> {
-            EntityT entity = em.find(clazz, id);
+        return Boolean.TRUE.equals(HibernateUtil.executeHibernateTransaction(entityManager, () -> {
+            EntityT entity = entityManager.find(clazz, id);
             if (entity != null) {
-                em.remove(entity);
+                entityManager.remove(entity);
                 return true;
             } else {
                 return false;
@@ -82,9 +81,9 @@ public abstract class AbstractDAO<EntityT extends Identifiable> implements DAO<E
 
     @Override
     public void close() {
-        if (this.entityManager.isOpen()) {
+        if (entityManager.isOpen()) {
             logger.info(CLOSING_ENTITY_MANAGER);
-            this.entityManager.close();
+            entityManager.close();
         }
     }
 }

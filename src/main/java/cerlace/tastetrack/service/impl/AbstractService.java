@@ -3,6 +3,7 @@ package cerlace.tastetrack.service.impl;
 import cerlace.tastetrack.dao.DAO;
 import cerlace.tastetrack.mapper.IMapper;
 import cerlace.tastetrack.service.CrudService;
+import cerlace.tastetrack.utils.ServiceUtil;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public abstract class AbstractService<DtoT, EntityT, DaoT extends DAO<EntityT>>
     @Override
     public DtoT save(DtoT dto) {
         EntityT entity = mapper.toEntity(dto);
-        return mapper.toDTO(dao.save(entity));
+        return ServiceUtil.handleServiceExceptions(() -> mapper.toDTO(dao.save(entity)));
     }
 
     @Override
@@ -44,12 +45,12 @@ public abstract class AbstractService<DtoT, EntityT, DaoT extends DAO<EntityT>>
     @Override
     public DtoT update(Long id, DtoT dto) {
         EntityT entity = mapper.toEntity(dto);
-        return mapper.toDTO(dao.update(id, entity));
+        return ServiceUtil.handleServiceExceptions(() -> mapper.toDTO(dao.update(id, entity)));
     }
 
     @Override
     public boolean delete(Long id) {
-        return dao.delete(id);
+        return Boolean.TRUE.equals(ServiceUtil.handleServiceExceptions(() -> dao.delete(id)));
     }
 
     @Override

@@ -7,6 +7,13 @@ public class ServletConstants {
     public static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
     public static final String SIDEBAR_JSP = "/sidebar.jsp";
+    public static final String ALERT_BLOCK_JSP = "/alert-block.jsp";
+    public static final String ALERT_TYPE_ATTRIBUTE = "alertType";
+    public static final String ALERT_MESSAGE_ATTRIBUTE = "alertMessage";
+
+    public static final String LANGUAGE_SWITCH_JSP = "/language-switch.jsp";
+    public static final String COOKIE_LOCALE_PARAM = "cookieLocale";
+    public static final String LOCALE_COOKIE = "locale";
 
     public static final String USER_LIST_JSP = "/data/user/list-user.jsp";
     public static final String USER_SAVE_JSP = "/data/user/save-user.jsp";

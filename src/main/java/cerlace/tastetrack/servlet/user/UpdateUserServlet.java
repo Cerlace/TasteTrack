@@ -6,6 +6,7 @@ import cerlace.tastetrack.service.impl.UserServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
 import cerlace.tastetrack.utils.RequestMapperUtil;
+import cerlace.tastetrack.utils.ServletUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,17 +33,17 @@ public class UpdateUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        userService.update(
-                RequestMapperUtil.getLongParam(req, ServletConstants.USER_ID_PARAM),
-                RequestMapperUtil.getDTO(req, UserDTO.class));
-
+        ServletUtil.handleAppExceptions(req, () ->
+                userService.update(
+                        RequestMapperUtil.getLongParam(req, ServletConstants.USER_ID_PARAM),
+                        RequestMapperUtil.getDTO(req, UserDTO.class))
+        );
         resp.sendRedirect(ServletConstants.USER_LIST_SERVLET);
     }
 
     @Override
     public void destroy() {
-        this.userService.closeDao();
+        userService.closeDao();
         HibernateUtil.close();
         super.destroy();
     }

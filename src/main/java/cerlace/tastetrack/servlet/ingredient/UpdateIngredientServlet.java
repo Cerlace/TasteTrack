@@ -6,6 +6,7 @@ import cerlace.tastetrack.service.impl.IngredientServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
 import cerlace.tastetrack.utils.RequestMapperUtil;
+import cerlace.tastetrack.utils.ServletUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,17 +33,17 @@ public class UpdateIngredientServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        ingredientService.update(
-                RequestMapperUtil.getLongParam(req, ServletConstants.INGREDIENT_ID_PARAM),
-                RequestMapperUtil.getDTO(req, IngredientDTO.class));
-
+        ServletUtil.handleAppExceptions(req, () ->
+                    ingredientService.update(
+                            RequestMapperUtil.getLongParam(req, ServletConstants.INGREDIENT_ID_PARAM),
+                            RequestMapperUtil.getDTO(req, IngredientDTO.class))
+        );
         resp.sendRedirect(ServletConstants.INGREDIENT_LIST_SERVLET);
     }
 
     @Override
     public void destroy() {
-        this.ingredientService.closeDao();
+        ingredientService.closeDao();
         HibernateUtil.close();
         super.destroy();
     }

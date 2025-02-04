@@ -6,7 +6,9 @@ body {
 }
 
 .sidebar {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 160px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
@@ -15,7 +17,8 @@ body {
     left: 0;
     overflow-x: hidden;
     background-color: #f4f4f4; /* Светлый фон для боковой панели */
-    padding: 20px; /* Отступы внутри боковой панели */
+    padding-left: 20px;
+    padding-right: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Тень для боковой панели */
 }
 
@@ -34,6 +37,15 @@ body {
     float: right;
 }
 
+.lang-switcher {
+    display: flex;
+    border-radius: 5px; /* Закругленные углы */
+    width: 160px;
+    height: 40px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
 h1, h2 {
     color: #4CAF50; /* Зеленый цвет заголовков */
 }
@@ -49,10 +61,26 @@ button {
     display: block;
     cursor: pointer;
     border-radius: 5px; /* Закругленные углы */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход */
 }
 
 button:hover {
     background-color: #45a049; /* Более темный зеленый при наведении */
+}
+
+button:disabled,
+button[disabled]{
+    background-color: #dfdfdf;
+    color: #666;
+    cursor: default;
+}
+
+/* Стили для кнопок языка */
+.lang-button {
+    font-size: 0.8em;
+    width: 50%;
+    height: 40px;
+    border-radius: 0;
 }
 
 /* Стили для кнопок меню */
@@ -192,4 +220,55 @@ option {
     padding: 10px; /* Отступы для опций (не всегда работает во всех браузерах) */
     font-family: Arial, sans-serif; /* Шрифт для опций */
     font-size: 16px; /* Размер шрифта для опций */
+}
+
+.alert_block {
+    z-index: 1;
+    position: fixed;
+    right: 0;
+    overflow-x: hidden;
+    width: 30%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.alert {
+    padding: 20px;
+    box-shadow: 15px 5px 10px #000000;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+    pointer-events: all;
+}
+
+.alert.success {
+    background-color: #3a773c;
+}
+
+.alert.info {
+    background-color: #316a99;
+}
+
+.alert.warning {
+    background-color: #a07534;
+}
+
+.alert.error {
+    background-color: #a32d24;
+}
+
+.close-button {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-button:hover {
+    color: black;
 }

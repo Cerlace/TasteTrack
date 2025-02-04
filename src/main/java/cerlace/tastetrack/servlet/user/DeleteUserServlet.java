@@ -5,6 +5,7 @@ import cerlace.tastetrack.service.impl.UserServiceImpl;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.HibernateUtil;
 import cerlace.tastetrack.utils.RequestMapperUtil;
+import cerlace.tastetrack.utils.ServletUtil;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,14 +19,16 @@ public class DeleteUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        this.userService.delete(
-                RequestMapperUtil.getLongParam(req, ServletConstants.USER_ID_PARAM));
+        ServletUtil.handleAppExceptions(req, () ->
+                userService.delete(
+                        RequestMapperUtil.getLongParam(req, ServletConstants.USER_ID_PARAM))
+        );
         resp.sendRedirect(ServletConstants.USER_LIST_SERVLET);
     }
 
     @Override
     public void destroy() {
-        this.userService.closeDao();
+        userService.closeDao();
         HibernateUtil.close();
         super.destroy();
     }
