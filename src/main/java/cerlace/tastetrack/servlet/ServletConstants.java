@@ -15,9 +15,9 @@ public class ServletConstants {
     public static final String COOKIE_LOCALE_PARAM = "cookieLocale";
     public static final String LOCALE_COOKIE = "locale";
 
-    public static final String USER_LIST_JSP = "/data/user/list-user.jsp";
-    public static final String USER_SAVE_JSP = "/data/user/save-user.jsp";
-    public static final String USER_UPDATE_JSP = "/data/user/update-user.jsp";
+    public static final String USER_LIST_JSP = "/user/list-user.jsp";
+    public static final String USER_SAVE_JSP = "/user/save-user.jsp";
+    public static final String USER_UPDATE_JSP = "/user/update-user.jsp";
     public static final String USER_LIST_SERVLET = "list-user";
     public static final String USER_SAVE_SERVLET = "save-user";
     public static final String USER_UPDATE_SERVLET = "update-user";
@@ -35,10 +35,10 @@ public class ServletConstants {
     public static final String USER_ACTIVITY_PARAM = "userActivity";
     public static final String USER_GOAL_PARAM = "userGoal";
 
-    public static final String INGREDIENT_LIST_JSP = "/data/ingredient/list-ingredient.jsp";
-    public static final String INGREDIENT_SAVE_JSP = "/data/ingredient/save-ingredient.jsp";
-    public static final String INGREDIENT_UPDATE_JSP = "/data/ingredient/update-ingredient.jsp";
-    public static final String INGREDIENT_SELECT_JSP = "/data/ingredient/select-ingredient.jsp";
+    public static final String INGREDIENT_LIST_JSP = "/ingredient/list-ingredient.jsp";
+    public static final String INGREDIENT_SAVE_JSP = "/ingredient/save-ingredient.jsp";
+    public static final String INGREDIENT_UPDATE_JSP = "/ingredient/update-ingredient.jsp";
+    public static final String INGREDIENT_SELECT_JSP = "/ingredient/select-ingredient.jsp";
     public static final String INGREDIENT_LIST_SERVLET = "list-ingredient";
     public static final String INGREDIENT_SAVE_SERVLET = "save-ingredient";
     public static final String INGREDIENT_UPDATE_SERVLET = "update-ingredient";
@@ -51,10 +51,10 @@ public class ServletConstants {
     public static final String INGREDIENT_NAME_PARAM = "ingredientName";
     public static final String INGREDIENT_PRODUCT_TYPE_PARAM = "ingredientProductType";
 
-    public static final String DISH_LIST_JSP = "/data/dish/list-dish.jsp";
-    public static final String DISH_SAVE_JSP = "/data/dish/save-dish.jsp";
-    public static final String DISH_UPDATE_JSP = "/data/dish/update-dish.jsp";
-    public static final String DISH_SELECT_JSP = "/data/dish/select-dish.jsp";
+    public static final String DISH_LIST_JSP = "/dish/list-dish.jsp";
+    public static final String DISH_SAVE_JSP = "/dish/save-dish.jsp";
+    public static final String DISH_UPDATE_JSP = "/dish/update-dish.jsp";
+    public static final String DISH_SELECT_JSP = "/dish/select-dish.jsp";
     public static final String DISH_LIST_SERVLET = "list-dish";
     public static final String DISH_SAVE_SERVLET = "save-dish";
     public static final String DISH_UPDATE_SERVLET = "update-dish";
@@ -71,9 +71,9 @@ public class ServletConstants {
     public static final String DISH_CARBOHYDRATES_PARAM = "dishCarbohydrates";
     public static final String DISH_RECIPE_PARAM = "dishRecipe";
 
-    public static final String MEAL_LIST_JSP = "/data/meal/list-meal.jsp";
-    public static final String MEAL_SAVE_JSP = "/data/meal/save-meal.jsp";
-    public static final String MEAL_UPDATE_JSP = "/data/meal/update-meal.jsp";
+    public static final String MEAL_LIST_JSP = "/meal/list-meal.jsp";
+    public static final String MEAL_SAVE_JSP = "/meal/save-meal.jsp";
+    public static final String MEAL_UPDATE_JSP = "/meal/update-meal.jsp";
     public static final String MEAL_LIST_SERVLET = "list-meal";
     public static final String MEAL_SAVE_SERVLET = "save-meal";
     public static final String MEAL_UPDATE_SERVLET = "update-meal";
@@ -85,9 +85,9 @@ public class ServletConstants {
     public static final String MEAL_DATE_PARAM = "mealDate";
     public static final String MEAL_TIME_PARAM = "mealTime";
 
-    public static final String DISH_INGREDIENT_LIST_JSP = "/data/dish-ingredient/list-dish-ingredient.jsp";
-    public static final String DISH_INGREDIENT_SAVE_JSP = "/data/dish-ingredient/save-dish-ingredient.jsp";
-    public static final String DISH_INGREDIENT_UPDATE_JSP = "/data/dish-ingredient/update-dish-ingredient.jsp";
+    public static final String DISH_INGREDIENT_LIST_JSP = "/dish-ingredient/list-dish-ingredient.jsp";
+    public static final String DISH_INGREDIENT_SAVE_JSP = "/dish-ingredient/save-dish-ingredient.jsp";
+    public static final String DISH_INGREDIENT_UPDATE_JSP = "/dish-ingredient/update-dish-ingredient.jsp";
     public static final String DISH_INGREDIENT_LIST_SERVLET = "list-dish-ingredient";
     public static final String DISH_INGREDIENT_SAVE_SERVLET = "save-dish-ingredient";
     public static final String DISH_INGREDIENT_UPDATE_SERVLET = "update-dish-ingredient";
