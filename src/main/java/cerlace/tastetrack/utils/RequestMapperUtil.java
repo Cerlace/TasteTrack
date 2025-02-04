@@ -1,16 +1,5 @@
 package cerlace.tastetrack.utils;
 
-import cerlace.tastetrack.dto.DishDTO;
-import cerlace.tastetrack.dto.DishIngredientDTO;
-import cerlace.tastetrack.dto.IngredientDTO;
-import cerlace.tastetrack.dto.MealDTO;
-import cerlace.tastetrack.dto.UserDTO;
-import cerlace.tastetrack.requestmapper.RequestMapper;
-import cerlace.tastetrack.requestmapper.impl.DishIngredientRequestMapper;
-import cerlace.tastetrack.requestmapper.impl.DishRequestMapper;
-import cerlace.tastetrack.requestmapper.impl.IngredientRequestMapper;
-import cerlace.tastetrack.requestmapper.impl.MealRequestMapper;
-import cerlace.tastetrack.requestmapper.impl.UserRequestMapper;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,21 +7,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public class RequestMapperUtil {
-
-    private static final Map<Class, RequestMapper> REQUEST_MAPPER_MAP = new HashMap<>();
-
-    static {
-        REQUEST_MAPPER_MAP.put(DishIngredientDTO.class, new DishIngredientRequestMapper());
-        REQUEST_MAPPER_MAP.put(DishDTO.class, new DishRequestMapper());
-        REQUEST_MAPPER_MAP.put(IngredientDTO.class, new IngredientRequestMapper());
-        REQUEST_MAPPER_MAP.put(MealDTO.class, new MealRequestMapper());
-        REQUEST_MAPPER_MAP.put(UserDTO.class, new UserRequestMapper());
-    }
 
     /**
      * Создает объект типа {@code DtoT}, заполняя поля значениями из параметров,
@@ -44,7 +21,7 @@ public class RequestMapperUtil {
      * @return объект типа {@code DtoT}
      */
     public static <DtoT> DtoT getDTO(HttpServletRequest request, Class<DtoT> clazz) {
-        return (DtoT) REQUEST_MAPPER_MAP.get(clazz).getDTO(request);
+        return RequestMapperFactory.getMapper(clazz).getDTO(request);
     }
 
     /**
