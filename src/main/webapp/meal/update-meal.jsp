@@ -1,80 +1,85 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
-<%@ page import="cerlace.tastetrack.dto.MealDTO" %>
 <%@ page import="cerlace.tastetrack.enums.MealTime" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+<fmt:setLocale value="${not empty cookie.locale ? cookie.locale.value : 'en'}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
-    <title>Update meal</title>
+    <title><fmt:message key="table.meal.update"/></title>
     <link rel='stylesheet' type='text/css' media='screen'
           href='${pageContext.request.contextPath}/style.css'>
 </head>
 <body>
-<jsp:include page="<%= ServletConstants.SIDEBAR_JSP %>"/>
+<jsp:include page="${ServletConstants.SIDEBAR_JSP}"/>
 <div class="content">
-    <% MealDTO meal = (MealDTO) request.getAttribute(ServletConstants.MEAL_ATTRIBUTE); %>
+
+    <jsp:useBean id="mealObject" class="cerlace.tastetrack.dto.MealDTO" scope="request"/>
+
     <form name="update"
           method="post"
-          action="<%= ServletConstants.MEAL_UPDATE_SERVLET %>">
-        <h2>Update meal:</h2>
-        <input name="<%= ServletConstants.MEAL_ID_PARAM %>"
+          action="${ServletConstants.MEAL_UPDATE_SERVLET}">
+        <h2><fmt:message key="table.meal.update"/>:</h2>
+        <input name="${ServletConstants.MEAL_ID_PARAM}"
                type="hidden"
-               value="<%= meal.getId() %>"
+               value="${mealObject.id}"
                required>
-        <input name="<%= ServletConstants.USER_ID_PARAM %>"
+        <input name="${ServletConstants.USER_ID_PARAM}"
                type="hidden"
-               value="<%= meal.getUser().getId() %>"
+               value="${mealObject.user.id}"
                required>
         <div class="input-group">
             <label for="date-input">
-                Fill meal date:
+                <fmt:message key="table.meal.column.date"/>:
             </label>
             <input id="date-input"
-                   name="<%= ServletConstants.MEAL_DATE_PARAM %>"
+                   name="${ServletConstants.MEAL_DATE_PARAM}"
                    type="date"
-                   value="<%= ServletConstants.DATE_FORMATTER.format(meal.getDate()) %>"
+                   value="<fmt:formatDate value="${mealObject.date}" pattern="yyyy-MM-dd"/>"
                    required>
         </div>
         <div class="input-group">
-            Select meal time:
+            <fmt:message key="table.meal.column.meal-time"/>
             <label>
-                <input name="<%= ServletConstants.MEAL_TIME_PARAM %>"
+                <input name="${ServletConstants.MEAL_TIME_PARAM}"
                        type="radio"
-                       value="<%= MealTime.BREAKFAST %>"
-                    <%= meal.getMealTime() == MealTime.BREAKFAST ? "checked" : "" %>
+                       value="${MealTime.BREAKFAST}"
+                ${mealObject.mealTime == MealTime.BREAKFAST ? "checked" : ""}
                        required>
-                Breakfast
+                <fmt:message key="table.meal.column.meal-time.breakfast"/>
             </label>
             <label>
-                <input name="<%= ServletConstants.MEAL_TIME_PARAM %>"
+                <input name="${ServletConstants.MEAL_TIME_PARAM}"
                        type="radio"
-                       value="<%= MealTime.LUNCH %>"
-                    <%= meal.getMealTime() == MealTime.LUNCH ? "checked" : "" %>>
-                Lunch
+                       value="${MealTime.LUNCH}"
+                ${mealObject.mealTime == MealTime.LUNCH ? "checked" : ""}>
+                <fmt:message key="table.meal.column.meal-time.lunch"/>
             </label>
             <label>
-                <input name="<%= ServletConstants.MEAL_TIME_PARAM %>"
+                <input name="${ServletConstants.MEAL_TIME_PARAM}"
                        type="radio"
-                       value="<%= MealTime.DINNER %>"
-                    <%= meal.getMealTime() == MealTime.DINNER ? "checked" : "" %>>
-                Dinner
+                       value="${MealTime.DINNER}"
+                ${mealObject.mealTime == MealTime.DINNER ? "checked" : ""}>
+                <fmt:message key="table.meal.column.meal-time.dinner"/>
             </label>
         </div>
 
-        <jsp:include page="<%= ServletConstants.DISH_SELECT_SERVLET %>"/>
+        <jsp:include page="${ServletConstants.DISH_SELECT_SERVLET}"/>
 
         <button type="submit"
                 class="medium-action-button">
-            Send
+            <fmt:message key="button.send"/>
         </button>
     </form>
     <form name="list-meals"
           method="get"
-          action="<%= ServletConstants.MEAL_LIST_SERVLET %>">
+          action="${ServletConstants.MEAL_LIST_SERVLET}">
         <button type="submit"
                 class="medium-action-button"
-                name="<%= ServletConstants.USER_ID_PARAM %>"
-                value="<%= request.getParameter(ServletConstants.USER_ID_PARAM) %>">
-            Return to meals
+                name="${ServletConstants.USER_ID_PARAM}"
+                value="${mealObject.user.id}">
+            <fmt:message key="table.meal.return"/>
         </button>
     </form>
 </div>
