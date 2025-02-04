@@ -9,7 +9,7 @@
 <fmt:setBundle basename="messages"/>
 <html>
 <head>
-    <title>Update user</title>
+    <title><fmt:message key="table.user.update"/></title>
     <link rel='stylesheet' type='text/css' media='screen'
           href='${pageContext.request.contextPath}/style.css'>
 </head>
@@ -151,7 +151,7 @@
         </div>
         <button type="submit"
                 class="medium-action-button">
-            <fmt:message key="label.send"/>
+            <fmt:message key="button.send"/>
         </button>
     </form>
     <form name="list-users"

@@ -9,7 +9,7 @@
 <fmt:setBundle basename="messages"/>
 <html>
 <head>
-    <title>Save user</title>
+    <title><fmt:message key="table.user.save"/></title>
     <link rel='stylesheet' type='text/css' media='screen'
           href='${pageContext.request.contextPath}/style.css'>
 </head>
@@ -19,7 +19,7 @@
     <form name="save"
           method="post"
           action="${ServletConstants.USER_SAVE_SERVLET}">
-        <h2>Save user:</h2>
+        <h2><fmt:message key="table.user.save"/>:</h2>
         <div class="input-group">
             <label for="name-input">
                 <fmt:message key="table.user.column.full-name"/>:
@@ -131,7 +131,7 @@
         </div>
         <button type="submit"
                 class="medium-action-button">
-            <fmt:message key="label.send"/>
+            <fmt:message key="button.send"/>
         </button>
     </form>
     <form name="list-users"
