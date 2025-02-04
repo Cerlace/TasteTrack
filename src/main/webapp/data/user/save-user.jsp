@@ -1,8 +1,12 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
 <%@ page import="cerlace.tastetrack.enums.Gender" %>
 <%@ page import="cerlace.tastetrack.enums.Activity" %>
 <%@ page import="cerlace.tastetrack.enums.Goal" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+<fmt:setLocale value="${not empty cookie.locale ? cookie.locale.value : 'en'}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
     <title>Save user</title>
@@ -10,130 +14,132 @@
           href='${pageContext.request.contextPath}/style.css'>
 </head>
 <body>
-<jsp:include page="<%= ServletConstants.SIDEBAR_JSP %>"/>
+<jsp:include page="${ServletConstants.SIDEBAR_JSP}"/>
 <div class="content">
     <form name="save"
           method="post"
-          action="<%= ServletConstants.USER_SAVE_SERVLET %>">
+          action="${ServletConstants.USER_SAVE_SERVLET}">
         <h2>Save user:</h2>
         <div class="input-group">
             <label for="name-input">
-                Fill user full name:
+                <fmt:message key="table.user.column.full-name"/>:
             </label>
             <input id="name-input"
-                   name="<%= ServletConstants.USER_FULL_NAME_PARAM %>"
+                   name="${ServletConstants.USER_FULL_NAME_PARAM}"
                    type="text"
                    required>
         </div>
         <div class="input-group">
             <label for="email-input">
-                Fill user email:
+                <fmt:message key="table.user.column.email"/>:
             </label>
             <input id="email-input"
-                   name="<%= ServletConstants.USER_EMAIL_PARAM %>"
+                   name="${ServletConstants.USER_EMAIL_PARAM}"
                    type="email"
                    required>
         </div>
         <div class="input-group">
             <label for="birthdate-input">
-                Fill user birthdate:
+                <fmt:message key="table.user.column.birth-date"/>:
             </label>
             <input id="birthdate-input"
-                   name="<%= ServletConstants.USER_BIRTHDATE_PARAM %>"
+                   name="${ServletConstants.USER_BIRTHDATE_PARAM}"
                    type="date"
                    required>
         </div>
         <div class="input-group">
-            Select gender:
+            <fmt:message key="table.user.column.gender"/>:
             <label>
-                <input name="<%= ServletConstants.USER_GENDER_PARAM %>"
+                <input name="${ServletConstants.USER_GENDER_PARAM}"
                        type="radio"
-                       value="<%= Gender.MALE %>"
+                       value="${Gender.MALE}"
                        required>
-                Male
+                <fmt:message key="table.user.column.gender.male"/>
             </label>
             <label>
-                <input name="<%= ServletConstants.USER_GENDER_PARAM %>"
+                <input name="${ServletConstants.USER_GENDER_PARAM}"
                        type="radio"
-                       value="<%= Gender.FEMALE %>">
-                Female
+                       value="${Gender.FEMALE}">
+                <fmt:message key="table.user.column.gender.female"/>
             </label>
         </div>
         <div class="input-group">
             <label for="height-input">
-                Fill user height:
+                <fmt:message key="table.user.column.height"/>:
             </label>
             <input id="height-input"
-                   name="<%= ServletConstants.USER_HEIGHT_PARAM %>"
+                   name="${ServletConstants.USER_HEIGHT_PARAM}"
                    type="number"
                    step="0.1"
+                   min="0.1"
                    required>
         </div>
         <div class="input-group">
             <label for="weight-input">
-                Fill user weight:
+                <fmt:message key="table.user.column.weight"/>:
             </label>
             <input id="weight-input"
-                   name="<%= ServletConstants.USER_WEIGHT_PARAM %>"
+                   name="${ServletConstants.USER_WEIGHT_PARAM}"
                    type="number"
                    step="0.1"
+                   min="0.1"
                    required>
         </div>
         <div class="input-group">
-            Select user activity level:
+            <fmt:message key="table.user.column.activity"/>:
             <label>
-                <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+                <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
                        type="radio"
-                       value="<%= Activity.LOW %>"
+                       value="${Activity.LOW}"
                        required>
-                Low
+                <fmt:message key="table.user.column.activity.low"/>
             </label>
             <label>
-                <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+                <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
                        type="radio"
-                       value="<%= Activity.AVERAGE %>">
-                Average
+                       value="${Activity.AVERAGE}">
+                <fmt:message key="table.user.column.activity.average"/>
             </label>
             <label>
-                <input name="<%= ServletConstants.USER_ACTIVITY_PARAM %>"
+                <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
                        type="radio"
-                       value="<%= Activity.HIGH %>">
-                High
+                       value="${Activity.HIGH}">
+                <fmt:message key="table.user.column.activity.high"/>
             </label>
         </div>
         <div class="input-group">
-            Select user goal:
+            <fmt:message key="table.user.column.goal"/>:
             <label>
-                <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+                <input name="${ServletConstants.USER_GOAL_PARAM}"
                        type="radio"
-                       value="<%= Goal.LOSE_WEIGHT %>"
+                       value="${Goal.LOSE_WEIGHT}"
                        required>
-                Lose weight
+                <fmt:message key="table.user.column.goal.lose"/>
             </label>
             <label>
-                <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+                <input name="${ServletConstants.USER_GOAL_PARAM}"
                        type="radio"
-                       value="<%= Goal.KEEP_WEIGHT %>">
-                Keep weight
+                       value="${Goal.KEEP_WEIGHT}">
+                <fmt:message key="table.user.column.goal.keep"/>
             </label>
             <label>
-                <input name="<%= ServletConstants.USER_GOAL_PARAM %>"
+                <input name="${ServletConstants.USER_GOAL_PARAM}"
                        type="radio"
-                       value="<%= Goal.GAIN_WEIGHT %>">
-                Gain weight
+                       value="${Goal.GAIN_WEIGHT}">
+                <fmt:message key="table.user.column.goal.gain"/>
             </label>
         </div>
         <button type="submit"
                 class="medium-action-button">
-            Send
+            <fmt:message key="label.send"/>
         </button>
     </form>
     <form name="list-users"
           method="get"
-          action="<%= ServletConstants.USER_LIST_SERVLET %>">
+          action="${ServletConstants.USER_LIST_SERVLET}">
         <button type="submit"
                 class="medium-action-button">
-            Return to users
+            <fmt:message key="table.user.return"/>
         </button>
     </form>
 </div>

@@ -1,10 +1,13 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.util.List" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
-<%@ page import="cerlace.tastetrack.dto.UserDTO" %>
+
+<fmt:setLocale value="${not empty cookie.locale ? cookie.locale.value : 'en'}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
-    <title>Users list</title>
+    <title><fmt:message key="table.user.list"/></title>
     <link rel='stylesheet' type='text/css' media='screen'
           href='${pageContext.request.contextPath}/style.css'>
 </head>
@@ -13,123 +16,119 @@
 <jsp:include page="${ServletConstants.ALERT_BLOCK_JSP}"/>
 <div class="content">
     <div class="line-container">
-        <h1>Users list:</h1>
+        <h1><fmt:message key="table.user.list"/>:</h1>
         <form name="save-user"
               method="get"
-              action="<%= ServletConstants.USER_SAVE_SERVLET %>">
+              action="${ ServletConstants.USER_SAVE_SERVLET }">
             <button type="submit"
                     class="medium-action-button">
-                Save new user
+                <fmt:message key="table.user.save"/>
             </button>
         </form>
     </div>
     <table>
         <tr>
             <td>
-                User ID
+                <fmt:message key="table.user.column.id"/>
             </td>
             <td>
-                Full name
+                <fmt:message key="table.user.column.full-name"/>
             </td>
             <td>
-                Birthdate
+                <fmt:message key="table.user.column.birth-date"/>
             </td>
             <td>
-                Gender
+                <fmt:message key="table.user.column.gender"/>
             </td>
             <td>
-                Email
+                <fmt:message key="table.user.column.email"/>
             </td>
             <td>
-                Height
+                <fmt:message key="table.user.column.height"/>
             </td>
             <td>
-                Weight
+                <fmt:message key="table.user.column.weight"/>
             </td>
             <td>
-                Activity
+                <fmt:message key="table.user.column.activity"/>
             </td>
             <td>
-                Goal
+                <fmt:message key="table.user.column.goal"/>
             </td>
             <td>
-                User meals
+                <fmt:message key="table.user.column.user-meals"/>
             </td>
             <td colspan="2">
-                Action
+                <fmt:message key="label.action"/>
             </td>
         </tr>
-        <% List<UserDTO> users = (List<UserDTO>) request.getAttribute(ServletConstants.USER_LIST_ATTRIBUTE);
-            for (UserDTO user : users) {
-        %>
-        <tr>
-            <td>
-                <%= user.getId() %>
-            </td>
-            <td>
-                <%= user.getFullName() %>
-            </td>
-            <td>
-                <%= ServletConstants.DATE_FORMATTER.format(user.getBirthDate()) %>
-            </td>
-            <td>
-                <%= user.getGender() %>
-            </td>
-            <td>
-                <%= user.getEmail() %>
-            </td>
-            <td>
-                <%= user.getHeight() %>
-            </td>
-            <td>
-                <%= user.getWeight() %>
-            </td>
-            <td>
-                <%= user.getActivity() %>
-            </td>
-            <td>
-                <%= user.getGoal() %>
-            </td>
-            <td>
-                <form name="list-meals"
-                      method="get"
-                      action="<%= ServletConstants.MEAL_LIST_SERVLET %>">
-                    <button type="submit"
-                            class="small-action-button"
-                            name="<%= ServletConstants.USER_ID_PARAM %>"
-                            value="<%= user.getId() %>">
-                        Meals list
-                    </button>
-                </form>
-            </td>
-            <td>
-                <form name="delete"
-                      method="post"
-                      action="<%= ServletConstants.USER_DELETE_SERVLET %>">
-                    <button type="submit"
-                            class="small-action-button"
-                            name="<%= ServletConstants.USER_ID_PARAM %>"
-                            value="<%= user.getId() %>">
-                        Delete
-                    </button>
-                </form>
-            </td>
-            <td>
-                <form name="update"
-                      method="get"
-                      action="<%= ServletConstants.USER_UPDATE_SERVLET %>">
-                    <button type="submit"
-                            class="small-action-button"
-                            name="<%= ServletConstants.USER_ID_PARAM %>"
-                            value="<%= user.getId() %>">
-                        Update
-                    </button>
-                </form>
-            </td>
-        </tr>
-        <%
-            }
-        %>
+        <c:forEach var="user" items="${requestScope.userList}">
+            <tr>
+                <td>
+                        ${user.id}
+                </td>
+                <td>
+                        ${user.fullName}
+                </td>
+                <td>
+                    <fmt:formatDate value="${user.birthDate}"/>
+                </td>
+                <td>
+                        ${user.gender}
+                </td>
+                <td>
+                        ${user.email}
+                </td>
+                <td>
+                        ${user.height}
+                </td>
+                <td>
+                        ${user.weight}
+                </td>
+                <td>
+                        ${user.activity}
+                </td>
+                <td>
+                        ${user.goal}
+                </td>
+                <td>
+                    <form name="list-meals"
+                          method="get"
+                          action="${ServletConstants.MEAL_LIST_SERVLET}">
+                        <button type="submit"
+                                class="small-action-button"
+                                name="${ServletConstants.USER_ID_PARAM}"
+                                value="${user.id}">
+                            <fmt:message key="table.meal.list"/>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form name="delete"
+                          method="post"
+                          action="${ServletConstants.USER_DELETE_SERVLET}">
+                        <button type="submit"
+                                class="small-action-button"
+                                name="${ServletConstants.USER_ID_PARAM}"
+                                value="${user.id}">
+                            <fmt:message key="button.delete"/>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form name="update"
+                          method="get"
+                          action="${ServletConstants.USER_UPDATE_SERVLET}">
+                        <button type="submit"
+                                class="small-action-button"
+                                name="${ServletConstants.USER_ID_PARAM}"
+                                value="${user.id}">
+                            <fmt:message key="button.update"/>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
 </div>
 </body>
