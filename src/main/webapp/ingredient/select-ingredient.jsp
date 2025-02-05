@@ -1,28 +1,28 @@
-<%@ page import="cerlace.tastetrack.dto.IngredientDTO" %>
-<%@ page import="java.util.List" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
-<%@ page import="cerlace.tastetrack.dto.DishIngredientDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+<fmt:setLocale value="${not empty cookie.locale ? cookie.locale.value : 'en'}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <body>
-<% DishIngredientDTO updatingIngredient = (DishIngredientDTO) request.getAttribute(ServletConstants.DISH_INGREDIENT_ATTRIBUTE); %>
+
+<jsp:useBean id="dishIngredientObject" class="cerlace.tastetrack.dto.DishIngredientDTO" scope="request"/>
+
 <div class="input-group">
     <label for="ingredient-select">
-        Select ingredient:
+        <fmt:message key="table.ingredient.column.name"/>:
     </label>
     <select id="ingredient-select"
-            name="<%= ServletConstants.INGREDIENT_ID_PARAM %>" required>
-        <% List<IngredientDTO> ingredients = (List<IngredientDTO>) request.getAttribute(ServletConstants.INGREDIENT_LIST_ATTRIBUTE);
-            for (IngredientDTO ingredient : ingredients) {
-        %>
-        <option value="<%= ingredient.getId() %>"
-                <%= updatingIngredient != null && updatingIngredient.getIngredient().getId().equals(ingredient.getId())
-                        ? "selected" : ""%>>
-            <%= ingredient.getName() %>
-        </option>
-        <%
-            }
-        %>
+            name="${ServletConstants.INGREDIENT_ID_PARAM}" required>
+        <c:forEach var="ingredient" items="${requestScope.ingredientList}">
+            <option value="${ingredient.id}"
+                ${dishIngredientObject != null && dishIngredientObject.ingredient.id == ingredient.id
+                        ? "selected" : ""}>
+                    ${ingredient.name}
+            </option>
+        </c:forEach>
     </select>
 </div>
 </body>
