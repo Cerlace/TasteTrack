@@ -1,10 +1,13 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.util.List" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
-<%@ page import="cerlace.tastetrack.dto.DishIngredientDTO" %>
+
+<fmt:setLocale value="${not empty cookie.locale ? cookie.locale.value : 'en'}"/>
+<fmt:setBundle basename="messages"/>
 <html>
 <head>
-    <title>Dish ingredient list</title>
+    <title><fmt:message key="table.dish-ingredient.list"/></title>
     <link rel='stylesheet' type='text/css' media='screen'
           href='${pageContext.request.contextPath}/style.css'>
 </head>
@@ -13,86 +16,81 @@
 <jsp:include page="${ServletConstants.ALERT_BLOCK_JSP}"/>
 <div class="content">
     <div class="line-container">
-        <h1>Dish ingredient list:</h1>
+        <h1><fmt:message key="table.dish-ingredient.list"/>:</h1>
         <form name="save"
               method="get"
-              action="<%= ServletConstants.DISH_INGREDIENT_SAVE_SERVLET %>">
+              action="${ServletConstants.DISH_INGREDIENT_SAVE_SERVLET}">
             <button type="submit"
                     class="medium-action-button"
-                    name="<%= ServletConstants.DISH_ID_PARAM %>"
-                    value="<%= request.getParameter(ServletConstants.DISH_ID_PARAM) %>">
-                Save new dish ingredient
+                    name="${ServletConstants.DISH_ID_PARAM}"
+                    value="${param.dishId}">
+                <fmt:message key="table.dish-ingredient.save"/>
             </button>
         </form>
     </div>
     <table>
         <tr>
             <td>
-                Dish ingredient ID
+                <fmt:message key="column.id"/>
             </td>
             <td>
-                Ingredient name
+                <fmt:message key="table.ingredient.column.name"/>
             </td>
             <td>
-                Amount (grams or count)
+                <fmt:message key="table.dish-ingredient.column.amount"/>
             </td>
             <td colspan="2">
-                Action
+                <fmt:message key="label.action"/>
             </td>
         </tr>
-        <% List<DishIngredientDTO> dishIngredients = (List<DishIngredientDTO>) request.getAttribute(
-                ServletConstants.DISH_INGREDIENT_LIST_ATTRIBUTE);
-            for (DishIngredientDTO dishIngredient : dishIngredients) {
-        %>
-        <tr>
-            <td>
-                <%= dishIngredient.getId() %>
-            </td>
-            <td>
-                <%= dishIngredient.getIngredient().getName() %>
-            </td>
-            <td>
-                <%= dishIngredient.getAmount() %>
-            </td>
-            <td>
-                <form name="delete"
-                      method="post"
-                      action="<%= ServletConstants.DISH_INGREDIENT_DELETE_SERVLET %>">
-                    <input name="<%= ServletConstants.DISH_ID_PARAM %>"
-                           type="hidden"
-                           value="<%= dishIngredient.getDish().getId() %>"
-                           required>
-                    <button type="submit"
-                            class="small-action-button"
-                            name="<%= ServletConstants.DISH_INGREDIENT_ID_PARAM %>"
-                            value="<%= dishIngredient.getId() %>">
-                        Delete
-                    </button>
-                </form>
-            </td>
-            <td>
-                <form name="update"
-                      method="get"
-                      action="<%= ServletConstants.DISH_INGREDIENT_UPDATE_SERVLET %>">
-                    <button type="submit"
-                            class="small-action-button"
-                            name="<%= ServletConstants.DISH_INGREDIENT_ID_PARAM %>"
-                            value="<%= dishIngredient.getId() %>">
-                        Update
-                    </button>
-                </form>
-            </td>
-        </tr>
-        <%
-            }
-        %>
+        <c:forEach var="dishIngredient" items="${requestScope.dishIngredientList}">
+            <tr>
+                <td>
+                        ${dishIngredient.id}
+                </td>
+                <td>
+                        ${dishIngredient.ingredient.name}
+                </td>
+                <td>
+                        ${dishIngredient.amount}
+                </td>
+                <td>
+                    <form name="delete"
+                          method="post"
+                          action="${ServletConstants.DISH_INGREDIENT_DELETE_SERVLET}">
+                        <input name="${ServletConstants.DISH_ID_PARAM}"
+                               type="hidden"
+                               value="${dishIngredient.dish.id}"
+                               required>
+                        <button type="submit"
+                                class="small-action-button"
+                                name="${ServletConstants.DISH_INGREDIENT_ID_PARAM}"
+                                value="${dishIngredient.id}">
+                            <fmt:message key="button.delete"/>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form name="update"
+                          method="get"
+                          action="${ServletConstants.DISH_INGREDIENT_UPDATE_SERVLET}">
+                        <button type="submit"
+                                class="small-action-button"
+                                name="${ServletConstants.DISH_INGREDIENT_ID_PARAM}"
+                                value="${dishIngredient.id}">
+                            <fmt:message key="button.update"/>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
     </table>
     <form name="list-dish"
           method="get"
-          action="<%= ServletConstants.DISH_LIST_SERVLET %>">
+          action="${ServletConstants.DISH_LIST_SERVLET}">
         <button type="submit"
                 class="medium-action-button">
-            Return to dishes
+            <fmt:message key="table.dish.return"/>
         </button>
     </form>
 </div>
