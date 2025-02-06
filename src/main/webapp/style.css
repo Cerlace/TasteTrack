@@ -98,7 +98,8 @@ button[disabled]{
 .small-action-button {
     font-size: 0.8em; /* Размер шрифта для кнопок действий */
     margin: 5px; /* Отступы между кнопками действий */
-    width: 100px;
+    min-width: 80px;
+    max-width: 130px;
     min-height: 40px;
 }
 
