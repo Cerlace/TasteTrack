@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Enumeration;
+import java.util.Objects;
 
 @WebFilter(filterName = "LocaleFilter", urlPatterns = {"/*"})
 public class LocaleFilter implements Filter {
@@ -31,9 +33,29 @@ public class LocaleFilter implements Filter {
             cookie.setMaxAge((int) Duration.ofDays(DAYS_TO_STORE_COOKIE).getSeconds());
             cookie.setPath("/");
             resp.addCookie(cookie);
-            resp.sendRedirect(req.getRequestURI());
+
+            String redirectUrl = getRequestURIWithParams(req);
+            resp.sendRedirect(redirectUrl);
         } else {
             chain.doFilter(request, response);
         }
+    }
+
+    private String getRequestURIWithParams(HttpServletRequest req) {
+        StringBuilder urlBuilder = new StringBuilder(req.getRequestURI());
+        urlBuilder.append("?");
+        Enumeration<String> paramNames = req.getParameterNames();
+        while (paramNames.hasMoreElements()) {
+            String param = paramNames.nextElement();
+            if (Objects.equals(param, ServletConstants.COOKIE_LOCALE_PARAM)) {
+                continue;
+            }
+            urlBuilder.append(param);
+            urlBuilder.append("=");
+            urlBuilder.append(req.getParameter(param));
+            urlBuilder.append("&");
+        }
+        urlBuilder.deleteCharAt(urlBuilder.length() - 1);
+        return urlBuilder.toString();
     }
 }

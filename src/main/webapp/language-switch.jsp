@@ -12,6 +12,11 @@
           id="en-lang"
           method="get"
           action="">
+        <c:forEach var="paramEntry" items="${param}">
+            <input type="hidden"
+                   name="${paramEntry.key}"
+                   value="${paramEntry.value}"/>
+        </c:forEach>
     </form>
     <button form="en-lang"
             type="submit"
@@ -27,6 +32,11 @@
           id="ru-lang"
           method="get"
           action="">
+        <c:forEach var="paramEntry" items="${param}">
+            <input type="hidden"
+                   name="${paramEntry.key}"
+                   value="${paramEntry.value}"/>
+        </c:forEach>
     </form>
     <button form="ru-lang"
             type="submit"
