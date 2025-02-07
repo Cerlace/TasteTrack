@@ -3,6 +3,7 @@ package cerlace.tastetrack.requestmapper.impl;
 import cerlace.tastetrack.dto.DishDTO;
 import cerlace.tastetrack.dto.DishIngredientDTO;
 import cerlace.tastetrack.dto.IngredientDTO;
+import cerlace.tastetrack.enums.MeasureUnit;
 import cerlace.tastetrack.requestmapper.RequestMapper;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.RequestMapperUtil;
@@ -20,6 +21,8 @@ public class DishIngredientRequestMapper implements RequestMapper<DishIngredient
                         .id(RequestMapperUtil.getLongParam(request, ServletConstants.INGREDIENT_ID_PARAM))
                         .build())
                 .amount(RequestMapperUtil.getFloatParam(request, ServletConstants.DISH_INGREDIENT_AMOUNT_PARAM))
+                .measureUnit(MeasureUnit.valueOf(
+                        RequestMapperUtil.getStringParam(request, ServletConstants.DISH_INGREDIENT_MEASURE_UNIT_PARAM)))
                 .build();
     }
 }

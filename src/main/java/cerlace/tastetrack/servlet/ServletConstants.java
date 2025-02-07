@@ -97,4 +97,5 @@ public class ServletConstants {
     public static final String DISH_INGREDIENT_ATTRIBUTE = "dishIngredientObject";
     public static final String DISH_INGREDIENT_ID_PARAM = "dishIngredientId";
     public static final String DISH_INGREDIENT_AMOUNT_PARAM = "dishIngredientAmount";
+    public static final String DISH_INGREDIENT_MEASURE_UNIT_PARAM = "dishIngredientMeasureUnit";
 }

@@ -1,5 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
+<%@ page import="cerlace.tastetrack.enums.MeasureUnit" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <fmt:setLocale value="${not empty cookie.locale ? cookie.locale.value : 'en'}"/>
@@ -42,6 +44,21 @@
                    min="0.1"
                    value="${dishIngredientObject.amount}"
                    required>
+        </div>
+        <div class="input-group">
+            <label for="unit-input">
+                <fmt:message key="table.dish-ingredient.column.measure-unit"/>:
+            </label>
+            <select id="unit-input"
+                    name="${ServletConstants.DISH_INGREDIENT_MEASURE_UNIT_PARAM}"
+                    required>
+                <c:forEach var="measureUnit" items="${MeasureUnit.values()}">
+                    <option value="${measureUnit}"
+                        ${dishIngredientObject.measureUnit == measureUnit ? "selected" : ""}>
+                        <fmt:message key="${measureUnit.messageKey}"/>
+                    </option>
+                </c:forEach>
+            </select>
         </div>
         <button type="submit"
                 class="medium-action-button">
