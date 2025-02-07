@@ -50,7 +50,7 @@
                         ${ingredient.name}
                 </td>
                 <td>
-                        ${ingredient.productType}
+                    <fmt:message key="${ingredient.productType.messageKey}"/>
                 </td>
                 <td>
                     <form name="delete"

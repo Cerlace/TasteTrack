@@ -44,7 +44,7 @@
                     name="${ServletConstants.INGREDIENT_PRODUCT_TYPE_PARAM}" required>
                 <c:forEach var="productType" items="${ProductType.values()}">
                     <option ${ingredientObject.productType == productType ? "selected" : ""} >
-                            ${productType}
+                        <fmt:message key="${productType.messageKey}"/>
                     </option>
                 </c:forEach>
             </select>

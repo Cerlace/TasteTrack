@@ -54,13 +54,13 @@
                        type="radio"
                        value="${Gender.MALE}"
                        required>
-                <fmt:message key="table.user.column.gender.male"/>
+                <fmt:message key="${Gender.MALE.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_GENDER_PARAM}"
                        type="radio"
                        value="${Gender.FEMALE}">
-                <fmt:message key="table.user.column.gender.female"/>
+                <fmt:message key="${Gender.FEMALE.messageKey}"/>
             </label>
         </div>
         <div class="input-group">
@@ -92,19 +92,19 @@
                        type="radio"
                        value="${Activity.LOW}"
                        required>
-                <fmt:message key="table.user.column.activity.low"/>
+                <fmt:message key="${Activity.LOW.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
                        type="radio"
                        value="${Activity.AVERAGE}">
-                <fmt:message key="table.user.column.activity.average"/>
+                <fmt:message key="${Activity.AVERAGE.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
                        type="radio"
                        value="${Activity.HIGH}">
-                <fmt:message key="table.user.column.activity.high"/>
+                <fmt:message key="${Activity.HIGH.messageKey}"/>
             </label>
         </div>
         <div class="input-group">
@@ -114,19 +114,19 @@
                        type="radio"
                        value="${Goal.LOSE_WEIGHT}"
                        required>
-                <fmt:message key="table.user.column.goal.lose"/>
+                <fmt:message key="${Goal.LOSE_WEIGHT.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_GOAL_PARAM}"
                        type="radio"
                        value="${Goal.KEEP_WEIGHT}">
-                <fmt:message key="table.user.column.goal.keep"/>
+                <fmt:message key="${Goal.KEEP_WEIGHT.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_GOAL_PARAM}"
                        type="radio"
                        value="${Goal.GAIN_WEIGHT}">
-                <fmt:message key="table.user.column.goal.gain"/>
+                <fmt:message key="${Goal.GAIN_WEIGHT.messageKey}"/>
             </label>
         </div>
         <button type="submit"

@@ -47,21 +47,21 @@
                        value="${MealTime.BREAKFAST}"
                 ${mealObject.mealTime == MealTime.BREAKFAST ? "checked" : ""}
                        required>
-                <fmt:message key="table.meal.column.meal-time.breakfast"/>
+                <fmt:message key="${MealTime.BREAKFAST.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.MEAL_TIME_PARAM}"
                        type="radio"
                        value="${MealTime.LUNCH}"
                 ${mealObject.mealTime == MealTime.LUNCH ? "checked" : ""}>
-                <fmt:message key="table.meal.column.meal-time.lunch"/>
+                <fmt:message key="${MealTime.LUNCH.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.MEAL_TIME_PARAM}"
                        type="radio"
                        value="${MealTime.DINNER}"
                 ${mealObject.mealTime == MealTime.DINNER ? "checked" : ""}>
-                <fmt:message key="table.meal.column.meal-time.dinner"/>
+                <fmt:message key="${MealTime.DINNER.messageKey}"/>
             </label>
         </div>
 

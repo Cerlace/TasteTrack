@@ -38,19 +38,19 @@
                        type="radio"
                        value="${MealTime.BREAKFAST}"
                        required>
-                <fmt:message key="table.meal.column.meal-time.breakfast"/>
+                <fmt:message key="${MealTime.BREAKFAST.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.MEAL_TIME_PARAM}"
                        type="radio"
                        value="${MealTime.LUNCH}">
-                <fmt:message key="table.meal.column.meal-time.lunch"/>
+                <fmt:message key="${MealTime.LUNCH.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.MEAL_TIME_PARAM}"
                        type="radio"
                        value="${MealTime.DINNER}">
-                <fmt:message key="table.meal.column.meal-time.dinner"/>
+                <fmt:message key="${MealTime.DINNER.messageKey}"/>
             </label>
         </div>
 

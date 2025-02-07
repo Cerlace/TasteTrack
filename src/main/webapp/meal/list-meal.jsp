@@ -55,7 +55,7 @@
                     <fmt:formatDate value="${meal.date}"/>
                 </td>
                 <td>
-                        ${meal.mealTime}
+                    <fmt:message key="${meal.mealTime.messageKey}"/>
                 </td>
                 <td>
                         ${meal.dish.name}

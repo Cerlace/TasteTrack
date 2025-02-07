@@ -74,7 +74,7 @@
                     <fmt:formatDate value="${user.birthDate}"/>
                 </td>
                 <td>
-                        ${user.gender}
+                    <fmt:message key="${user.gender.messageKey}"/>
                 </td>
                 <td>
                         ${user.email}
@@ -86,10 +86,10 @@
                         ${user.weight}
                 </td>
                 <td>
-                        ${user.activity}
+                    <fmt:message key="${user.activity.messageKey}"/>
                 </td>
                 <td>
-                        ${user.goal}
+                    <fmt:message key="${user.goal.messageKey}"/>
                 </td>
                 <td>
                     <form name="list-meals"

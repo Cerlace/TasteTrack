@@ -65,14 +65,14 @@
                        value="${Gender.MALE}"
                        required
                 ${userObject.gender == Gender.MALE ? "checked" : ""}>
-                <fmt:message key="table.user.column.gender.male"/>
+                <fmt:message key="${Gender.MALE.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_GENDER_PARAM}"
                        type="radio"
                        value="${Gender.FEMALE}"
                 ${userObject.gender == Gender.FEMALE ? "checked" : ""}>
-                <fmt:message key="table.user.column.gender.female"/>
+                <fmt:message key="${Gender.FEMALE.messageKey}"/>
             </label>
         </div>
         <div class="input-group">
@@ -107,21 +107,21 @@
                        value="${Activity.LOW}"
                        required
                 ${userObject.activity == Activity.LOW ? "checked" : ""}>
-                <fmt:message key="table.user.column.activity.low"/>
+                <fmt:message key="${Activity.LOW.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
                        type="radio"
                        value="${Activity.AVERAGE}"
                 ${userObject.activity == Activity.AVERAGE ? "checked" : ""}>
-                <fmt:message key="table.user.column.activity.average"/>
+                <fmt:message key="${Activity.AVERAGE.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
                        type="radio"
                        value="${Activity.HIGH}"
                 ${userObject.activity == Activity.HIGH ? "checked" : ""}>
-                <fmt:message key="table.user.column.activity.high"/>
+                <fmt:message key="${Activity.HIGH.messageKey}"/>
             </label>
         </div>
         <div class="input-group">
@@ -132,21 +132,21 @@
                        value="${Goal.LOSE_WEIGHT}"
                        required
                 ${userObject.goal == Goal.LOSE_WEIGHT ? "checked" : ""}>
-                <fmt:message key="table.user.column.goal.lose"/>
+                <fmt:message key="${Goal.LOSE_WEIGHT.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_GOAL_PARAM}"
                        type="radio"
                        value="${Goal.KEEP_WEIGHT}"
                 ${userObject.goal == Goal.KEEP_WEIGHT ? "checked" : ""}>
-                <fmt:message key="table.user.column.goal.keep"/>
+                <fmt:message key="${Goal.KEEP_WEIGHT.messageKey}"/>
             </label>
             <label>
                 <input name="${ServletConstants.USER_GOAL_PARAM}"
                        type="radio"
                        value="${Goal.GAIN_WEIGHT}"
                 ${userObject.goal == Goal.GAIN_WEIGHT ? "checked" : ""}>
-                <fmt:message key="table.user.column.goal.gain"/>
+                <fmt:message key="${Goal.GAIN_WEIGHT.messageKey}"/>
             </label>
         </div>
         <button type="submit"
