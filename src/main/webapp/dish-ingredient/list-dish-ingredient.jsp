@@ -52,7 +52,8 @@
                         ${dishIngredient.ingredient.name}
                 </td>
                 <td>
-                       <fmt:formatNumber value="${dishIngredient.amount}" minFractionDigits="0"/> <fmt:message key="${dishIngredient.measureUnit.messageKey}"/>
+                    <fmt:formatNumber value="${dishIngredient.amount}" minFractionDigits="0"/>&nbsp<fmt:message
+                        key="${dishIngredient.measureUnit.messageKey}"/>
                 </td>
                 <td>
                     <form name="delete"

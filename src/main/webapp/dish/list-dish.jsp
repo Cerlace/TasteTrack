@@ -77,16 +77,16 @@
                     </form>
                 </td>
                 <td>
-                        ${dish.calories}
+                    <fmt:formatNumber value="${dish.calories}" minFractionDigits="0"/>
                 </td>
                 <td>
-                        ${dish.proteins}
+                    <fmt:formatNumber value="${dish.proteins}" minFractionDigits="0"/>
                 </td>
                 <td>
-                        ${dish.fats}
+                    <fmt:formatNumber value="${dish.fats}" minFractionDigits="0"/>
                 </td>
                 <td>
-                        ${dish.carbohydrates}
+                    <fmt:formatNumber value="${dish.carbohydrates}" minFractionDigits="0"/>
                 </td>
                 <td>
                         ${dish.recipe}

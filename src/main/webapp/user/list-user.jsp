@@ -80,10 +80,12 @@
                         ${user.email}
                 </td>
                 <td>
-                        ${user.height}
+                    <fmt:formatNumber value="${user.height}" minFractionDigits="0"/>&nbsp<fmt:message
+                        key="table.user.column.height.unit"/>
                 </td>
                 <td>
-                        ${user.weight}
+                    <fmt:formatNumber value="${user.weight}" minFractionDigits="0"/>&nbsp<fmt:message
+                        key="table.user.column.weight.unit"/>
                 </td>
                 <td>
                     <fmt:message key="${user.activity.messageKey}"/>
