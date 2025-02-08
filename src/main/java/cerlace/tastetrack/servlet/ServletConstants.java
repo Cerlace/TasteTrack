@@ -4,8 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class ServletConstants {
-    public static final DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
-
     public static final String SIDEBAR_JSP = "/sidebar.jsp";
     public static final String ALERT_BLOCK_JSP = "/alert-block.jsp";
     public static final String ALERT_TYPE_ATTRIBUTE = "alertType";
