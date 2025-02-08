@@ -1,8 +1,5 @@
 package cerlace.tastetrack.servlet;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 public class ServletConstants {
     public static final String SIDEBAR_JSP = "/sidebar.jsp";
     public static final String ALERT_BLOCK_JSP = "/alert-block.jsp";

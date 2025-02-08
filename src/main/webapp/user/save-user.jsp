@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
 <%@ page import="cerlace.tastetrack.enums.Gender" %>
 <%@ page import="cerlace.tastetrack.enums.Activity" %>
@@ -49,19 +50,15 @@
         </div>
         <div class="input-group">
             <fmt:message key="table.user.column.gender"/>:
-            <label>
-                <input name="${ServletConstants.USER_GENDER_PARAM}"
-                       type="radio"
-                       value="${Gender.MALE}"
-                       required>
-                <fmt:message key="${Gender.MALE.messageKey}"/>
-            </label>
-            <label>
-                <input name="${ServletConstants.USER_GENDER_PARAM}"
-                       type="radio"
-                       value="${Gender.FEMALE}">
-                <fmt:message key="${Gender.FEMALE.messageKey}"/>
-            </label>
+            <c:forEach var="gender" items="${Gender.values()}">
+                <label>
+                    <input name="${ServletConstants.USER_GENDER_PARAM}"
+                           type="radio"
+                           value="${gender}"
+                           required>
+                    <fmt:message key="${gender.messageKey}"/>
+                </label>
+            </c:forEach>
         </div>
         <div class="input-group">
             <label for="height-input">
@@ -87,47 +84,27 @@
         </div>
         <div class="input-group">
             <fmt:message key="table.user.column.activity"/>:
-            <label>
-                <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
-                       type="radio"
-                       value="${Activity.LOW}"
-                       required>
-                <fmt:message key="${Activity.LOW.messageKey}"/>
-            </label>
-            <label>
-                <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
-                       type="radio"
-                       value="${Activity.AVERAGE}">
-                <fmt:message key="${Activity.AVERAGE.messageKey}"/>
-            </label>
-            <label>
-                <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
-                       type="radio"
-                       value="${Activity.HIGH}">
-                <fmt:message key="${Activity.HIGH.messageKey}"/>
-            </label>
+            <c:forEach var="activity" items="${Activity.values()}">
+                <label>
+                    <input name="${ServletConstants.USER_ACTIVITY_PARAM}"
+                           type="radio"
+                           value="${activity}"
+                           required>
+                    <fmt:message key="${activity.messageKey}"/>
+                </label>
+            </c:forEach>
         </div>
         <div class="input-group">
             <fmt:message key="table.user.column.goal"/>:
-            <label>
-                <input name="${ServletConstants.USER_GOAL_PARAM}"
-                       type="radio"
-                       value="${Goal.LOSE_WEIGHT}"
-                       required>
-                <fmt:message key="${Goal.LOSE_WEIGHT.messageKey}"/>
-            </label>
-            <label>
-                <input name="${ServletConstants.USER_GOAL_PARAM}"
-                       type="radio"
-                       value="${Goal.KEEP_WEIGHT}">
-                <fmt:message key="${Goal.KEEP_WEIGHT.messageKey}"/>
-            </label>
-            <label>
-                <input name="${ServletConstants.USER_GOAL_PARAM}"
-                       type="radio"
-                       value="${Goal.GAIN_WEIGHT}">
-                <fmt:message key="${Goal.GAIN_WEIGHT.messageKey}"/>
-            </label>
+            <c:forEach var="goal" items="${Goal.values()}">
+                <label>
+                    <input name="${ServletConstants.USER_GOAL_PARAM}"
+                           type="radio"
+                           value="${goal}"
+                           required>
+                    <fmt:message key="${goal.messageKey}"/>
+                </label>
+            </c:forEach>
         </div>
         <button type="submit"
                 class="medium-action-button">

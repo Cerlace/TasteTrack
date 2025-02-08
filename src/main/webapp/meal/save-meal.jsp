@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
 <%@ page import="cerlace.tastetrack.enums.MealTime" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -33,25 +34,15 @@
         </div>
         <div class="input-group">
             <fmt:message key="table.meal.column.meal-time"/>
-            <label>
-                <input name="${ServletConstants.MEAL_TIME_PARAM}"
-                       type="radio"
-                       value="${MealTime.BREAKFAST}"
-                       required>
-                <fmt:message key="${MealTime.BREAKFAST.messageKey}"/>
-            </label>
-            <label>
-                <input name="${ServletConstants.MEAL_TIME_PARAM}"
-                       type="radio"
-                       value="${MealTime.LUNCH}">
-                <fmt:message key="${MealTime.LUNCH.messageKey}"/>
-            </label>
-            <label>
-                <input name="${ServletConstants.MEAL_TIME_PARAM}"
-                       type="radio"
-                       value="${MealTime.DINNER}">
-                <fmt:message key="${MealTime.DINNER.messageKey}"/>
-            </label>
+            <c:forEach var="mealTime" items="${MealTime.values()}">
+                <label>
+                    <input name="${ServletConstants.MEAL_TIME_PARAM}"
+                           type="radio"
+                           value="${mealTime}"
+                           required>
+                    <fmt:message key="${mealTime.messageKey}"/>
+                </label>
+            </c:forEach>
         </div>
 
         <jsp:include page="<%= ServletConstants.DISH_SELECT_SERVLET %>"/>
