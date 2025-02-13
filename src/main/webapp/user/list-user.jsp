@@ -106,26 +106,27 @@
                     </form>
                 </td>
                 <td>
-                    <form name="delete"
-                          method="post"
-                          action="${ServletConstants.USER_DELETE_SERVLET}">
-                        <button type="submit"
-                                class="small-action-button"
-                                name="${ServletConstants.USER_ID_PARAM}"
-                                value="${user.id}">
-                            <fmt:message key="button.delete"/>
-                        </button>
-                    </form>
-                </td>
-                <td>
                     <form name="update"
                           method="get"
                           action="${ServletConstants.USER_UPDATE_SERVLET}">
                         <button type="submit"
-                                class="small-action-button"
+                                class="small-action-button update"
                                 name="${ServletConstants.USER_ID_PARAM}"
                                 value="${user.id}">
                             <fmt:message key="button.update"/>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form name="delete"
+                          method="post"
+                          action="${ServletConstants.USER_DELETE_SERVLET}">
+                        <button type="submit"
+                                class="small-action-button delete"
+                                onclick="return confirm('<fmt:message key="alert.confirm.delete"/>');"
+                                name="${ServletConstants.USER_ID_PARAM}"
+                                value="${user.id}">
+                            <fmt:message key="button.delete"/>
                         </button>
                     </form>
                 </td>

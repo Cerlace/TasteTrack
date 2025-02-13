@@ -53,26 +53,27 @@
                     <fmt:message key="${ingredient.productType.messageKey}"/>
                 </td>
                 <td>
-                    <form name="delete"
-                          method="post"
-                          action="${ServletConstants.INGREDIENT_DELETE_SERVLET}">
-                        <button type="submit"
-                                class="small-action-button"
-                                name="${ServletConstants.INGREDIENT_ID_PARAM}"
-                                value="${ingredient.id}">
-                            <fmt:message key="button.delete"/>
-                        </button>
-                    </form>
-                </td>
-                <td>
                     <form name="update"
                           method="get"
                           action="${ServletConstants.INGREDIENT_UPDATE_SERVLET}">
                         <button type="submit"
-                                class="small-action-button"
+                                class="small-action-button update"
                                 name="${ServletConstants.INGREDIENT_ID_PARAM}"
                                 value="${ingredient.id}">
                             <fmt:message key="button.update"/>
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form name="delete"
+                          method="post"
+                          action="${ServletConstants.INGREDIENT_DELETE_SERVLET}">
+                        <button type="submit"
+                                class="small-action-button delete"
+                                onclick="return confirm('<fmt:message key="alert.confirm.delete"/>');"
+                                name="${ServletConstants.INGREDIENT_ID_PARAM}"
+                                value="${ingredient.id}">
+                            <fmt:message key="button.delete"/>
                         </button>
                     </form>
                 </td>

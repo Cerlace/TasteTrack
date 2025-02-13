@@ -56,6 +56,18 @@
                         key="${dishIngredient.measureUnit.messageKey}"/>
                 </td>
                 <td>
+                    <form name="update"
+                          method="get"
+                          action="${ServletConstants.DISH_INGREDIENT_UPDATE_SERVLET}">
+                        <button type="submit"
+                                class="small-action-button update"
+                                name="${ServletConstants.DISH_INGREDIENT_ID_PARAM}"
+                                value="${dishIngredient.id}">
+                            <fmt:message key="button.update"/>
+                        </button>
+                    </form>
+                </td>
+                <td>
                     <form name="delete"
                           method="post"
                           action="${ServletConstants.DISH_INGREDIENT_DELETE_SERVLET}">
@@ -64,22 +76,11 @@
                                value="${dishIngredient.dish.id}"
                                required>
                         <button type="submit"
-                                class="small-action-button"
+                                class="small-action-button delete"
+                                onclick="return confirm('<fmt:message key="alert.confirm.delete"/>');"
                                 name="${ServletConstants.DISH_INGREDIENT_ID_PARAM}"
                                 value="${dishIngredient.id}">
                             <fmt:message key="button.delete"/>
-                        </button>
-                    </form>
-                </td>
-                <td>
-                    <form name="update"
-                          method="get"
-                          action="${ServletConstants.DISH_INGREDIENT_UPDATE_SERVLET}">
-                        <button type="submit"
-                                class="small-action-button"
-                                name="${ServletConstants.DISH_INGREDIENT_ID_PARAM}"
-                                value="${dishIngredient.id}">
-                            <fmt:message key="button.update"/>
                         </button>
                     </form>
                 </td>

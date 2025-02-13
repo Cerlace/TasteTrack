@@ -60,7 +60,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049; /* Более темный зеленый при наведении */
+    background-color: #3d8f3f; /* Более темный зеленый при наведении */
 }
 
 button:disabled,
@@ -101,6 +101,22 @@ button[disabled]{
     min-width: 80px;
     max-width: 130px;
     min-height: 40px;
+}
+
+.small-action-button.update {
+    background-color: #009688;
+}
+
+.small-action-button.update:hover {
+    background-color: #00796B;
+}
+
+.small-action-button.delete {
+    background-color: #d32f2f;
+}
+
+.small-action-button.delete:hover {
+    background-color: #b71c1c;
 }
 
 table {

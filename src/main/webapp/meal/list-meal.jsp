@@ -61,6 +61,18 @@
                         ${meal.dish.name}
                 </td>
                 <td>
+                    <form name="update"
+                          method="get"
+                          action="${ServletConstants.MEAL_UPDATE_SERVLET}">
+                        <button type="submit"
+                                class="small-action-button update"
+                                name="${ServletConstants.MEAL_ID_PARAM}"
+                                value="${meal.id}">
+                            <fmt:message key="button.update"/>
+                        </button>
+                    </form>
+                </td>
+                <td>
                     <form name="delete"
                           method="post"
                           action="${ServletConstants.MEAL_DELETE_SERVLET}">
@@ -69,22 +81,11 @@
                                value="${meal.user.id}"
                                required>
                         <button type="submit"
-                                class="small-action-button"
+                                class="small-action-button delete"
+                                onclick="return confirm('<fmt:message key="alert.confirm.delete"/>');"
                                 name="${ServletConstants.MEAL_ID_PARAM}"
                                 value="${meal.id}">
                             <fmt:message key="button.delete"/>
-                        </button>
-                    </form>
-                </td>
-                <td>
-                    <form name="update"
-                          method="get"
-                          action="${ServletConstants.MEAL_UPDATE_SERVLET}">
-                        <button type="submit"
-                                class="small-action-button"
-                                name="${ServletConstants.MEAL_ID_PARAM}"
-                                value="${meal.id}">
-                            <fmt:message key="button.update"/>
                         </button>
                     </form>
                 </td>
