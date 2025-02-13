@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
+
+    <changeSet id="14-02-2025-dish-column-dish-type-add-1" author="Daniil">
+        <addColumn tableName="dish">
+            <column name="dish_type" type="int"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="14-02-2025-dish-column-dish-type-values-update-2" author="Daniil">
+        <update tableName="dish">
+            <column name="dish_type" value="0"/>
+        </update>
+    </changeSet>
+    <changeSet id="14-02-2025-dish-column-dish-type-not-null-constraint-3" author="Daniil">
+        <addNotNullConstraint tableName="dish"
+                              columnName="dish_type"
+                              columnDataType="int"/>
+    </changeSet>
+</databaseChangeLog>

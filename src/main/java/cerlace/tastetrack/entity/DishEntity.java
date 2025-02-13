@@ -1,5 +1,6 @@
 package cerlace.tastetrack.entity;
 
+import cerlace.tastetrack.enums.DishType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -12,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,6 +32,9 @@ import java.util.Set;
 public class DishEntity extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String name;
+    @Column(name = "dish_type", nullable = false)
+    @Enumerated
+    private DishType dishType;
     @Column(nullable = false)
     private Float calories;
     @Column(nullable = false)

@@ -35,6 +35,9 @@
                 <fmt:message key="table.dish.column.name"/>
             </td>
             <td>
+                <fmt:message key="table.dish.column.type"/>
+            </td>
+            <td>
                 <fmt:message key="table.dish-ingredient.label"/>
             </td>
             <td>
@@ -63,6 +66,9 @@
                 </td>
                 <td>
                         ${dish.name}
+                </td>
+                <td>
+                    <fmt:message key="${dish.dishType.messageKey}"/>
                 </td>
                 <td>
                     <form name="list-dish-ingredients"

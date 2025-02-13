@@ -1,5 +1,6 @@
 package cerlace.tastetrack.dto;
 
+import cerlace.tastetrack.enums.DishType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 public class DishDTO extends BaseDTO {
     private String name;
+    private DishType dishType;
     private Float calories;
     private Float proteins;
     private Float fats;

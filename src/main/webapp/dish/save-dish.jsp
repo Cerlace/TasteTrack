@@ -1,5 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="cerlace.tastetrack.servlet.ServletConstants" %>
+<%@ page import="cerlace.tastetrack.enums.DishType" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <fmt:setLocale value="${not empty cookie.locale ? cookie.locale.value : 'en'}"/>
@@ -25,6 +27,20 @@
                    name="${ServletConstants.DISH_NAME_PARAM}"
                    type="text"
                    required>
+        </div>
+        <div class="input-group">
+            <label for="type-input">
+                <fmt:message key="table.dish.column.type"/>:
+            </label>
+            <select id="type-input"
+                    name="${ServletConstants.DISH_TYPE_PARAM}"
+                    required>
+                <c:forEach var="dishType" items="${DishType.values()}">
+                    <option value="${dishType}">
+                        <fmt:message key="${dishType.messageKey}"/>
+                    </option>
+                </c:forEach>
+            </select>
         </div>
         <div class="input-group">
             <label for="calories-input">

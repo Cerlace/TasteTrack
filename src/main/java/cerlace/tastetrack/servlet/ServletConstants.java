@@ -60,6 +60,7 @@ public class ServletConstants {
     public static final String DISH_ATTRIBUTE = "dishObject";
     public static final String DISH_ID_PARAM = "dishId";
     public static final String DISH_NAME_PARAM = "dishName";
+    public static final String DISH_TYPE_PARAM = "dishType";
     public static final String DISH_CALORIES_PARAM = "dishCalories";
     public static final String DISH_PROTEINS_PARAM = "dishProteins";
     public static final String DISH_FATS_PARAM = "dishFats";

@@ -1,6 +1,7 @@
 package cerlace.tastetrack.requestmapper.impl;
 
 import cerlace.tastetrack.dto.DishDTO;
+import cerlace.tastetrack.enums.DishType;
 import cerlace.tastetrack.requestmapper.RequestMapper;
 import cerlace.tastetrack.servlet.ServletConstants;
 import cerlace.tastetrack.utils.RequestMapperUtil;
@@ -12,6 +13,8 @@ public class DishRequestMapper implements RequestMapper<DishDTO> {
     public DishDTO getDTO(HttpServletRequest request) {
         return DishDTO.builder()
                 .name(RequestMapperUtil.getStringParam(request, ServletConstants.DISH_NAME_PARAM))
+                .dishType(DishType.valueOf(
+                        RequestMapperUtil.getStringParam(request, ServletConstants.DISH_TYPE_PARAM)))
                 .calories(RequestMapperUtil.getFloatParam(request, ServletConstants.DISH_CALORIES_PARAM))
                 .proteins(RequestMapperUtil.getFloatParam(request, ServletConstants.DISH_PROTEINS_PARAM))
                 .fats(RequestMapperUtil.getFloatParam(request, ServletConstants.DISH_FATS_PARAM))

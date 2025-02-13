@@ -5,5 +5,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
 
-    <include file="/db_migrations/v-0.3/08-02-2025-02-dish-ingredient-change.xml"/>
+    <include file="/db_migrations/v-0.3/08-02-2025-01-dish-ingredient-change.xml"/>
+    <include file="/db_migrations/v-0.3/14-02-2025-01-dish-change.xml"/>
 </databaseChangeLog>
