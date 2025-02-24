@@ -1,22 +1,20 @@
 package cerlace.tastetrack.entity;
 
-import cerlace.tastetrack.utils.interfaces.Identifiable;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 @Data
 @MappedSuperclass
-public abstract class BaseEntity implements Identifiable {
+public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
