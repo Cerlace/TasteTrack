@@ -1,16 +1,42 @@
 package cerlace.tastetrack.service.impl;
 
-import cerlace.tastetrack.dao.IngredientDAO;
-import cerlace.tastetrack.dao.impl.IngredientDAOImpl;
 import cerlace.tastetrack.dto.IngredientDTO;
 import cerlace.tastetrack.entity.IngredientEntity;
 import cerlace.tastetrack.mapper.IngredientMapper;
+import cerlace.tastetrack.repository.IngredientRepository;
 import cerlace.tastetrack.service.IngredientService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-public class IngredientServiceImpl extends AbstractService<IngredientDTO, IngredientEntity, IngredientDAO>
-        implements IngredientService {
+import java.util.List;
 
-    public IngredientServiceImpl() {
-        super(new IngredientDAOImpl(), IngredientMapper.INSTANCE);
+@Service
+@RequiredArgsConstructor
+public class IngredientServiceImpl implements IngredientService {
+
+    private final IngredientRepository repository;
+    private final IngredientMapper mapper;
+
+    @Override
+    public IngredientDTO saveOrUpdate(IngredientDTO dto) {
+        IngredientEntity entity = mapper.toEntity(dto);
+        return mapper.toDTO(repository.save(entity));
+    }
+
+    @Override
+    public IngredientDTO get(Long id) {
+        return repository.findById(id)
+                .map(mapper::toDTO)
+                .orElse(null);
+    }
+
+    @Override
+    public List<IngredientDTO> getAll() {
+        return mapper.toDTOList(repository.findAll());
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
     }
 }
