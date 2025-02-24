@@ -5,7 +5,7 @@ import cerlace.tastetrack.entity.DishEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface DishMapper extends IMapper<DishDTO, DishEntity> {
     DishMapper INSTANCE = Mappers.getMapper(DishMapper.class);
 }

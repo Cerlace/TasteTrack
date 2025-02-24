@@ -5,7 +5,7 @@ import cerlace.tastetrack.entity.IngredientEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface IngredientMapper extends IMapper<IngredientDTO, IngredientEntity> {
     IngredientMapper INSTANCE = Mappers.getMapper(IngredientMapper.class);
 }
