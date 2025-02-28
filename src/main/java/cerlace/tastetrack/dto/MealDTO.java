@@ -2,10 +2,12 @@ package cerlace.tastetrack.dto;
 
 import cerlace.tastetrack.enums.MealTime;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,8 +17,11 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MealDTO extends BaseDTO {
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     private MealTime mealTime;
-    private UserDTO user;
-    private DishDTO dish;
+    @Builder.Default
+    private UserDTO user = new UserDTO();
+    @Builder.Default
+    private DishDTO dish = new DishDTO();
 }

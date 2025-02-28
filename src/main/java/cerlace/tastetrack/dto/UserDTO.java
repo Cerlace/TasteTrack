@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -18,6 +19,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 public class UserDTO extends BaseDTO {
     private String fullName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
     private Gender gender;
     private String email;
