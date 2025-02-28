@@ -1,0 +1,79 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{table.dish.list}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <div class="line-container">
+        <h1 th:text="#{table.dish.list}"></h1>
+        <form name="save-dish"
+              method="get"
+              th:action="@{/dishes/create}">
+            <button type="submit"
+                    class="medium-action-button"
+                    th:text="#{table.dish.save}"></button>
+        </form>
+    </div>
+    <table>
+        <tr>
+            <td th:text="#{column.id}"></td>
+            <td th:text="#{table.dish.column.name}"></td>
+            <td th:text="#{table.dish.column.type}"></td>
+            <td th:text="#{table.dish-ingredient.label}"></td>
+            <td th:text="#{table.dish.column.calories}"></td>
+            <td th:text="#{table.dish.column.proteins}"></td>
+            <td th:text="#{table.dish.column.fats}"></td>
+            <td th:text="#{table.dish.column.carbohydrates}"></td>
+            <td th:text="#{table.dish.column.recipe}"></td>
+            <td th:text="#{label.action}" colspan="2"></td>
+        </tr>
+        <tr th:each="dish : ${dishList}">
+            <td th:text="${dish.id}"></td>
+            <td th:text="${dish.name}">/td>
+            <td th:text="#{${dish.dishType.messageKey}}"></td>
+            <td>
+                <form name="list-dish-ingredients"
+                      method="get"
+                      th:action="@{/dish-ingredients/{dishId}(dishId=${dish.id})}">
+                    <button type="submit"
+                            class="small-action-button"
+                            th:text="#{table.dish-ingredient.list}">
+                    </button>
+                </form>
+            </td>
+            <td th:text="${dish.calories}"></td>
+            <td th:text="${dish.proteins}"></td>
+            <td th:text="${dish.fats}"></td>
+            <td th:text="${dish.carbohydrates}"></td>
+            <td th:text="${dish.recipe}"></td>
+            <td>
+                <form name="update"
+                      method="get"
+                      th:action="@{/dishes/edit/{dishId}(dishId=${dish.id})}">
+                    <button type="submit"
+                            class="small-action-button update"
+                            th:text="#{button.update}">
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form name="delete"
+                      method="post"
+                      th:action="@{/dishes/delete/{dishId}(dishId=${dish.id})}">
+                    <button type="submit"
+                            class="small-action-button delete"
+                            th:onclick="'return confirm(\'' + #{alert.confirm.delete} + '\');'"
+                            th:text="#{button.delete}">
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

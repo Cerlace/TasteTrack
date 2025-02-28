@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${dishIngredient.id == null} ?
+    #{table.dish-ingredient.save} : #{table.dish-ingredient.update}"></title>
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <form name="update"
+          method="post"
+          th:object="${dishIngredient}"
+          th:action="@{/dish-ingredients/save}">
+        <h2 th:text="${dishIngredient.id == null} ?
+    #{table.dish-ingredient.save} : #{table.dish-ingredient.update}"></h2>
+        <input type="hidden"
+               th:field="*{id}"
+               required>
+        <input type="hidden"
+               th:name="dish.id"
+               th:value="${dishId}"
+               required>
+        <div class="input-group">
+            <label for="ingredient-select" th:text="#{table.ingredient.column.name} + ':' "></label>
+            <select id="ingredient-select"
+                    th:field="*{ingredient.id}"
+                    required>
+                <option th:each="ingredient : ${ingredientsList}"
+                        th:value="${ingredient.id}"
+                        th:text="${ingredient.name}">
+                </option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="amount-input" th:text="#{table.dish-ingredient.column.amount} + ':' "></label>
+            <input id="amount-input"
+                   type="number"
+                   step="0.1"
+                   min="0.1"
+                   th:field="*{amount}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="unit-input" th:text="#{table.dish-ingredient.column.measure-unit} + ':' "></label>
+            <select id="unit-input"
+                    th:field="*{measureUnit}"
+                    required>
+                <option th:each="measureUnitValue : ${measureUnits}"
+                        th:value="${measureUnitValue}"
+                        th:text="#{${measureUnitValue.getMessageKey()}}"></option>
+            </select>
+        </div>
+        <input type="hidden"
+               th:name="dishId"
+               th:value="${dishId}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{button.send}">
+        </button>
+    </form>
+    <form name="list-dish-ingredients"
+          method="get"
+          th:action="@{/dish-ingredients/{dishId}(dishId=${dishId})}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{table.dish-ingredient.return}">
+        </button>
+    </form>
+</div>
+</body>
+</html>

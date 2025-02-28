@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{table.user.list}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <div class="line-container">
+        <h1 th:text="#{table.user.list} + ':' "></h1>
+        <form name="save-user"
+              method="get"
+              th:action="@{/users/create}">
+            <button type="submit"
+                    class="medium-action-button"
+                    th:text="#{table.user.save}">
+            </button>
+        </form>
+    </div>
+    <table>
+        <tr>
+            <td th:text="#{column.id}"></td>
+            <td th:text="#{table.user.column.full-name}"></td>
+            <td th:text="#{table.user.column.birth-date}"></td>
+            <td th:text="#{table.user.column.gender}"></td>
+            <td th:text="#{table.user.column.email}"></td>
+            <td th:text="#{table.user.column.height}"></td>
+            <td th:text="#{table.user.column.weight}"></td>
+            <td th:text="#{table.user.column.activity}"></td>
+            <td th:text="#{table.user.column.goal}"></td>
+            <td th:text="#{table.user.column.user-meals}"></td>
+            <td colspan="2" th:text="#{label.action}"></td>
+        </tr>
+        <tr th:each="user : ${userList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.fullName}"></td>
+            <td th:text="${user.birthDate}"></td>
+            <td th:text="#{${user.gender.messageKey}}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.height} + '&nbsp' + #{table.user.column.height.unit}"></td>
+            <td th:text="${user.weight} + '&nbsp' + #{table.user.column.weight.unit}"></td>
+            <td th:text="#{${user.activity.messageKey}}"></td>
+            <td th:text="#{${user.goal.messageKey}}"></td>
+            <td>
+                <form name="list-meals"
+                      method="get"
+                      th:action="@{/meals/{userId}(userId=${user.id})}">
+                    <button type="submit"
+                            class="small-action-button"
+                            th:text="#{table.meal.list}">
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form name="update"
+                      method="get"
+                      th:action="@{/users/edit/{userId}(userId=${user.id})}">
+                    <button type="submit"
+                            class="small-action-button update"
+                            th:text="#{button.update}">
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form name="delete"
+                      method="post"
+                      th:action="@{/users/delete/{userId}(userId=${user.id})}">
+                    <button type="submit"
+                            class="small-action-button delete"
+                            th:onclick="'return confirm(\'' + #{alert.confirm.delete} + '\');'"
+                            th:text="#{button.delete}">
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

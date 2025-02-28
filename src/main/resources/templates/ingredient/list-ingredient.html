@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{table.ingredient.list}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <div class="line-container">
+        <h1 th:text="#{table.ingredient.list} + ':' "></h1>
+        <form name="save-ingredient"
+              method="get"
+              th:action="@{/ingredients/create}">
+            <button type="submit"
+                    class="medium-action-button"
+                    th:text="#{table.ingredient.save}">
+            </button>
+        </form>
+    </div>
+    <table>
+        <tr>
+            <td th:text="#{column.id}"></td>
+            <td th:text="#{table.ingredient.column.name}"></td>
+            <td th:text="#{table.ingredient.column.product-type}"></td>
+            <td th:text="#{label.action}" colspan="2"></td>
+        </tr>
+        <tr th:each="ingredient : ${ingredientList}">
+            <td th:text="${ingredient.id}"></td>
+            <td th:text="${ingredient.name}"></td>
+            <td th:text="#{${ingredient.productType.messageKey}}"></td>
+            <td>
+                <form name="update"
+                      method="get"
+                      th:action="@{/ingredients/edit/{ingredientId}(ingredientId=${ingredient.id})}">
+                    <button type="submit"
+                            class="small-action-button update"
+                            th:text="#{button.update}">
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form name="delete"
+                      method="post"
+                      th:action="@{/ingredients/delete/{ingredientId}(ingredientId=${ingredient.id})}">
+                    <button type="submit"
+                            class="small-action-button delete"
+                            th:onclick="'return confirm(\'' + #{alert.confirm.delete} + '\');'"
+                            th:text="#{button.delete}">
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

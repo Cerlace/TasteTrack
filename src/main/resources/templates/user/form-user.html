@@ -1,0 +1,118 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${user.id == null} ? #{table.user.save} : #{table.user.update}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <form name="form"
+          method="post"
+          th:object="${user}"
+          th:action="@{/users/save}">
+        <h2 th:text="${user.id == null} ? #{table.user.save} : #{table.user.update}"></h2>
+        <input id="id-input"
+               type="hidden"
+               th:field="*{id}"
+               required>
+        <div class="input-group">
+            <label for="name-input" th:text="#{table.user.column.full-name} + ':' "></label>
+            <input id="name-input"
+                   type="text"
+                   th:field="*{fullName}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="email-input" th:text="#{table.user.column.email} + ':' "></label>
+            <input id="email-input"
+                   type="email"
+                   th:field="*{email}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="birthdate-input" th:text="#{table.user.column.birth-date} + ':' "></label>
+            <input id="birthdate-input"
+                   type="date"
+                   th:field="*{birthDate}"
+                   required>
+        </div>
+        <div class="input-group">
+            <span th:text="#{table.user.column.gender} + ':' "></span>
+            <div class="label-radio"
+                 th:each="genderValue : ${genders}">
+                <input type="radio"
+                       th:id="${genderValue}"
+                       th:field="*{gender}"
+                       th:value="${genderValue}"
+                       required>
+                <label th:text="#{${genderValue.messageKey}}"
+                       th:for="${genderValue}">
+                </label>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="height-input" th:text="#{table.user.column.height} + ':' "></label>
+            <input id="height-input"
+                   type="number"
+                   step="0.1"
+                   min="0.1"
+                   th:field="*{height}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="weight-input" th:text="#{table.user.column.weight} + ':' "></label>
+            <input id="weight-input"
+                   type="number"
+                   step="0.1"
+                   min="0.1"
+                   th:field="*{weight}"
+                   required>
+        </div>
+        <div class="input-group">
+            <span th:text="#{table.user.column.activity} + ':' "></span>
+            <div class="label-radio"
+                 th:each="activityValue : ${activityLevels}">
+                <input type="radio"
+                       th:id="${activityValue}"
+                       th:field="*{activity}"
+                       th:value="${activityValue}"
+                       required>
+                <label th:text="#{${activityValue.messageKey}}"
+                       th:for="${activityValue}">
+                </label>
+
+            </div>
+        </div>
+        <div class="input-group">
+            <span th:text="#{table.user.column.goal} + ':' "></span>
+            <div class="label-radio"
+                 th:each="goalValue : ${goals}">
+                <input type="radio"
+                       th:id="${goalValue}"
+                       th:field="*{goal}"
+                       th:value="${goalValue}"
+                       required>
+                <label th:text="#{${goalValue.messageKey}}"
+                       th:for="${goalValue}">
+                </label>
+            </div>
+        </div>
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{button.send}">
+        </button>
+    </form>
+    <form name="list-users"
+          method="get"
+          th:action="@{/users}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{table.user.return}">
+        </button>
+    </form>
+</div>
+</body>
+</html>

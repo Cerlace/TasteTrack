@@ -1,0 +1,78 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{table.meal.list}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <div class="line-container">
+        <h1 th:text="#{table.meal.list} + ':' "></h1>
+        <form name="save-meal"
+              method="get"
+              th:action="@{/meals/create}">
+            <input type="hidden"
+                   th:name="userId"
+                   th:value="${userId}">
+            <button type="submit"
+                    class="medium-action-button"
+                    th:text="#{table.meal.save}">
+            </button>
+        </form>
+    </div>
+    <table>
+        <tr>
+            <td th:text="#{column.id}"></td>
+            <td th:text="#{table.meal.column.date}"></td>
+            <td th:text="#{table.meal.column.meal-time}"></td>
+            <td th:text="#{table.dish.column.name}"></td>
+            <td th:text="#{label.action}" colspan="2"></td>
+        </tr>
+        <tr th:each="meal : ${mealList}">
+            <td th:text="${meal.id}"></td>
+            <td th:text="${meal.date}"></td>
+            <td th:text="#{${meal.mealTime.messageKey}}"></td>
+            <td th:text="${meal.dish.name}"></td>
+            <td>
+                <form name="update"
+                      method="get"
+                      th:action="@{/meals/edit/{mealId}(mealId=${meal.id})}">
+                    <input type="hidden"
+                           th:name="userId"
+                           th:value="${userId}">
+                    <button type="submit"
+                            class="small-action-button update"
+                            th:text="#{button.update}">
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form name="delete"
+                      method="post"
+                      th:action="@{/meals/delete/{mealId}(mealId=${meal.id})}">
+                    <input type="hidden"
+                           th:name="userId"
+                           th:value="${userId}">
+                    <button type="submit"
+                            class="small-action-button delete"
+                            th:onclick="'return confirm(\'' + #{alert.confirm.delete} + '\');'"
+                            th:text="#{button.delete}">
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form name="list-users"
+          method="get"
+          th:action="@{/users}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{table.user.return}">
+        </button>
+    </form>
+</div>
+</body>
+</html>

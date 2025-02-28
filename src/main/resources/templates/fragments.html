@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="alert-block(alertType, alertMessage)" class="alert_block">
-    <script th:if="${alertType != null || alertMessage != null}">
+<div th:fragment="alert-block(alert)"
+     th:if="${alert != null}"
+     class="alert_block">
+    <script>
         function closeAlert(closeButton) {
             const alert = closeButton.parentElement;
             alert.style.opacity = "0";
@@ -11,21 +13,21 @@
             }, 600);
         }
     </script>
-    <div th:if="${alertType == T(cerlace.tastetrack.enums.AlertCode).SUCCESS}" class="alert success">
+    <div th:if="${alert.alertCode == T(cerlace.tastetrack.enums.AlertCode).SUCCESS}" class="alert success">
         <span class="close-button" onclick="closeAlert(this)">&times;</span>
-        <strong th:text="#{alert.type.success}"></strong> <span th:text="${alertMessage}"></span>
+        <strong th:text="#{alert.type.success}"></strong> <span th:text="#{${alert.alertMessage.messageKey}}"></span>
     </div>
-    <div th:if="${alertType == T(cerlace.tastetrack.enums.AlertCode).INFO}" class="alert info">
+    <div th:if="${alert.alertCode == T(cerlace.tastetrack.enums.AlertCode).INFO}" class="alert info">
         <span class="close-button" onclick="closeAlert(this)">&times;</span>
-        <strong th:text="#{alert.type.info}">Info message.</strong> <span th:text="${alertMessage}"></span>
+        <strong th:text="#{alert.type.info}">Info message.</strong> <span th:text="#{${alert.alertMessage.messageKey}}"></span>
     </div>
-    <div th:if="${alertType == T(cerlace.tastetrack.enums.AlertCode).WARNING}" class="alert warning">
+    <div th:if="${alert.alertCode == T(cerlace.tastetrack.enums.AlertCode).WARNING}" class="alert warning">
         <span class="close-button" onclick="closeAlert(this)">&times;</span>
-        <strong th:text="#{alert.type.warning}">Warning!</strong> <span th:text="${alertMessage}"></span>
+        <strong th:text="#{alert.type.warning}">Warning!</strong> <span th:text="#{${alert.alertMessage.messageKey}}"></span>
     </div>
-    <div th:if="${alertType == T(cerlace.tastetrack.enums.AlertCode).ERROR}" class="alert error">
+    <div th:if="${alert.alertCode == T(cerlace.tastetrack.enums.AlertCode).ERROR}" class="alert error">
         <span class="close-button" onclick="closeAlert(this)">&times;</span>
-        <strong th:text="#{alert.type.error}">Error!</strong> <span th:text="${alertMessage}"></span>
+        <strong th:text="#{alert.type.error}">Error!</strong> <span th:text="#{${alert.alertMessage.messageKey}}"></span>
     </div>
 </div>
 <div th:fragment="sidebar" class="sidebar">
@@ -35,7 +37,7 @@
               th:action="@{/users}">
             <button type="submit"
                     class="menu-button"
-            th:text="#{table.user.label}">
+                    th:text="#{table.user.label}">
             </button>
         </form>
         <form name="list-ingredients"
@@ -58,24 +60,24 @@
     <div th:replace="~{:: language-switch}"></div>
 </div>
 <div th:fragment="language-switch" class="lang-switcher">
-    <form id="en-lang" th:object="${#locale}" method="get"
-          th:action="@{${#request.getRequestURI() + '?' + #request.getQueryString()}}">
-        <button type="submit" class="lang-button"
-                th:field="*{language}"
-                th:value="en"
-                th:disabled="${#locale.language == 'en'}">
-            <span th:text="#{lang.en}"></span>
-        </button>
+    <form id="lang-form" method="get" action="">
+        <input type="hidden" th:each="requestParam : ${param}"
+               th:if="${requestParam.key != 'lang'}"
+               th:name="${requestParam.key}"
+               th:value="${requestParam.value[0]}" />
     </form>
-    <form id="ru-lang" th:object="${#locale}" method="get"
-          th:action="@{${#request.getRequestURI() + '?' + #request.getQueryString()}}">
-        <button type="submit" class="lang-button"
-                th:field="*{language}"
-                th:value="ru"
-                th:disabled="${#locale.language == 'ru'}">
-            <span th:text="#{lang.ru}"></span>
-        </button>
-    </form>
+    <button type="submit" class="lang-button" form="lang-form"
+            th:name="lang"
+            th:value="en"
+            th:disabled="${#locale.language == 'en'}"
+            th:text="#{lang.en}">
+    </button>
+    <button type="submit" class="lang-button" form="lang-form"
+            th:name="lang"
+            th:value="ru"
+            th:disabled="${#locale.language == 'ru'}"
+            th:text="#{lang.ru}">
+    </button>
 </div>
 
 </body>

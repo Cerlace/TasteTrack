@@ -191,7 +191,10 @@ label {
     font-size: 16px; /* Размер шрифта */
     font-weight: normal;
 }
-
+.label-radio {
+    display: flex;
+    align-items: flex-start;
+}
 .input-group {
     margin-bottom: 5px; /* Отступ между группами полей */
     color: #4CAF50; /* Зеленый цвет текста меток */
