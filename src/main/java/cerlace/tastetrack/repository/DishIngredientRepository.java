@@ -8,5 +8,10 @@ import java.util.List;
 
 @Repository
 public interface DishIngredientRepository extends JpaRepository<DishIngredientEntity, Long> {
+    /**
+     * Получает все {@code DishIngredientEntity}, которые относятся к блюду
+     * @param dishId идентификатор блюда
+     * @return список ингредиентов в формате {@code List<DishIngredientEntity>}
+     */
     List<DishIngredientEntity> getAllByDishId(Long dishId);
 }
