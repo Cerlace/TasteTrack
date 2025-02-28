@@ -1,6 +1,8 @@
 package cerlace.tastetrack.entity;
 
 import cerlace.tastetrack.enums.MealTime;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,6 +29,7 @@ import java.util.Date;
 @UniqueConstraint(columnNames = {"user_id", "dish_id", "meal_time", "date"}))
 public class MealEntity extends BaseEntity {
     @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date date;
     @Column(name = "meal_time", nullable = false)
     @Enumerated

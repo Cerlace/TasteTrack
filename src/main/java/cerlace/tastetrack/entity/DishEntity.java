@@ -43,7 +43,7 @@ public class DishEntity extends BaseEntity {
     private Float fats;
     @Column(nullable = false)
     private Float carbohydrates;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     @Lob
     private String recipe;
     @Builder.Default

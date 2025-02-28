@@ -3,6 +3,8 @@ package cerlace.tastetrack.entity;
 import cerlace.tastetrack.enums.Activity;
 import cerlace.tastetrack.enums.Gender;
 import cerlace.tastetrack.enums.Goal;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -35,6 +37,7 @@ public class UserEntity extends BaseEntity {
     @Column(name = "full_name", nullable = false)
     private String fullName;
     @Column(name = "birth_date", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     @Column(nullable = false)
     @Enumerated
