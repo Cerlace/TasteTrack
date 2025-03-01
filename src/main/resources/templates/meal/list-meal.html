@@ -25,11 +25,37 @@
     </div>
     <table>
         <tr>
-            <td th:text="#{column.id}"></td>
-            <td th:text="#{table.meal.column.date}"></td>
-            <td th:text="#{table.meal.column.meal-time}"></td>
-            <td th:text="#{table.dish.column.name}"></td>
-            <td th:text="#{label.action}" colspan="2"></td>
+            <th class="sortable-header">
+                <a th:href="@{/meals/{userId}(userId=${userId},
+                              page=0,
+                              size=${pageSettings.size},
+                              sortField='id',
+                              sortDirection=${pageSettings.sortField == 'id' ?
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
+                    <span th:text="#{column.id}  + ' ' "></span>
+                    <span
+                            th:if="${pageSettings.sortField == 'id'}"
+                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
+                    </span>
+                </a>
+            </th>
+            <th class="sortable-header">
+                <a th:href="@{/meals/{userId}(userId=${userId},
+                              page=0,
+                              size=${pageSettings.size},
+                              sortField='date',
+                              sortDirection=${pageSettings.sortField == 'date' ?
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
+                    <span th:text="#{table.meal.column.date}  + ' ' "></span>
+                    <span
+                            th:if="${pageSettings.sortField == 'date'}"
+                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
+                    </span>
+                </a>
+            </th>
+            <th th:text="#{table.meal.column.meal-time}"></th>
+            <th th:text="#{table.dish.column.name}"></th>
+            <th th:text="#{label.action}" colspan="2"></th>
         </tr>
         <tr th:each="meal : ${mealList}">
             <td th:text="${meal.id}"></td>
@@ -65,6 +91,56 @@
             </td>
         </tr>
     </table>
+    <div class="pagination">
+        <a th:if="${pageSettings.page > 0}"
+           th:href="@{/meals/{userId}(userId=${userId},
+                       page=${pageSettings.page - 1},
+                       size=${pageSettings.size},
+                       sortField=${pageSettings.sortField},
+                       sortDirection=${pageSettings.sortDirection})}"
+           class="pagination-button"
+           th:text="#{button.previous}"></a>
+
+        <span th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
+        <a th:if="${page != pageSettings.page}"
+           th:href="@{/meals/{userId}(userId=${userId},
+                          page=${page},
+                          size=${pageSettings.size},
+                          sortField=${pageSettings.sortField},
+                          sortDirection=${pageSettings.sortDirection})}"
+           class="pagination-button"
+           th:text="${page + 1}"></a>
+        <span th:unless="${page != pageSettings.page}"
+              class="pagination-current"
+              th:text="${page + 1}"></span>
+        </span>
+        <a th:if="${pageSettings.page < totalPages - 1}"
+           th:href="@{/meals/{userId}(userId=${userId},
+                       page=${pageSettings.page + 1},
+                       size=${pageSettings.size},
+                       sortField=${pageSettings.sortField},
+                       sortDirection=${pageSettings.sortDirection})}"
+           class="pagination-button"
+           th:text="#{button.next}"></a>
+
+        <form class="pagination-size-form"
+              th:action="@{/meals/{userId}(userId=${userId})}"
+              method="get">
+            <input type="hidden" name="page" th:value="${pageSettings.page}">
+            <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
+            <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
+            <input type="number"
+                   name="size"
+                   th:value="${pageSettings.size}"
+                   min="1"
+                   max="100"
+                   class="pagination-size-input"
+                   th:title="#{pagination.size.title}">
+            <button type="submit"
+                    class="pagination-size-button"
+                    th:text="#{button.send}"></button>
+        </form>
+    </div>
     <form name="list-users"
           method="get"
           th:action="@{/users}">

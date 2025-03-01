@@ -125,6 +125,19 @@ table {
     text-align: center;
 }
 
+th {
+    padding: 10px;
+    border: 1px solid #ddd; /* Согласуется с границами ячеек */
+    background-color: #4CAF50; /* Основной зеленый цвет как у кнопок и заголовков */
+    color: white; /* Белый текст для контраста */
+    font-weight: bold; /* Выделение текста */
+    text-align: center; /* Центрирование как в td */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень для разделения при прокрутке */
+}
+
 td {
     padding: 10px;
     border: 1px solid #ddd; /* Светло-серая граница */
@@ -286,4 +299,86 @@ option {
 
 .close-button:hover {
     color: black;
+}
+
+/* Стили для сортировки */
+.sortable-header a {
+    color: white; /* Белый текст для контраста */
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    align-items: center;
+}
+
+.sortable-header a:hover {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+/* Стили пагинации */
+.pagination {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+.pagination-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.pagination-button:hover {
+    background-color: #3d8f3f;
+    text-decoration: none;
+}
+
+.pagination-current {
+    background-color: #3d8f3f;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* Стили для формы ввода размера страницы */
+.pagination-size-form {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-left: 15px;
+}
+
+.pagination-size-input {
+    border: 1px solid #4CAF50 !important;
+    border-radius: 4px !important;
+    padding: 6px 12px !important;
+    width: 70px !important;
+    height: 30px !important;
+    color: #44583E !important;
+    text-align: center !important;
+    margin-bottom: 0 !important;
+}
+
+.pagination-size-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+}
+
+.pagination-size-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination-size-button:hover {
+    background-color: #3d8f3f;
 }

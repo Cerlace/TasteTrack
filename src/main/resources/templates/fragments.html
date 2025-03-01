@@ -19,15 +19,18 @@
     </div>
     <div th:if="${alert.alertCode == T(cerlace.tastetrack.enums.AlertCode).INFO}" class="alert info">
         <span class="close-button" onclick="closeAlert(this)">&times;</span>
-        <strong th:text="#{alert.type.info}">Info message.</strong> <span th:text="#{${alert.alertMessage.messageKey}}"></span>
+        <strong th:text="#{alert.type.info}">Info message.</strong> <span
+            th:text="#{${alert.alertMessage.messageKey}}"></span>
     </div>
     <div th:if="${alert.alertCode == T(cerlace.tastetrack.enums.AlertCode).WARNING}" class="alert warning">
         <span class="close-button" onclick="closeAlert(this)">&times;</span>
-        <strong th:text="#{alert.type.warning}">Warning!</strong> <span th:text="#{${alert.alertMessage.messageKey}}"></span>
+        <strong th:text="#{alert.type.warning}">Warning!</strong> <span
+            th:text="#{${alert.alertMessage.messageKey}}"></span>
     </div>
     <div th:if="${alert.alertCode == T(cerlace.tastetrack.enums.AlertCode).ERROR}" class="alert error">
         <span class="close-button" onclick="closeAlert(this)">&times;</span>
-        <strong th:text="#{alert.type.error}">Error!</strong> <span th:text="#{${alert.alertMessage.messageKey}}"></span>
+        <strong th:text="#{alert.type.error}">Error!</strong> <span
+            th:text="#{${alert.alertMessage.messageKey}}"></span>
     </div>
 </div>
 <div th:fragment="sidebar" class="sidebar">
@@ -64,7 +67,7 @@
         <input type="hidden" th:each="requestParam : ${param}"
                th:if="${requestParam.key != 'lang'}"
                th:name="${requestParam.key}"
-               th:value="${requestParam.value[0]}" />
+               th:value="${requestParam.value[0]}"/>
     </form>
     <button type="submit" class="lang-button" form="lang-form"
             th:name="lang"
