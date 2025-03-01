@@ -2,11 +2,13 @@ package cerlace.tastetrack.controller;
 
 import cerlace.tastetrack.dto.AlertDTO;
 import cerlace.tastetrack.dto.DishDTO;
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
 import cerlace.tastetrack.enums.DishType;
 import cerlace.tastetrack.service.DishService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,14 +26,19 @@ public class DishController {
     private final DishService dishService;
 
     /**
-     * Отображает список всех блюд.
+     * Отображает страницу блюд.
      *
-     * @param model объект {@link Model}, используемый для передачи данных в представление.
+     * @param pageSettings параметры для запроса страницы
+     * @param model        объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка блюд.
      */
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("dishList", dishService.getAll());
+    public String list(@ModelAttribute PageSettings pageSettings,
+                       Model model) {
+        Page<DishDTO> page = dishService.getPage(pageSettings);
+        model.addAttribute("dishList", page.getContent());
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("pageSettings", pageSettings);
         return "dish/list-dish";
     }
 

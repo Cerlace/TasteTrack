@@ -3,12 +3,14 @@ package cerlace.tastetrack.controller;
 import cerlace.tastetrack.dto.AlertDTO;
 import cerlace.tastetrack.dto.DishIngredientDTO;
 import cerlace.tastetrack.dto.IngredientDTO;
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
 import cerlace.tastetrack.enums.MeasureUnit;
 import cerlace.tastetrack.service.DishIngredientService;
 import cerlace.tastetrack.service.IngredientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,15 +42,21 @@ public class DishIngredientController {
     }
 
     /**
-     * Отображает список всех ингредиентов для указанного блюда.
+     * Отображает страницу ингредиентов для указанного блюда.
      *
-     * @param dishId идентификатор блюда, для которого нужно отобразить ингредиенты.
-     * @param model  объект {@link Model}, используемый для передачи данных в представление.
+     * @param pageSettings параметры для запроса страницы
+     * @param dishId       идентификатор блюда, для которого нужно отобразить ингредиенты.
+     * @param model        объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка ингредиентов блюда.
      */
     @GetMapping("/{dishId}")
-    public String listDishIngredients(@PathVariable("dishId") Long dishId, Model model) {
-        model.addAttribute("dishIngredientList", dishIngredientService.getAllIngredientsOfDish(dishId));
+    public String listDishIngredients(@ModelAttribute PageSettings pageSettings,
+                                      @PathVariable("dishId") Long dishId,
+                                      Model model) {
+        Page<DishIngredientDTO> page = dishIngredientService.getPageOfIngredientsByDish(pageSettings, dishId);
+        model.addAttribute("dishIngredientList", page.getContent());
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("pageSettings", pageSettings);
         return "dish-ingredient/list-dish-ingredient";
     }
 

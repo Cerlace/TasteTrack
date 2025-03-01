@@ -2,11 +2,13 @@ package cerlace.tastetrack.controller;
 
 import cerlace.tastetrack.dto.AlertDTO;
 import cerlace.tastetrack.dto.IngredientDTO;
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
 import cerlace.tastetrack.enums.ProductType;
 import cerlace.tastetrack.service.IngredientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,14 +26,19 @@ public class IngredientController {
     private final IngredientService ingredientService;
 
     /**
-     * Отображает список всех ингредиентов.
+     * Отображает страницу ингредиентов.
      *
+     * @param pageSettings параметры для запроса страницы
      * @param model объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка ингредиентов.
      */
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("ingredientList", ingredientService.getAll());
+    public String list(@ModelAttribute PageSettings pageSettings,
+                       Model model) {
+        Page<IngredientDTO> page = ingredientService.getPage(pageSettings);
+        model.addAttribute("ingredientList", page.getContent());
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("pageSettings", pageSettings);
         return "ingredient/list-ingredient";
     }
 

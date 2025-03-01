@@ -3,12 +3,14 @@ package cerlace.tastetrack.controller;
 import cerlace.tastetrack.dto.AlertDTO;
 import cerlace.tastetrack.dto.DishDTO;
 import cerlace.tastetrack.dto.MealDTO;
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
 import cerlace.tastetrack.enums.MealTime;
 import cerlace.tastetrack.service.DishService;
 import cerlace.tastetrack.service.MealService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,15 +42,21 @@ public class MealController {
     }
 
     /**
-     * Отображает список всех приемов пищи для указанного пользователя.
+     * Отображает страницу приемов пищи для указанного пользователя.
      *
-     * @param userId идентификатор пользователя, для которого нужно отобразить приемы пищи.
-     * @param model  объект {@link Model}, используемый для передачи данных в представление.
+     * @param pageSettings параметры для запроса страницы
+     * @param userId       идентификатор пользователя, для которого нужно отобразить приемы пищи.
+     * @param model        объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка приемов пищи.
      */
     @GetMapping("/{userId}")
-    public String listUserMeals(@PathVariable("userId") Long userId, Model model) {
-        model.addAttribute("mealList", mealService.getAllMealsOfUser(userId));
+    public String listUserMeals(@ModelAttribute PageSettings pageSettings,
+                                @PathVariable("userId") Long userId,
+                                Model model) {
+        Page<MealDTO> page = mealService.getPageOfMealsByUser(pageSettings, userId);
+        model.addAttribute("mealList", page.getContent());
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("pageSettings", pageSettings);
         return "meal/list-meal";
     }
 

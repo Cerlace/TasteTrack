@@ -1,6 +1,7 @@
 package cerlace.tastetrack.controller;
 
 import cerlace.tastetrack.dto.AlertDTO;
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.dto.UserDTO;
 import cerlace.tastetrack.enums.Activity;
 import cerlace.tastetrack.enums.AlertCode;
@@ -9,6 +10,7 @@ import cerlace.tastetrack.enums.Gender;
 import cerlace.tastetrack.enums.Goal;
 import cerlace.tastetrack.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,14 +28,19 @@ public class UserController {
     private final UserService userService;
 
     /**
-     * Отображает список всех пользователей.
+     * Отображает страницу пользователей.
      *
-     * @param model объект {@link Model}, используемый для передачи данных в представление.
+     * @param pageSettings параметры для запроса страницы
+     * @param model        объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка пользователей.
      */
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("userList", userService.getAll());
+    public String list(@ModelAttribute PageSettings pageSettings,
+                       Model model) {
+        Page<UserDTO> page = userService.getPage(pageSettings);
+        model.addAttribute("userList", page.getContent());
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("pageSettings", pageSettings);
         return "user/list-user";
     }
 
