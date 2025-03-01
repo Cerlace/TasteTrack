@@ -1,11 +1,16 @@
 package cerlace.tastetrack.service.impl;
 
 import cerlace.tastetrack.dto.IngredientDTO;
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.IngredientEntity;
 import cerlace.tastetrack.mapper.IngredientMapper;
 import cerlace.tastetrack.repository.IngredientRepository;
 import cerlace.tastetrack.service.IngredientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +38,17 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public List<IngredientDTO> getAll() {
         return mapper.toDTOList(repository.findAll());
+    }
+
+    @Override
+    public Page<IngredientDTO> getPage(PageSettings pageSettings) {
+        Pageable pageable = PageRequest.of(
+                pageSettings.getPage(),
+                pageSettings.getSize(),
+                Sort.by(Sort.Direction.fromString(
+                        pageSettings.getSortDirection()), pageSettings.getSortField()));
+
+        return repository.findAll(pageable).map(mapper::toDTO);
     }
 
     @Override

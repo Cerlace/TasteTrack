@@ -1,5 +1,6 @@
 package cerlace.tastetrack.service.impl;
 
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.dto.UserDTO;
 
 import cerlace.tastetrack.entity.UserEntity;
@@ -7,6 +8,10 @@ import cerlace.tastetrack.mapper.UserMapper;
 import cerlace.tastetrack.repository.UserRepository;
 import cerlace.tastetrack.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +39,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getAll() {
         return mapper.toDTOList(repository.findAll());
+    }
+
+    @Override
+    public Page<UserDTO> getPage(PageSettings pageSettings) {
+        Pageable pageable = PageRequest.of(
+                pageSettings.getPage(),
+                pageSettings.getSize(),
+                Sort.by(Sort.Direction.fromString(
+                        pageSettings.getSortDirection()), pageSettings.getSortField()));
+
+        return repository.findAll(pageable).map(mapper::toDTO);
     }
 
     @Override

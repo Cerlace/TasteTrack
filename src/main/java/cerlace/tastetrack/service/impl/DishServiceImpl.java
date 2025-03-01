@@ -1,11 +1,16 @@
 package cerlace.tastetrack.service.impl;
 
 import cerlace.tastetrack.dto.DishDTO;
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.DishEntity;
 import cerlace.tastetrack.mapper.DishMapper;
 import cerlace.tastetrack.repository.DishRepository;
 import cerlace.tastetrack.service.DishService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +38,17 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<DishDTO> getAll() {
         return mapper.toDTOList(repository.findAll());
+    }
+
+    @Override
+    public Page<DishDTO> getPage(PageSettings pageSettings) {
+        Pageable pageable = PageRequest.of(
+                pageSettings.getPage(),
+                pageSettings.getSize(),
+                Sort.by(Sort.Direction.fromString(
+                        pageSettings.getSortDirection()), pageSettings.getSortField()));
+
+        return repository.findAll(pageable).map(mapper::toDTO);
     }
 
     @Override
