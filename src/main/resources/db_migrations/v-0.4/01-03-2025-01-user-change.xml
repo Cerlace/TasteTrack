@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
+
+    <changeSet id="01-03-2025-email-column-rename-to-username-1" author="Daniil">
+        <dropUniqueConstraint tableName="user"
+                              constraintName="UK_user_email"/>
+        <renameColumn tableName="user"
+                      oldColumnName="email"
+                      newColumnName="username"
+                      columnDataType="varchar(255)"/>
+        <addUniqueConstraint tableName="user"
+                             columnNames="username"
+                             constraintName="UK_user_username"/>
+    </changeSet>
+
+    <changeSet id="01-03-2025-user-column-encoded-password-add-2" author="Daniil">
+        <addColumn tableName="user">
+            <column name="encoded_password" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="01-03-2025-user-column-encoded-password-values-update-3" author="Daniil">
+        <update tableName="user">
+            <column name="encoded_password" value="0"/>
+        </update>
+    </changeSet>
+    <changeSet id="01-03-2025-user-column-encoded-password-not-null-constraint-4" author="Daniil">
+        <addNotNullConstraint tableName="user"
+                              columnName="encoded_password"
+                              columnDataType="varchar(255)"/>
+    </changeSet>
+</databaseChangeLog>
