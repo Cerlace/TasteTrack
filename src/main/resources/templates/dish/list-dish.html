@@ -19,6 +19,47 @@
                     th:text="#{table.dish.save}"></button>
         </form>
     </div>
+    <form th:action="@{/dishes}" method="get" class="filter-form" th:object="${filter}">
+        <input type="hidden" name="page" th:value="0">
+        <input type="hidden" name="size" th:value="${pageSettings.size}">
+        <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
+        <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label th:text="#{table.dish.column.name}"></label>
+                <input type="text" name="name" th:field="*{name}">
+            </div>
+
+            <div class="filter-group">
+                <label th:text="#{table.dish.column.type}"></label>
+                <select name="dishTypes" multiple th:field="*{dishTypes}">
+                    <option th:each="type : ${dishTypes}"
+                            th:value="${type}"
+                            th:text="#{${type.messageKey}}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label th:text="#{table.dish.column.calories}"></label>
+                <div class="range-group">
+                    <input type="number" name="minCalories" th:field="*{minCalories}">
+                    <span>-</span>
+                    <input type="number" name="maxCalories" th:field="*{maxCalories}">
+                </div>
+            </div>
+
+            <div class="filter-actions">
+                <button type="submit" class="medium-action-button" th:text="#{button.apply}"></button>
+                <a th:href="@{/dishes(page=0,
+                           size=${pageSettings.size},
+                           sortField=${pageSettings.sortField},
+                           sortDirection=${pageSettings.sortDirection})}"
+                   class="medium-action-button"
+                   th:text="#{button.reset}"></a>
+            </div>
+        </div>
+    </form>
     <table>
         <tr>
             <th class="sortable-header">
@@ -142,7 +183,7 @@
         <form class="pagination-size-form"
               th:action="@{/dishes}"
               method="get">
-            <input type="hidden" name="page" th:value="${pageSettings.page}">
+            <input type="hidden" name="page" th:value="0">
             <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
             <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
             <input type="number"

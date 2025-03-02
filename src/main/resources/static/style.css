@@ -382,3 +382,118 @@ option {
 .pagination-size-button:hover {
     background-color: #3d8f3f;
 }
+
+/* Стили формы фильтрации */
+.filter-form {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.filter-row {
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 220px;
+}
+
+.filter-group label {
+    color: #4CAF50;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+/* Множественный выбор */
+.filter-group select[multiple] {
+    height: 120px;
+    padding: 8px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    background: white;
+    background-image: none; /* Убираем стрелку для множественного выбора */
+}
+
+.filter-group select[multiple] option {
+    padding: 8px;
+    margin: 2px 0;
+    border-radius: 3px;
+    transition: background 0.3s;
+}
+
+.filter-group select[multiple] option:hover {
+    background: #f0faf0;
+}
+
+/* Группа диапазона */
+.range-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.range-group input {
+    width: 100px;
+    padding: 8px 12px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.range-group span {
+    color: #666;
+    font-weight: bold;
+}
+
+/* Кнопки фильтров */
+.filter-actions {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.filter-actions button {
+    background: #4CAF50;
+    padding: 10px 25px;
+    font-size: 14px;
+}
+
+.filter-actions a {
+    background: #d32f2f;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.filter-actions a:hover {
+    background: #b71c1c;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        min-width: auto;
+    }
+
+    .filter-actions {
+        margin-left: 0;
+        justify-content: flex-end;
+    }
+}
