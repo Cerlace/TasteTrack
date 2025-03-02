@@ -126,7 +126,7 @@
         <form class="pagination-size-form"
               th:action="@{/meals/{userId}(userId=${userId})}"
               method="get">
-            <input type="hidden" name="page" th:value="${pageSettings.page}">
+            <input type="hidden" name="page" th:value="0">
             <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
             <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
             <input type="number"

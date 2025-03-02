@@ -67,7 +67,11 @@
                               size=${pageSettings.size},
                               sortField='id',
                               sortDirection=${pageSettings.sortField == 'id' ?
-                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'},
+                              name=${filter.name},
+                              dishTypes=${filter.dishTypes},
+                              minCalories=${filter.minCalories},
+                              maxCalories=${filter.maxCalories})}">
                     <span th:text="#{column.id}  + ' ' "></span>
                     <span
                             th:if="${pageSettings.sortField == 'id'}"
@@ -80,7 +84,11 @@
                               size=${pageSettings.size},
                               sortField='name',
                               sortDirection=${pageSettings.sortField == 'name' ?
-                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'},
+                              name=${filter.name},
+                              dishTypes=${filter.dishTypes},
+                              minCalories=${filter.minCalories},
+                              maxCalories=${filter.maxCalories})}">
                     <span th:text="#{table.dish.column.name}  + ' ' "></span>
                     <span
                             th:if="${pageSettings.sortField == 'name'}"
@@ -95,7 +103,11 @@
                               size=${pageSettings.size},
                               sortField='calories',
                               sortDirection=${pageSettings.sortField == 'calories' ?
-                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'},
+                              name=${filter.name},
+                              dishTypes=${filter.dishTypes},
+                              minCalories=${filter.minCalories},
+                              maxCalories=${filter.maxCalories})}">
                     <span th:text="#{table.dish.column.calories}  + ' ' "></span>
                     <span
                             th:if="${pageSettings.sortField == 'calories'}"
@@ -156,16 +168,24 @@
            th:href="@{/dishes(page=${pageSettings.page - 1},
                        size=${pageSettings.size},
                        sortField=${pageSettings.sortField},
-                       sortDirection=${pageSettings.sortDirection})}"
+                       sortDirection=${pageSettings.sortDirection},
+                       name=${filter.name},
+                       dishTypes=${filter.dishTypes},
+                       minCalories=${filter.minCalories},
+                       maxCalories=${filter.maxCalories})}"
            class="pagination-button"
            th:text="#{button.previous}"></a>
 
         <span th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
         <a th:if="${page != pageSettings.page}"
            th:href="@{/dishes(page=${page},
-                           size=${pageSettings.size},
-                           sortField=${pageSettings.sortField},
-                           sortDirection=${pageSettings.sortDirection})}"
+                       size=${pageSettings.size},
+                       sortField=${pageSettings.sortField},
+                       sortDirection=${pageSettings.sortDirection},
+                       name=${filter.name},
+                       dishTypes=${filter.dishTypes},
+                       minCalories=${filter.minCalories},
+                       maxCalories=${filter.maxCalories})}"
            class="pagination-button"
            th:text="${page + 1}"></a>
         <span th:unless="${page != pageSettings.page}"
@@ -176,7 +196,11 @@
            th:href="@{/dishes(page=${pageSettings.page + 1},
                        size=${pageSettings.size},
                        sortField=${pageSettings.sortField},
-                       sortDirection=${pageSettings.sortDirection})}"
+                       sortDirection=${pageSettings.sortDirection},
+                       name=${filter.name},
+                       dishTypes=${filter.dishTypes},
+                       minCalories=${filter.minCalories},
+                       maxCalories=${filter.maxCalories})}"
            class="pagination-button"
            th:text="#{button.next}"></a>
 
@@ -193,6 +217,11 @@
                    max="100"
                    class="pagination-size-input"
                    th:title="#{pagination.size.title}">
+            <input type="hidden" name="name" th:value="${filter.name}">
+            <input th:each="dishType : ${filter.dishTypes}"
+                   type="hidden" name="dishTypes" th:value="${dishType}">
+            <input type="hidden" name="minCalories" th:value="${filter.minCalories}">
+            <input type="hidden" name="maxCalories" th:value="${filter.maxCalories}">
             <button type="submit"
                     class="pagination-size-button"
                     th:text="#{button.send}"></button>
