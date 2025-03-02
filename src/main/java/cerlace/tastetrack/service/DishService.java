@@ -1,6 +1,7 @@
 package cerlace.tastetrack.service;
 
 import cerlace.tastetrack.dto.DishDTO;
+import cerlace.tastetrack.dto.DishFilter;
 import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.DishEntity;
 import org.springframework.data.domain.Page;
@@ -42,6 +43,16 @@ public interface DishService {
      * @return страница объектов {@link DishDTO}
      */
     Page<DishDTO> getPage(PageSettings pageSettings);
+
+    /**
+     * Получает из слоя Repository страницу объектов {@link DishEntity},
+     * отфильтрованную по критериям и конвертирует их в объекты {@link DishDTO}.
+     *
+     * @param pageSettings объект содержащий параметры страницы.
+     * @param filter   объект содержащий параметры фильтрации блюд.
+     * @return страница объектов {@link DishDTO}
+     */
+    Page<DishDTO> getFilteredPage(PageSettings pageSettings, DishFilter filter);
 
     /**
      * С помощью слоя Repository инициирует удаление объекта из БД
