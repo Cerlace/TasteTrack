@@ -8,7 +8,8 @@ import lombok.RequiredArgsConstructor;
 public enum AlertMessage {
     SAVED("alert.message.saved"),
     DELETED("alert.message.deleted"),
-    CONSTRAINT("alert.message.constraint");
+    CONSTRAINT("alert.message.constraint"),
+    PASSWORD_CONFIRM("alert.message.password-confirm");
 
     private final String messageKey;
 }
