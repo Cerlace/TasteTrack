@@ -38,12 +38,12 @@
             <th class="sortable-header">
                 <a th:href="@{/users(page=0,
                               size=${pageSettings.size},
-                              sortField='email',
-                              sortDirection=${pageSettings.sortField == 'email' ?
+                              sortField='username',
+                              sortDirection=${pageSettings.sortField == 'username' ?
                                   (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
-                    <span th:text="#{table.user.column.email}  + ' ' "></span>
+                    <span th:text="#{table.user.column.username}  + ' ' "></span>
                     <span
-                            th:if="${pageSettings.sortField == 'email'}"
+                            th:if="${pageSettings.sortField == 'username'}"
                             th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
                     </span>
                 </a>
@@ -84,7 +84,7 @@
         </tr>
         <tr th:each="user : ${userList}">
             <td th:text="${user.id}"></td>
-            <td th:text="${user.email}"></td>
+            <td th:text="${user.username}"></td>
             <td th:text="${user.fullName}"></td>
             <td th:text="${user.birthDate}"></td>
             <td th:text="#{${user.gender.messageKey}}"></td>

@@ -18,18 +18,36 @@
                type="hidden"
                th:field="*{id}"
                required>
+        <input id="encoded-password-input"
+               type="hidden"
+               th:field="*{encodedPassword}"
+               required>
+        <div class="input-group">
+            <label for="username-input" th:text="#{table.user.column.username} + ':' "></label>
+            <input id="username-input"
+                   type="text"
+                   th:field="*{username}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="password-input" th:text="#{table.user.column.password} + ':' "></label>
+            <input id="password-input"
+                   type="password"
+                   th:field="*{password}"
+                   th:required="${user.id == null}">
+        </div>
+        <div class="input-group">
+            <label for="password-confirm-input" th:text="#{table.user.column.password-confirm} + ':' "></label>
+            <input id="password-confirm-input"
+                   type="password"
+                   th:field="*{passwordConfirm}"
+                   th:required="${user.id == null}">
+        </div>
         <div class="input-group">
             <label for="name-input" th:text="#{table.user.column.full-name} + ':' "></label>
             <input id="name-input"
                    type="text"
                    th:field="*{fullName}"
-                   required>
-        </div>
-        <div class="input-group">
-            <label for="email-input" th:text="#{table.user.column.email} + ':' "></label>
-            <input id="email-input"
-                   type="email"
-                   th:field="*{email}"
                    required>
         </div>
         <div class="input-group">
