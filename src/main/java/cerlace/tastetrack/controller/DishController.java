@@ -2,6 +2,7 @@ package cerlace.tastetrack.controller;
 
 import cerlace.tastetrack.dto.AlertDTO;
 import cerlace.tastetrack.dto.DishDTO;
+import cerlace.tastetrack.dto.DishFilter;
 import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
@@ -33,11 +34,14 @@ public class DishController {
      * @return имя представления для отображения списка блюд.
      */
     @GetMapping
-    public String list(@ModelAttribute PageSettings pageSettings,
+    public String list(@ModelAttribute("filter") DishFilter filter,
+                       @ModelAttribute PageSettings pageSettings,
                        Model model) {
-        Page<DishDTO> page = dishService.getPage(pageSettings);
+        Page<DishDTO> page = dishService.getFilteredPage(pageSettings, filter);
         model.addAttribute("dishList", page.getContent());
         model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("dishTypes", DishType.values());
+        model.addAttribute("filter", filter);
         model.addAttribute("pageSettings", pageSettings);
         return "dish/list-dish";
     }
