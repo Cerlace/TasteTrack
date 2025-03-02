@@ -18,11 +18,14 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UserDTO extends BaseDTO {
+    private String username;
+    private String encodedPassword;
+    private String password;
+    private String passwordConfirm;
     private String fullName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
     private Gender gender;
-    private String email;
     private Float height;
     private Float weight;
     private Activity activity;
