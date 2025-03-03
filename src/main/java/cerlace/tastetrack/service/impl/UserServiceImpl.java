@@ -4,7 +4,6 @@ import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.dto.UserDTO;
 
 import cerlace.tastetrack.entity.UserEntity;
-import cerlace.tastetrack.enums.Role;
 import cerlace.tastetrack.exception.PasswordConfirmException;
 import cerlace.tastetrack.mapper.UserMapper;
 import cerlace.tastetrack.repository.RoleRepository;
@@ -15,6 +14,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +26,10 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     public static final String PASSWORD_CONFIRM_EXCEPTION_MESSAGE = "Password and confirm password don't match!";
+    public static final String COULD_NOT_FIND_USER_MESSAGE = "Could not find user";
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserMapper mapper;
@@ -75,5 +78,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(COULD_NOT_FIND_USER_MESSAGE);
+        }
+        return user;
     }
 }
