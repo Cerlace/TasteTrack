@@ -40,14 +40,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (!Objects.equals(dto.getPassword(), dto.getPasswordConfirm())) {
             throw new PasswordConfirmException(PASSWORD_CONFIRM_EXCEPTION_MESSAGE);
         }
-        if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
-            dto.setEncodedPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
-        }
         UserEntity entity = mapper.toEntity(dto);
         if (entity.getId() == null) {
             entity.setRoles(Collections.singleton(roleRepository.findByName("ROLE_USER")));
         } else {
-            entity.setRoles(userRepository.findById(entity.getId()).get().getRoles());
+            UserEntity entityFromDb = userRepository.findById(entity.getId()).get();
+            entity.setRoles(entityFromDb.getRoles());
+            entity.setEncodedPassword(entityFromDb.getEncodedPassword());
+        }
+        if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
+            entity.setEncodedPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         }
         return mapper.toDTO(userRepository.save(entity));
     }
