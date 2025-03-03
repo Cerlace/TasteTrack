@@ -25,19 +25,6 @@
             <th class="sortable-header">
                 <a th:href="@{/users(page=0,
                               size=${pageSettings.size},
-                              sortField='id',
-                              sortDirection=${pageSettings.sortField == 'id' ?
-                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
-                    <span th:text="#{column.id}  + ' ' "></span>
-                    <span
-                            th:if="${pageSettings.sortField == 'id'}"
-                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
-                    </span>
-                </a>
-            </th>
-            <th class="sortable-header">
-                <a th:href="@{/users(page=0,
-                              size=${pageSettings.size},
                               sortField='username',
                               sortDirection=${pageSettings.sortField == 'username' ?
                                   (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
@@ -75,23 +62,18 @@
                 </a>
             </th>
             <th th:text="#{table.user.column.gender}"></th>
-            <th th:text="#{table.user.column.height}"></th>
-            <th th:text="#{table.user.column.weight}"></th>
-            <th th:text="#{table.user.column.activity}"></th>
-            <th th:text="#{table.user.column.goal}"></th>
+            <th th:text="#{table.user.column.roles}"></th>
             <th th:text="#{table.user.column.user-meals}"></th>
             <th colspan="2" th:text="#{label.action}"></th>
         </tr>
         <tr th:each="user : ${userList}">
-            <td th:text="${user.id}"></td>
             <td th:text="${user.username}"></td>
             <td th:text="${user.fullName}"></td>
             <td th:text="${user.birthDate}"></td>
             <td th:text="#{${user.gender.messageKey}}"></td>
-            <td th:text="${user.height} + '&nbsp' + #{table.user.column.height.unit}"></td>
-            <td th:text="${user.weight} + '&nbsp' + #{table.user.column.weight.unit}"></td>
-            <td th:text="#{${user.activity.messageKey}}"></td>
-            <td th:text="#{${user.goal.messageKey}}"></td>
+            <td>
+                <p th:each="role : ${user.roles}" th:text="${role.name}"></p>
+            </td>
             <td>
                 <form name="list-meals"
                       method="get"

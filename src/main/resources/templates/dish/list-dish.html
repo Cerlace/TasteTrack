@@ -65,23 +65,6 @@
             <th class="sortable-header">
                 <a th:href="@{/dishes(page=0,
                               size=${pageSettings.size},
-                              sortField='id',
-                              sortDirection=${pageSettings.sortField == 'id' ?
-                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'},
-                              name=${filter.name},
-                              dishTypes=${filter.dishTypes},
-                              minCalories=${filter.minCalories},
-                              maxCalories=${filter.maxCalories})}">
-                    <span th:text="#{column.id}  + ' ' "></span>
-                    <span
-                            th:if="${pageSettings.sortField == 'id'}"
-                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
-                    </span>
-                </a>
-            </th>
-            <th class="sortable-header">
-                <a th:href="@{/dishes(page=0,
-                              size=${pageSettings.size},
                               sortField='name',
                               sortDirection=${pageSettings.sortField == 'name' ?
                                   (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'},
@@ -118,11 +101,9 @@
             <th th:text="#{table.dish.column.proteins}"></th>
             <th th:text="#{table.dish.column.fats}"></th>
             <th th:text="#{table.dish.column.carbohydrates}"></th>
-            <th th:text="#{table.dish.column.recipe}"></th>
             <th th:text="#{label.action}" colspan="2"></th>
         </tr>
         <tr th:each="dish : ${dishList}">
-            <td th:text="${dish.id}"></td>
             <td th:text="${dish.name}">/td>
             <td th:text="#{${dish.dishType.messageKey}}"></td>
             <td>
@@ -139,7 +120,6 @@
             <td th:text="${dish.proteins}"></td>
             <td th:text="${dish.fats}"></td>
             <td th:text="${dish.carbohydrates}"></td>
-            <td th:text="${dish.recipe}"></td>
             <td>
                 <form name="update"
                       method="get"

@@ -28,20 +28,6 @@
                 <a th:href="@{/dish-ingredients/{dishId}(dishId=${dishId},
                               page=0,
                               size=${pageSettings.size},
-                              sortField='id',
-                              sortDirection=${pageSettings.sortField == 'id' ?
-                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
-                    <span th:text="#{column.id}  + ' ' "></span>
-                    <span
-                            th:if="${pageSettings.sortField == 'id'}"
-                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
-                    </span>
-                </a>
-            </th>
-            <th class="sortable-header">
-                <a th:href="@{/dish-ingredients/{dishId}(dishId=${dishId},
-                              page=0,
-                              size=${pageSettings.size},
                               sortField='ingredient',
                               sortDirection=${pageSettings.sortField == 'ingredient' ?
                                   (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
@@ -56,7 +42,6 @@
             <th th:text="#{label.action}" colspan="2"></th>
         </tr>
         <tr th:each="dishIngredient : ${dishIngredientList}">
-            <td th:text="${dishIngredient.id}"></td>
             <td th:text="${dishIngredient.ingredient.name}"></td>
             <td th:text="${dishIngredient.amount} + '&nbsp'
              + #{${dishIngredient.measureUnit.messageKey}}"></td>

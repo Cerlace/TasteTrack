@@ -25,20 +25,7 @@
     </div>
     <table>
         <tr>
-            <th class="sortable-header">
-                <a th:href="@{/meals/{userId}(userId=${userId},
-                              page=0,
-                              size=${pageSettings.size},
-                              sortField='id',
-                              sortDirection=${pageSettings.sortField == 'id' ?
-                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
-                    <span th:text="#{column.id}  + ' ' "></span>
-                    <span
-                            th:if="${pageSettings.sortField == 'id'}"
-                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
-                    </span>
-                </a>
-            </th>
+            <th th:text="#{table.dish.column.name}"></th>
             <th class="sortable-header">
                 <a th:href="@{/meals/{userId}(userId=${userId},
                               page=0,
@@ -54,14 +41,12 @@
                 </a>
             </th>
             <th th:text="#{table.meal.column.meal-time}"></th>
-            <th th:text="#{table.dish.column.name}"></th>
             <th th:text="#{label.action}" colspan="2"></th>
         </tr>
         <tr th:each="meal : ${mealList}">
-            <td th:text="${meal.id}"></td>
+            <td th:text="${meal.dish.name}"></td>
             <td th:text="${meal.date}"></td>
             <td th:text="#{${meal.mealTime.messageKey}}"></td>
-            <td th:text="${meal.dish.name}"></td>
             <td>
                 <form name="update"
                       method="get"
