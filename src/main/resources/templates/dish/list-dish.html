@@ -111,7 +111,7 @@
             <th th:text="#{table.dish.column.proteins}"></th>
             <th th:text="#{table.dish.column.fats}"></th>
             <th th:text="#{table.dish.column.carbohydrates}"></th>
-            <th th:text="#{label.action}" colspan="2"></th>
+            <th th:text="#{label.action}" colspan="3"></th>
         </tr>
         <tr th:each="dish : ${dishList}">
             <td th:text="${dish.name}">/td>
@@ -130,6 +130,16 @@
             <td th:text="${dish.proteins}"></td>
             <td th:text="${dish.fats}"></td>
             <td th:text="${dish.carbohydrates}"></td>
+            <td>
+                <form name="details"
+                      method="get"
+                      th:action="@{/dishes/{dishId}(dishId=${dish.id})}">
+                    <button type="submit"
+                            class="small-action-button"
+                            th:text="#{button.details}">
+                    </button>
+                </form>
+            </td>
             <td>
                 <form name="update"
                       method="get"

@@ -27,6 +27,14 @@ body {
     padding-left: 20px; /* Отступы внутри основного контента */
 }
 
+.column-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 0 25%;
+}
+
 .line-container {
     display: flex;
     justify-content: space-between;

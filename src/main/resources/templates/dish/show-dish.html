@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{label.dish} + ': ' + ${dish.name}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <div class="column-container">
+        <h1 th:text="${dish.name}"></h1>
+        <h2 th:text="#{label.category} + ': ' + #{${dish.dishType.messageKey}}"></h2>
+        <h2 th:text="#{label.nutritional}"></h2>
+        <table>
+            <tr>
+                <th th:text="#{table.dish.column.calories}"></th>
+                <th th:text="#{table.dish.column.proteins}"></th>
+                <th th:text="#{table.dish.column.fats}"></th>
+                <th th:text="#{table.dish.column.carbohydrates}"></th>
+            </tr>
+            <tr>
+                <td th:text="${dish.calories}"></td>
+                <td th:text="${dish.proteins}"></td>
+                <td th:text="${dish.fats}"></td>
+                <td th:text="${dish.carbohydrates}"></td>
+            </tr>
+        </table>
+        <h2 th:text="#{table.ingredient.label} + ':'"></h2>
+        <p th:each="dishIngredient : ${dish.dishIngredients}"
+           th:text="${dishIngredient.ingredient.name} + ' — ' +
+               ${dishIngredient.amount} + ' ' + #{${dishIngredient.measureUnit.messageKey}}"></p>
+        <h2 th:text="#{table.dish.column.recipe} + ':'"></h2>
+        <p th:text="${dish.recipe}"></p>
+    </div>
+    <form name="list-dishes"
+          method="get"
+          th:action="@{/dishes}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{table.dish.return}">
+        </button>
+    </form>
+</div>
+</body>
+</html>

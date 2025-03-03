@@ -43,9 +43,24 @@ public class DishController {
     }
 
     /**
+     * Отображает детали о блюде
+     *
+     * @param dishId идентификатор блюда.
+     * @param model  объект {@link Model}, используемый для передачи данных в представление.
+     * @return имя представления для отображения деталей блюда.
+     */
+    @GetMapping("/{dishId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public String details(@PathVariable("dishId") Long dishId,
+                          Model model) {
+        model.addAttribute("dish", dishService.getDetailed(dishId));
+        return "dish/show-dish";
+    }
+
+    /**
      * Отображает страницу блюд.
      *
-     * @param filter параметры для фильтрации страницы
+     * @param filter       параметры для фильтрации страницы
      * @param pageSettings параметры для запроса страницы
      * @param model        объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка блюд.
