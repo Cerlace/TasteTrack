@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title th:text="#{table.dish.list}"></title>
     <meta charset="UTF-8">
@@ -11,7 +12,8 @@
 <div class="content">
     <div class="line-container">
         <h1 th:text="#{table.dish.list}"></h1>
-        <form name="save-dish"
+        <form sec:authorize="hasRole('ADMIN')"
+              name="save-dish"
               method="get"
               th:action="@{/dishes/create}">
             <button type="submit"
@@ -90,7 +92,8 @@
                 </a>
             </th>
             <th th:text="#{table.dish.column.type}"></th>
-            <th th:text="#{table.dish-ingredient.label}"></th>
+            <th sec:authorize="hasRole('ADMIN')"
+                th:text="#{table.dish-ingredient.label}"></th>
             <th class="sortable-header">
                 <a th:href="@{/dishes(page=0,
                               size=${pageSettings.size},
@@ -111,12 +114,15 @@
             <th th:text="#{table.dish.column.proteins}"></th>
             <th th:text="#{table.dish.column.fats}"></th>
             <th th:text="#{table.dish.column.carbohydrates}"></th>
-            <th th:text="#{label.action}" colspan="3"></th>
+            <th sec:authorize="isAuthenticated()"
+                th:text="#{label.details}"></th>
+            <th sec:authorize="hasRole('ADMIN')"
+                th:text="#{label.action}" colspan="2"></th>
         </tr>
         <tr th:each="dish : ${dishList}">
             <td th:text="${dish.name}">/td>
             <td th:text="#{${dish.dishType.messageKey}}"></td>
-            <td>
+            <td sec:authorize="hasRole('ADMIN')">
                 <form name="list-dish-ingredients"
                       method="get"
                       th:action="@{/dishes/{dishId}/dish-ingredients(dishId=${dish.id})}">
@@ -130,17 +136,17 @@
             <td th:text="${dish.proteins}"></td>
             <td th:text="${dish.fats}"></td>
             <td th:text="${dish.carbohydrates}"></td>
-            <td>
+            <td sec:authorize="isAuthenticated()">
                 <form name="details"
                       method="get"
                       th:action="@{/dishes/{dishId}(dishId=${dish.id})}">
                     <button type="submit"
                             class="small-action-button"
-                            th:text="#{button.details}">
+                            th:text="#{button.view}">
                     </button>
                 </form>
             </td>
-            <td>
+            <td sec:authorize="hasRole('ADMIN')">
                 <form name="update"
                       method="get"
                       th:action="@{/dishes/edit/{dishId}(dishId=${dish.id})}">
@@ -150,7 +156,7 @@
                     </button>
                 </form>
             </td>
-            <td>
+            <td sec:authorize="hasRole('ADMIN')">
                 <form name="delete"
                       method="post"
                       th:action="@{/dishes/delete/{dishId}(dishId=${dish.id})}">
