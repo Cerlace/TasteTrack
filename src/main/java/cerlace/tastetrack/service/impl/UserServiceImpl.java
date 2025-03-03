@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
         }
         UserEntity entity = mapper.toEntity(dto);
         if (entity.getId() == null) {
-            entity.setRoles(Collections.singleton(roleRepository.findByName(Role.ROLE_USER)));
+            entity.setRoles(Collections.singleton(roleRepository.findByName("ROLE_USER")));
         } else {
             entity.setRoles(userRepository.findById(entity.getId()).get().getRoles());
         }
