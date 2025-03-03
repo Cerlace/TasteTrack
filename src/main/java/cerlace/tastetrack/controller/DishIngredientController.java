@@ -11,6 +11,7 @@ import cerlace.tastetrack.service.DishIngredientService;
 import cerlace.tastetrack.service.IngredientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,6 +51,7 @@ public class DishIngredientController {
      * @return имя представления для отображения списка ингредиентов блюда.
      */
     @GetMapping("/{dishId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String listDishIngredients(@ModelAttribute PageSettings pageSettings,
                                       @PathVariable("dishId") Long dishId,
                                       Model model) {
@@ -68,6 +70,7 @@ public class DishIngredientController {
      * @return имя представления для отображения формы создания ингредиента блюда.
      */
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public String showCreateForm(@RequestParam("dishId") Long dishId, Model model) {
         model.addAttribute("dishId", dishId);
         model.addAttribute("dishIngredient", new DishIngredientDTO());
@@ -84,6 +87,7 @@ public class DishIngredientController {
      * @return имя представления для отображения формы редактирования ингредиента блюда.
      */
     @GetMapping("/edit/{dishIngredientId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String showEditForm(@RequestParam("dishId") Long dishId,
                                @PathVariable("dishIngredientId") Long dishIngredientId,
                                Model model) {
@@ -102,6 +106,7 @@ public class DishIngredientController {
      * @return перенаправление на страницу со списком ингредиентов блюда.
      */
     @PostMapping("/save")
+    @PreAuthorize("hasRole('ADMIN')")
     public String saveOrUpdate(@ModelAttribute("dishIngredient") DishIngredientDTO dishIngredient,
                                @ModelAttribute("dishId") Long dishId,
                                RedirectAttributes redirectAttributes) {
@@ -122,9 +127,10 @@ public class DishIngredientController {
      * @return перенаправление на страницу со списком ингредиентов блюда.
      */
     @PostMapping("/delete/{dishIngredientId}")
-    public String deleteUser(@PathVariable Long dishIngredientId,
-                             @ModelAttribute("dishId") Long dishId,
-                             RedirectAttributes redirectAttributes) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public String delete(@PathVariable Long dishIngredientId,
+                         @ModelAttribute("dishId") Long dishId,
+                         RedirectAttributes redirectAttributes) {
         dishIngredientService.delete(dishIngredientId);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)

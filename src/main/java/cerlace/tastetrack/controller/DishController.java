@@ -10,6 +10,7 @@ import cerlace.tastetrack.enums.DishType;
 import cerlace.tastetrack.service.DishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +55,7 @@ public class DishController {
      * @return имя представления для отображения формы создания блюда.
      */
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public String showCreateForm(Model model) {
         model.addAttribute("dish", new DishDTO());
         model.addAttribute("dishTypes", DishType.values());
@@ -68,6 +70,7 @@ public class DishController {
      * @return имя представления для отображения формы редактирования блюда.
      */
     @GetMapping("/edit/{dishId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String showEditForm(@PathVariable("dishId") Long dishId, Model model) {
         model.addAttribute("dish", dishService.get(dishId));
         model.addAttribute("dishTypes", DishType.values());
@@ -82,6 +85,7 @@ public class DishController {
      * @return перенаправление на страницу со списком блюд.
      */
     @PostMapping("/save")
+    @PreAuthorize("hasRole('ADMIN')")
     public String saveOrUpdate(@ModelAttribute("dish") DishDTO dish,
                                RedirectAttributes redirectAttributes) {
         dishService.saveOrUpdate(dish);
@@ -100,8 +104,9 @@ public class DishController {
      * @return перенаправление на страницу со списком блюд.
      */
     @PostMapping("/delete/{dishId}")
-    public String deleteUser(@PathVariable Long dishId,
-                             RedirectAttributes redirectAttributes) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public String delete(@PathVariable Long dishId,
+                         RedirectAttributes redirectAttributes) {
         dishService.delete(dishId);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)

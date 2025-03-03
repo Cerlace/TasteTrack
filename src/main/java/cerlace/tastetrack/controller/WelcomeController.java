@@ -12,6 +12,6 @@ public class WelcomeController {
      */
     @GetMapping("/")
     public String redirectToHomePage() {
-        return "redirect:/users";
+        return "redirect:/dishes";
     }
 }

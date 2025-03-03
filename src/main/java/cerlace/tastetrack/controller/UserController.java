@@ -11,6 +11,7 @@ import cerlace.tastetrack.enums.Goal;
 import cerlace.tastetrack.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/users")
+@PreAuthorize("hasRole('ADMIN')")
 public class UserController {
 
     private final UserService userService;
@@ -101,8 +103,8 @@ public class UserController {
      * @return перенаправления на страницу со списком пользователей.
      */
     @PostMapping("/delete/{userId}")
-    public String deleteUser(@PathVariable Long userId,
-                             RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable Long userId,
+                         RedirectAttributes redirectAttributes) {
         userService.delete(userId);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)

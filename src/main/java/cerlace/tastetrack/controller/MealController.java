@@ -11,6 +11,7 @@ import cerlace.tastetrack.service.DishService;
 import cerlace.tastetrack.service.MealService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/meals")
+@PreAuthorize("hasRole('ADMIN')")
 public class MealController {
 
     private final MealService mealService;
@@ -122,9 +124,9 @@ public class MealController {
      * @return перенаправление на страницу со списком приемов пищи.
      */
     @PostMapping("/delete/{mealId}")
-    public String deleteUser(@PathVariable Long mealId,
-                             @ModelAttribute("userId") Long userId,
-                             RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable Long mealId,
+                         @ModelAttribute("userId") Long userId,
+                         RedirectAttributes redirectAttributes) {
         mealService.delete(mealId);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)
