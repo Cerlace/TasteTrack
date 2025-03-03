@@ -4,8 +4,10 @@ import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.dto.UserDTO;
 
 import cerlace.tastetrack.entity.UserEntity;
+import cerlace.tastetrack.enums.Role;
 import cerlace.tastetrack.exception.PasswordConfirmException;
 import cerlace.tastetrack.mapper.UserMapper;
+import cerlace.tastetrack.repository.RoleRepository;
 import cerlace.tastetrack.repository.UserRepository;
 import cerlace.tastetrack.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +27,8 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService {
 
     public static final String PASSWORD_CONFIRM_EXCEPTION_MESSAGE = "Password and confirm password don't match!";
-    private final UserRepository repository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final UserMapper mapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -37,19 +41,24 @@ public class UserServiceImpl implements UserService {
             dto.setEncodedPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         }
         UserEntity entity = mapper.toEntity(dto);
-        return mapper.toDTO(repository.save(entity));
+        if (entity.getId() == null) {
+            entity.setRoles(Collections.singleton(roleRepository.findByName(Role.ROLE_USER)));
+        } else {
+            entity.setRoles(userRepository.findById(entity.getId()).get().getRoles());
+        }
+        return mapper.toDTO(userRepository.save(entity));
     }
 
     @Override
     public UserDTO get(Long id) {
-        return repository.findById(id)
+        return userRepository.findById(id)
                 .map(mapper::toDTO)
                 .orElse(null);
     }
 
     @Override
     public List<UserDTO> getAll() {
-        return mapper.toDTOList(repository.findAll());
+        return mapper.toDTOList(userRepository.findAll());
     }
 
     @Override
@@ -60,11 +69,11 @@ public class UserServiceImpl implements UserService {
                 Sort.by(Sort.Direction.fromString(
                         pageSettings.getSortDirection()), pageSettings.getSortField()));
 
-        return repository.findAll(pageable).map(mapper::toDTO);
+        return userRepository.findAll(pageable).map(mapper::toDTO);
     }
 
     @Override
     public void delete(Long id) {
-        repository.deleteById(id);
+        userRepository.deleteById(id);
     }
 }
