@@ -68,6 +68,7 @@ public class DishServiceImpl implements DishService {
 
         Specification<DishEntity> specification = where(hasNameLike(filter.getName()))
                 .and(hasTypeIn(filter.getDishTypes()))
+                .and(hasIngredientIn(filter.getIngredientIds()))
                 .and(hasMinCalories(filter.getMinCalories()))
                 .and(hasMaxCalories(filter.getMaxCalories()));
 

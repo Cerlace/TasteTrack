@@ -15,6 +15,7 @@ import java.util.List;
 public class DishFilter {
     private String name;
     private List<DishType> dishTypes;
+    private List<Long> ingredientIds;
     private Integer minCalories;
     private Integer maxCalories;
 }
