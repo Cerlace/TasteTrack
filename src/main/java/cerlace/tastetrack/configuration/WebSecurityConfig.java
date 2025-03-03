@@ -23,13 +23,20 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Конфигурация цепочки фильтров безопасности для приложения.
+     *
+     * @param httpSecurity объект конфигурации безопасности HTTP.
+     * @return построенная цепочка фильтров безопасности.
+     * @throws Exception если во время конфигурации возникнет ошибка.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/dishes", "/style.css").permitAll()
-                                .anyRequest().authenticated()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .defaultSuccessUrl("/", true)

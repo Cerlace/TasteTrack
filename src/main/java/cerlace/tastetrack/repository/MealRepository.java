@@ -12,6 +12,7 @@ import java.util.List;
 public interface MealRepository extends JpaRepository<MealEntity, Long> {
     /**
      * Получает все {@code MealEntity}, которые относятся к пользователю
+     *
      * @param userId идентификатор пользователя.
      * @return список приемов пищи в формате {@code List<MealEntity>}
      */
@@ -19,8 +20,9 @@ public interface MealRepository extends JpaRepository<MealEntity, Long> {
 
     /**
      * Получает страницу {@code MealEntity}, которые относятся к пользователю
+     *
      * @param pageable запрос на получение страницы.
-     * @param userId идентификатор пользователя.
+     * @param userId   идентификатор пользователя.
      * @return список приемов пищи в формате {@code List<MealEntity>}
      */
     Page<MealEntity> findByUserId(Pageable pageable, Long userId);
