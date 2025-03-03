@@ -253,7 +253,7 @@ option {
 }
 
 .alert_block {
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     right: 0;
     overflow-x: hidden;
