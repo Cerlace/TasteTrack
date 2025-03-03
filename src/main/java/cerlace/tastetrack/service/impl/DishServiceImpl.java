@@ -4,6 +4,7 @@ import cerlace.tastetrack.dto.DishDTO;
 import cerlace.tastetrack.dto.DishFilter;
 import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.DishEntity;
+import cerlace.tastetrack.mapper.DishIngredientMapper;
 import cerlace.tastetrack.mapper.DishMapper;
 import cerlace.tastetrack.repository.DishRepository;
 import cerlace.tastetrack.service.DishService;
@@ -25,24 +26,33 @@ import static org.springframework.data.jpa.domain.Specification.*;
 public class DishServiceImpl implements DishService {
 
     private final DishRepository repository;
-    private final DishMapper mapper;
+    private final DishMapper dishMapper;
+    private final DishIngredientMapper dishIngredientMapper;
 
     @Override
     public DishDTO saveOrUpdate(DishDTO dto) {
-        DishEntity entity = mapper.toEntity(dto);
-        return mapper.toDTO(repository.save(entity));
+        DishEntity entity = dishMapper.toEntity(dto);
+        return dishMapper.toDTO(repository.save(entity));
     }
 
     @Override
     public DishDTO get(Long id) {
         return repository.findById(id)
-                .map(mapper::toDTO)
+                .map(dishMapper::toDTO)
                 .orElse(null);
     }
 
     @Override
+    public DishDTO getDetailed(Long id) {
+        DishEntity entity = repository.findById(id).orElse(null);
+        DishDTO dto = dishMapper.toDTO(entity);
+        dto.setDishIngredients(dishIngredientMapper.toDTOSet(entity.getDishIngredients()));
+        return dto;
+    }
+
+    @Override
     public List<DishDTO> getAll() {
-        return mapper.toDTOList(repository.findAll());
+        return dishMapper.toDTOList(repository.findAll());
     }
 
     @Override
@@ -53,7 +63,7 @@ public class DishServiceImpl implements DishService {
                 Sort.by(Sort.Direction.fromString(
                         pageSettings.getSortDirection()), pageSettings.getSortField()));
 
-        return repository.findAll(pageable).map(mapper::toDTO);
+        return repository.findAll(pageable).map(dishMapper::toDTO);
     }
 
     @Override
@@ -72,7 +82,7 @@ public class DishServiceImpl implements DishService {
                 .and(hasMinCalories(filter.getMinCalories()))
                 .and(hasMaxCalories(filter.getMaxCalories()));
 
-        return repository.findAll(specification, pageable).map(mapper::toDTO);
+        return repository.findAll(specification, pageable).map(dishMapper::toDTO);
     }
 
     @Override

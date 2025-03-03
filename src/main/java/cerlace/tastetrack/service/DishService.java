@@ -28,6 +28,16 @@ public interface DishService {
     DishDTO get(Long id);
 
     /**
+     * Получает из слоя Repository объект {@link DishEntity} по id и
+     * конвертирует его в объект {@link DishDTO}.
+     * Включает в возвращаемый объект набор ингредиентов блюда.
+     *
+     * @param id идентификатор записи в БД
+     * @return полученная запись или null в случае, если запись не найдена
+     */
+    DishDTO getDetailed(Long id);
+
+    /**
      * Получает из слоя Repository список всех объектов {@link DishEntity} в БД,
      * конвертирует их в объекты {@link DishDTO}.
      *
