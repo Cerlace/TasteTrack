@@ -390,8 +390,7 @@ option {
     background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
 .filter-row {
@@ -411,7 +410,6 @@ option {
 .filter-group label {
     color: #4CAF50;
     font-weight: bold;
-    font-size: 14px;
     margin-left: 5px;
 }
 
@@ -463,10 +461,19 @@ option {
     margin-left: auto;
 }
 
-.filter-actions button {
-    background: #4CAF50;
+.filter-actions-button {
+    font-size: 1em;
+    margin: 10px;
+    width: 150px;
+    min-height: 60px;
     padding: 10px 25px;
-    font-size: 14px;
+}
+.filter-actions-button.delete {
+    background: #d32f2f;
+}
+
+.filter-actions-button.delete:hover {
+    background: #b71c1c;
 }
 
 .filter-actions a {

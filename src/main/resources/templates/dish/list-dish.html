@@ -27,9 +27,15 @@
         <div class="filter-row">
             <div class="filter-group">
                 <label th:text="#{table.dish.column.name}"></label>
-                <input type="text" name="name" th:field="*{name}">
-            </div>
+                <input type="text" name="name" th:field="*{name}" style="width: auto;">
 
+                <label th:text="#{table.dish.column.calories}"></label>
+                <div class="range-group">
+                    <input type="number" name="minCalories" th:field="*{minCalories}">
+                    <span>-</span>
+                    <input type="number" name="maxCalories" th:field="*{maxCalories}">
+                </div>
+            </div>
             <div class="filter-group">
                 <label th:text="#{table.dish.column.type}"></label>
                 <select name="dishTypes" multiple th:field="*{dishTypes}">
@@ -39,26 +45,30 @@
                     </option>
                 </select>
             </div>
-
             <div class="filter-group">
-                <label th:text="#{table.dish.column.calories}"></label>
-                <div class="range-group">
-                    <input type="number" name="minCalories" th:field="*{minCalories}">
-                    <span>-</span>
-                    <input type="number" name="maxCalories" th:field="*{maxCalories}">
-                </div>
+                <label th:text="#{table.ingredient.label}"></label>
+                <select name="ingredientIds" multiple th:field="*{ingredientIds}">
+                    <option th:each="ingredient : ${ingredientsList}"
+                            th:value="${ingredient.id}"
+                            th:text="${ingredient.name}">
+                    </option>
+                </select>
             </div>
-
             <div class="filter-actions">
-                <button type="submit" class="medium-action-button" th:text="#{button.apply}"></button>
-                <a th:href="@{/dishes(page=0,
-                           size=${pageSettings.size},
-                           sortField=${pageSettings.sortField},
-                           sortDirection=${pageSettings.sortDirection})}"
-                   class="medium-action-button"
-                   th:text="#{button.reset}"></a>
+                <button type="submit" class="filter-actions-button"
+                        th:text="#{button.apply}"></button>
+                <button type="submit" class="filter-actions-button delete" form="filter-reset-form"
+                        th:text="#{button.reset}"></button>
             </div>
         </div>
+    </form>
+    <form id="filter-reset-form"
+          th:action="@{/dishes}"
+          method="get">
+        <input type="hidden" name="page" th:value="0">
+        <input type="hidden" name="size" th:value="${pageSettings.size}">
+        <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
+        <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
     </form>
     <table>
         <tr>
