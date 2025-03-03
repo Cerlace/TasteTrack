@@ -12,7 +12,7 @@
     <form name="update"
           method="post"
           th:object="${meal}"
-          th:action="@{/meals/save}">
+          th:action="@{/users/{userId}/meals/save(userId=${userId})}">
         <h2 th:text="${meal.id == null} ? #{table.meal.save} : #{table.meal.update}"></h2>
         <input type="hidden"
                th:field="*{id}"
@@ -53,9 +53,6 @@
                 </option>
             </select>
         </div>
-        <input type="hidden"
-               th:name="userId"
-               th:value="${userId}">
         <button type="submit"
                 class="medium-action-button"
                 th:text="#{button.send}">
@@ -63,7 +60,7 @@
     </form>
     <form name="list-meals"
           method="get"
-          th:action="@{/meals/{userId}(userId=${userId})}">
+          th:action="@{/users/{userId}/meals(userId=${userId})}">
         <button type="submit"
                 class="medium-action-button"
                 th:text="#{table.meal.return}">

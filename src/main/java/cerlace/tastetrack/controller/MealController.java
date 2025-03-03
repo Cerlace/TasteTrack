@@ -26,7 +26,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/meals")
+@RequestMapping("/users/{userId}/meals")
 @PreAuthorize("hasRole('ADMIN')")
 public class MealController {
 
@@ -51,7 +51,7 @@ public class MealController {
      * @param model        объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка приемов пищи.
      */
-    @GetMapping("/{userId}")
+    @GetMapping
     public String listUserMeals(@ModelAttribute PageSettings pageSettings,
                                 @PathVariable("userId") Long userId,
                                 Model model) {
@@ -70,8 +70,8 @@ public class MealController {
      * @return имя представления для отображения формы создания приема пищи.
      */
     @GetMapping("/create")
-    public String showCreateForm(@RequestParam("userId") Long userId, Model model) {
-        model.addAttribute("userId", userId);
+    public String showCreateForm(@PathVariable("userId") Long userId,
+                                 Model model) {
         model.addAttribute("meal", new MealDTO());
         model.addAttribute("mealTimes", MealTime.values());
         return "meal/form-meal";
@@ -87,9 +87,8 @@ public class MealController {
      */
     @GetMapping("/edit/{mealId}")
     public String showEditForm(@PathVariable("mealId") Long mealId,
-                               @RequestParam("userId") Long userId,
+                               @PathVariable("userId") Long userId,
                                Model model) {
-        model.addAttribute("userId", userId);
         model.addAttribute("meal", mealService.get(mealId));
         model.addAttribute("mealTimes", MealTime.values());
         return "meal/form-meal";
@@ -105,14 +104,14 @@ public class MealController {
      */
     @PostMapping("/save")
     public String saveOrUpdate(@ModelAttribute("meal") MealDTO meal,
-                               @ModelAttribute("userId") Long userId,
+                               @PathVariable("userId") Long userId,
                                RedirectAttributes redirectAttributes) {
         mealService.saveOrUpdate(meal);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)
                 .alertMessage(AlertMessage.SAVED)
                 .build());
-        return "redirect:/meals/" + userId;
+        return "redirect:/users/%d/meals".formatted(userId);
     }
 
     /**
@@ -125,13 +124,13 @@ public class MealController {
      */
     @PostMapping("/delete/{mealId}")
     public String delete(@PathVariable Long mealId,
-                         @ModelAttribute("userId") Long userId,
+                         @PathVariable("userId") Long userId,
                          RedirectAttributes redirectAttributes) {
         mealService.delete(mealId);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)
                 .alertMessage(AlertMessage.DELETED)
                 .build());
-        return "redirect:/meals/" + userId;
+        return "redirect:/users/%d/meals".formatted(userId);
     }
 }
