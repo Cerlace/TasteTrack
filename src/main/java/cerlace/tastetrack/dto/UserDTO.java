@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +31,5 @@ public class UserDTO extends BaseDTO {
     private Float weight;
     private Activity activity;
     private Goal goal;
+    private Set<RoleDTO> roles;
 }
