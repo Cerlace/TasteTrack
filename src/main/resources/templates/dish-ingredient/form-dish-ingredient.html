@@ -12,7 +12,7 @@
     <form name="update"
           method="post"
           th:object="${dishIngredient}"
-          th:action="@{/dish-ingredients/save}">
+          th:action="@{/dishes/{dishId}/dish-ingredients/save(dishId=${dishId})}">
         <h2 th:text="${dishIngredient.id == null} ?
     #{table.dish-ingredient.save} : #{table.dish-ingredient.update}"></h2>
         <input type="hidden"
@@ -62,7 +62,7 @@
     </form>
     <form name="list-dish-ingredients"
           method="get"
-          th:action="@{/dish-ingredients/{dishId}(dishId=${dishId})}">
+          th:action="@{/dishes/{dishId}/dish-ingredients(dishId=${dishId})}">
         <button type="submit"
                 class="medium-action-button"
                 th:text="#{table.dish-ingredient.return}">

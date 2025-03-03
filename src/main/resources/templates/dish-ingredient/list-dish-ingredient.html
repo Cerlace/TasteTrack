@@ -12,10 +12,7 @@
         <h1 th:text="#{table.dish-ingredient.list} + ':' "></h1>
         <form name="save-dish-ingredient"
               method="get"
-              th:action="@{/dish-ingredients/create}">
-            <input type="hidden"
-                   th:name="dishId"
-                   th:value="${dishId}">
+              th:action="@{/dishes/{dishId}/dish-ingredients/create(dishId=${dishId})}">
             <button type="submit"
                     class="medium-action-button"
                     th:text="#{table.dish-ingredient.save}">
@@ -25,7 +22,7 @@
     <table>
         <tr>
             <th class="sortable-header">
-                <a th:href="@{/dish-ingredients/{dishId}(dishId=${dishId},
+                <a th:href="@{/dishes/{dishId}/dish-ingredients(dishId=${dishId},
                               page=0,
                               size=${pageSettings.size},
                               sortField='ingredient',
@@ -48,11 +45,9 @@
             <td>
                 <form name="update-dish-ingredient"
                       method="get"
-                      th:action="@{/dish-ingredients/edit/{dish-ingredientId}
-                          (dish-ingredientId=${dishIngredient.id})}">
-                    <input type="hidden"
-                           th:name="dishId"
-                           th:value="${dishId}">
+                      th:action="@{/dishes/{dishId}/dish-ingredients/edit/{dish-ingredientId}
+                          (dishId=${dishId},
+                           dish-ingredientId=${dishIngredient.id})}">
                     <button type="submit"
                             class="small-action-button update"
                             th:text="#{button.update}">
@@ -62,8 +57,9 @@
             <td>
                 <form name="delete"
                       method="post"
-                      th:action="@{/dish-ingredients/delete/{dish-ingredientId}
-                          (dish-ingredientId=${dishIngredient.id})}">
+                      th:action="@{/dishes/{dishId}/dish-ingredients/delete/{dish-ingredientId}
+                          (dishId=${dishId},
+                           dish-ingredientId=${dishIngredient.id})}">
                     <input type="hidden"
                            th:name="dishId"
                            th:value="${dishId}">
@@ -78,7 +74,7 @@
     </table>
     <div class="pagination">
         <a th:if="${pageSettings.page > 0}"
-           th:href="@{/dish-ingredients/{dishId}(dishId=${dishId},
+           th:href="@{/dishes/{dishId}/dish-ingredients(dishId=${dishId},
                        page=${pageSettings.page - 1},
                        size=${pageSettings.size},
                        sortField=${pageSettings.sortField},
@@ -88,7 +84,7 @@
 
         <span th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
         <a th:if="${page != pageSettings.page}"
-           th:href="@{/dish-ingredients/{dishId}(dishId=${dishId},
+           th:href="@{/dishes/{dishId}/dish-ingredients(dishId=${dishId},
                           page=${page},
                           size=${pageSettings.size},
                           sortField=${pageSettings.sortField},
@@ -100,7 +96,7 @@
               th:text="${page + 1}"></span>
         </span>
         <a th:if="${pageSettings.page < totalPages - 1}"
-           th:href="@{/dish-ingredients/{dishId}(dishId=${dishId},
+           th:href="@{/dishes/{dishId}/dish-ingredients(dishId=${dishId},
                        page=${pageSettings.page + 1},
                        size=${pageSettings.size},
                        sortField=${pageSettings.sortField},
@@ -109,7 +105,7 @@
            th:text="#{button.next}"></a>
 
         <form class="pagination-size-form"
-              th:action="@{/dish-ingredients/{dishId}(dishId=${dishId})}"
+              th:action="@{/dishes/{dishId}/dish-ingredients(dishId=${dishId})}"
               method="get">
             <input type="hidden" name="page" th:value="0">
             <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">

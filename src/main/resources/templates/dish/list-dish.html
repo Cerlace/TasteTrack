@@ -109,7 +109,7 @@
             <td>
                 <form name="list-dish-ingredients"
                       method="get"
-                      th:action="@{/dish-ingredients/{dishId}(dishId=${dish.id})}">
+                      th:action="@{/dishes/{dishId}/dish-ingredients(dishId=${dish.id})}">
                     <button type="submit"
                             class="small-action-button"
                             th:text="#{table.dish-ingredient.list}">

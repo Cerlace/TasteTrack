@@ -19,14 +19,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/dish-ingredients")
+@RequestMapping("/dishes/{dishId}/dish-ingredients")
 public class DishIngredientController {
 
     private final DishIngredientService dishIngredientService;
@@ -50,7 +49,7 @@ public class DishIngredientController {
      * @param model        объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка ингредиентов блюда.
      */
-    @GetMapping("/{dishId}")
+    @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String listDishIngredients(@ModelAttribute PageSettings pageSettings,
                                       @PathVariable("dishId") Long dishId,
@@ -71,8 +70,7 @@ public class DishIngredientController {
      */
     @GetMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
-    public String showCreateForm(@RequestParam("dishId") Long dishId, Model model) {
-        model.addAttribute("dishId", dishId);
+    public String showCreateForm(@PathVariable("dishId") Long dishId, Model model) {
         model.addAttribute("dishIngredient", new DishIngredientDTO());
         model.addAttribute("measureUnits", MeasureUnit.values());
         return "dish-ingredient/form-dish-ingredient";
@@ -88,10 +86,9 @@ public class DishIngredientController {
      */
     @GetMapping("/edit/{dishIngredientId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String showEditForm(@RequestParam("dishId") Long dishId,
+    public String showEditForm(@PathVariable("dishId") Long dishId,
                                @PathVariable("dishIngredientId") Long dishIngredientId,
                                Model model) {
-        model.addAttribute("dishId", dishId);
         model.addAttribute("dishIngredient", dishIngredientService.get(dishIngredientId));
         model.addAttribute("measureUnits", MeasureUnit.values());
         return "dish-ingredient/form-dish-ingredient";
@@ -107,15 +104,15 @@ public class DishIngredientController {
      */
     @PostMapping("/save")
     @PreAuthorize("hasRole('ADMIN')")
-    public String saveOrUpdate(@ModelAttribute("dishIngredient") DishIngredientDTO dishIngredient,
-                               @ModelAttribute("dishId") Long dishId,
+    public String saveOrUpdate(@PathVariable("dishId") Long dishId,
+                               @ModelAttribute("dishIngredient") DishIngredientDTO dishIngredient,
                                RedirectAttributes redirectAttributes) {
         dishIngredientService.saveOrUpdate(dishIngredient);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)
                 .alertMessage(AlertMessage.SAVED)
                 .build());
-        return "redirect:/dish-ingredients/" + dishId;
+        return "redirect:/dishes/%d/dish-ingredients".formatted(dishId);
     }
 
     /**
@@ -128,14 +125,14 @@ public class DishIngredientController {
      */
     @PostMapping("/delete/{dishIngredientId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public String delete(@PathVariable Long dishIngredientId,
-                         @ModelAttribute("dishId") Long dishId,
+    public String delete(@PathVariable("dishId") Long dishId,
+                         @PathVariable Long dishIngredientId,
                          RedirectAttributes redirectAttributes) {
         dishIngredientService.delete(dishIngredientId);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)
                 .alertMessage(AlertMessage.DELETED)
                 .build());
-        return "redirect:/dish-ingredients/" + dishId;
+        return "redirect:/dishes/%d/dish-ingredients".formatted(dishId);
     }
 }
