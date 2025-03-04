@@ -27,6 +27,15 @@ public interface UserService {
     UserDTO get(Long id);
 
     /**
+     * Получает из слоя Repository объект {@link UserEntity} по username и
+     * конвертирует его в объект {@link UserDTO}.
+     *
+     * @param username имя пользователя
+     * @return полученная запись или null в случае, если запись не найдена
+     */
+    UserDTO getByUsername(String username);
+
+    /**
      * Получает из слоя Repository список всех объектов {@link UserEntity} в БД,
      * конвертирует их в объекты {@link UserDTO}.
      *
@@ -47,7 +56,30 @@ public interface UserService {
      * С помощью слоя Repository инициирует удаление объекта из БД
      *
      * @param id идентификатор записи для удаления
-     *           или не произошло удаление
      */
     void delete(Long id);
+
+    /**
+     * С помощью слоя Repository инициирует удаление объекта из БД
+     * по имени пользователя
+     *
+     * @param username имя пользователя
+     */
+    void deleteByUsername(String username);
+
+    /**
+     * Редактирует параметры пользователя.
+     *
+     * @param dto {@link UserDTO} с новыми параметрами
+     * @return обновленный {@link UserDTO}
+     */
+    UserDTO editDetails(UserDTO dto);
+
+    /**
+     * Меняет пароль пользователя.
+     *
+     * @param dto {@link UserDTO} с новым паролем
+     * @return обновленный {@link UserDTO}
+     */
+    UserDTO changePassword(UserDTO dto);
 }

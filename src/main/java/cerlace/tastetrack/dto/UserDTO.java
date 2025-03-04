@@ -20,7 +20,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 public class UserDTO extends BaseDTO {
     private String username;
-    private String encodedPassword;
+    private String oldPassword;
     private String password;
     private String passwordConfirm;
     private String fullName;

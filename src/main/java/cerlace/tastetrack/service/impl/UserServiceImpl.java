@@ -19,13 +19,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-@Service
 @RequiredArgsConstructor
+@Service
+@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     public static final String PASSWORD_CONFIRM_EXCEPTION_MESSAGE = "Password and confirm password don't match!";
@@ -37,19 +39,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDTO saveOrUpdate(UserDTO dto) {
-        if (!Objects.equals(dto.getPassword(), dto.getPasswordConfirm())) {
-            throw new PasswordConfirmException(PASSWORD_CONFIRM_EXCEPTION_MESSAGE);
-        }
         UserEntity entity = mapper.toEntity(dto);
         if (entity.getId() == null) {
             entity.setRoles(Collections.singleton(roleRepository.findByName("ROLE_USER")));
+            entity.setEncodedPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         } else {
             UserEntity entityFromDb = userRepository.findById(entity.getId()).get();
             entity.setRoles(entityFromDb.getRoles());
             entity.setEncodedPassword(entityFromDb.getEncodedPassword());
-        }
-        if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
-            entity.setEncodedPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         }
         return mapper.toDTO(userRepository.save(entity));
     }
@@ -59,6 +56,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findById(id)
                 .map(mapper::toDTO)
                 .orElse(null);
+    }
+
+    @Override
+    public UserDTO getByUsername(String username) {
+        return mapper.toDTO(userRepository.findByUsername(username));
     }
 
     @Override
@@ -80,6 +82,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteByUsername(String username) {
+        userRepository.deleteByUsername(username);
+    }
+
+    @Override
+    public UserDTO editDetails(UserDTO dto) {
+        dto.setId(userRepository.findByUsername(dto.getUsername()).getId());
+        return saveOrUpdate(dto);
+    }
+
+    @Override
+    public UserDTO changePassword(UserDTO dto) {
+        UserEntity entity = userRepository.findByUsername(dto.getUsername());
+        if (!Objects.equals(dto.getPassword(), dto.getPasswordConfirm()) ||
+                !bCryptPasswordEncoder.matches(dto.getOldPassword(), entity.getEncodedPassword())) {
+            throw new PasswordConfirmException(PASSWORD_CONFIRM_EXCEPTION_MESSAGE);
+        }
+        entity.setEncodedPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
+        return mapper.toDTO(userRepository.save(entity));
     }
 
     @Override

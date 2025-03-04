@@ -13,4 +13,11 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
      * @return объект {@link UserEntity}
      */
     UserEntity findByUsername(String username);
+
+    /**
+     * Удаляет {@link UserEntity} по имени пользователя
+     *
+     * @param username имя пользователя.
+     */
+    void deleteByUsername(String username);
 }
