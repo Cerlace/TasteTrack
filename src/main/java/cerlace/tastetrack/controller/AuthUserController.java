@@ -8,7 +8,6 @@ import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
 import cerlace.tastetrack.enums.Gender;
 import cerlace.tastetrack.enums.Goal;
-import cerlace.tastetrack.mapper.UserMapper;
 import cerlace.tastetrack.service.MealService;
 import cerlace.tastetrack.service.UserService;
 import jakarta.servlet.ServletException;
@@ -143,6 +142,13 @@ public class AuthUserController {
         return "redirect:/dishes";
     }
 
+    /**
+     * Получает дневник питания
+     * @param userDetails  объект {@link UserDetails}, содержащий информацию о текущем пользователе.
+     * @param inputDate дата
+     * @param model объект {@link Model} для передачи данных в представление.
+     * @return имя представления.
+     */
     @GetMapping("/diary")
     public String getUserDietDiary(@AuthenticationPrincipal UserDetails userDetails,
                                    @RequestParam(required = false)
