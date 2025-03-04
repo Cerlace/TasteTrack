@@ -41,6 +41,9 @@
                   th:text="#{label.admin} + ': ' + ${ #authentication.name }"></h2>
             <h2 sec:authorize="hasRole('USER') && !hasRole('ADMIN')"
                   th:text="#{label.user} + ': ' + ${#authentication.name}"></h2>
+            <form name="profile" method="get" th:action="@{/profile}">
+                <button type="submit" class="small-action-button" th:text="#{button.profile}"></button>
+            </form>
             <form name="logout" method="get" th:action="@{/logout}">
                 <button type="submit" class="small-action-button delete" th:text="#{button.logout}"></button>
             </form>

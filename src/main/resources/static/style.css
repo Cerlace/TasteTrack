@@ -35,6 +35,11 @@ body {
     padding: 0 25%;
 }
 
+.column-container-left {
+    display: flex;
+    flex-direction: column;
+}
+
 .line-container {
     display: flex;
     justify-content: space-between;
@@ -72,7 +77,7 @@ button:hover {
 }
 
 button:disabled,
-button[disabled]{
+button[disabled] {
     background-color: #dfdfdf;
     color: #666;
     cursor: default;
@@ -111,19 +116,23 @@ button[disabled]{
     min-height: 40px;
 }
 
-.small-action-button.update {
+.small-action-button.update,
+.medium-action-button.update {
     background-color: #009688;
 }
 
-.small-action-button.update:hover {
+.small-action-button.update:hover,
+.medium-action-button.update:hover {
     background-color: #00796B;
 }
 
-.small-action-button.delete {
+.small-action-button.delete,
+.medium-action-button.delete {
     background-color: #d32f2f;
 }
 
-.small-action-button.delete:hover {
+.small-action-button.delete:hover,
+.medium-action-button.delete:hover {
     background-color: #b71c1c;
 }
 
@@ -214,10 +223,12 @@ label {
     font-size: 16px; /* Размер шрифта */
     font-weight: normal;
 }
+
 .label-radio {
     display: flex;
     align-items: flex-start;
 }
+
 .input-group {
     margin-bottom: 5px; /* Отступ между группами полей */
     color: #4CAF50; /* Зеленый цвет текста меток */
@@ -476,6 +487,7 @@ option {
     min-height: 60px;
     padding: 10px 25px;
 }
+
 .filter-actions-button.delete {
     background: #d32f2f;
 }

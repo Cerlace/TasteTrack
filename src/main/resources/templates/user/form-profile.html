@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${user.id == null} ? #{table.user.save} : #{table.user.update}"></title>
+    <title th:text="${user.id == null} ? #{button.change-password} : #{button.edit}"></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" media='screen'
           th:href="@{/style.css}">
@@ -9,28 +9,17 @@
 <div th:replace="~{fragments :: sidebar}"></div>
 <div th:replace="~{fragments :: alert-block(${alert})}"></div>
 <div class="content">
-    <form name="form"
+    <form th:if="${user.id != null}"
+          name="edit-form"
           method="post"
           th:object="${user}"
-          th:action="@{/users/save}">
-        <h2 th:text="${user.id == null} ? #{table.user.save} : #{table.user.update}"></h2>
-        <input id="id-input"
-               type="hidden"
-               th:field="*{id}"
-               required>
+          th:action="@{/profile/edit}">
+        <h2 th:text="#{button.edit}"></h2>
         <div class="input-group">
             <label for="username-input" th:text="#{table.user.column.username} + ':' "></label>
             <input id="username-input"
                    type="text"
                    th:field="*{username}"
-                   required>
-        </div>
-        <div th:if="${user.id == null}"
-             class="input-group">
-            <label for="password-input" th:text="#{table.user.column.password} + ':' "></label>
-            <input id="password-input"
-                   type="password"
-                   th:field="*{password}"
                    required>
         </div>
         <div class="input-group">
@@ -113,12 +102,43 @@
                 th:text="#{button.send}">
         </button>
     </form>
-    <form name="list-users"
-          method="get"
-          th:action="@{/users}">
+    <form th:if="${user.id == null}"
+          name="change-password-form"
+          method="post"
+          th:object="${user}"
+          th:action="@{/profile/change-password}">
+        <div class="input-group">
+            <label for="old-password-input" th:text="#{table.user.column.old-password} + ':' "></label>
+            <input id="old-password-input"
+                   type="password"
+                   th:field="*{oldPassword}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="password-input" th:text="#{table.user.column.password} + ':' "></label>
+            <input id="password-input"
+                   type="password"
+                   th:field="*{password}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="password-confirm-input" th:text="#{table.user.column.password-confirm} + ':' "></label>
+            <input id="password-confirm-input"
+                   type="password"
+                   th:field="*{passwordConfirm}"
+                   required>
+        </div>
         <button type="submit"
                 class="medium-action-button"
-                th:text="#{table.user.return}">
+                th:text="#{button.send}">
+        </button>
+    </form>
+    <form name="profile"
+          method="get"
+          th:action="@{/profile}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{button.return}">
         </button>
     </form>
 </div>
