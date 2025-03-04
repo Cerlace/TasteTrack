@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
+
+    <include file="/db_migrations/v-0.4/01-03-2025-01-user-change.xml"/>
+    <include file="/db_migrations/v-0.4/01-03-2025-02-role-table-setup.xml"/>
+    <include file="/db_migrations/v-0.4/01-03-2025-03-user-role-join-table-setup.xml"/>
+    <include file="/db_migrations/v-0.4/01-03-2025-04-role-insert.xml"/>
+</databaseChangeLog>

@@ -1,0 +1,128 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{table.ingredient.list}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <div class="line-container">
+        <h1 th:text="#{table.ingredient.list} + ':' "></h1>
+        <form name="save-ingredient"
+              method="get"
+              th:action="@{/ingredients/create}">
+            <button type="submit"
+                    class="medium-action-button"
+                    th:text="#{table.ingredient.save}">
+            </button>
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th class="sortable-header">
+                <a th:href="@{/ingredients(page=0,
+                              size=${pageSettings.size},
+                              sortField='name',
+                              sortDirection=${pageSettings.sortField == 'name' ?
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
+                    <span th:text="#{table.ingredient.column.name} + ' ' "></span>
+                    <span
+                            th:if="${pageSettings.sortField == 'name'}"
+                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
+                    </span>
+                </a>
+            </th>
+            <th class="sortable-header">
+                <a th:href="@{/ingredients(page=0,
+                              size=${pageSettings.size},
+                              sortField='productType',
+                              sortDirection=${pageSettings.sortField == 'productType' ?
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'})}">
+                    <span th:text="#{table.ingredient.column.product-type}  + ' ' "></span>
+                    <span
+                            th:if="${pageSettings.sortField == 'productType'}"
+                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
+                    </span>
+                </a>
+            </th>
+            <th th:text="#{label.action}" colspan="2"></th>
+        </tr>
+        <tr th:each="ingredient : ${ingredientList}">
+            <td th:text="${ingredient.name}"></td>
+            <td th:text="#{${ingredient.productType.messageKey}}"></td>
+            <td>
+                <form name="update"
+                      method="get"
+                      th:action="@{/ingredients/edit/{ingredientId}(ingredientId=${ingredient.id})}">
+                    <button type="submit"
+                            class="small-action-button update"
+                            th:text="#{button.update}">
+                    </button>
+                </form>
+            </td>
+            <td>
+                <form name="delete"
+                      method="post"
+                      th:action="@{/ingredients/delete/{ingredientId}(ingredientId=${ingredient.id})}">
+                    <button type="submit"
+                            class="small-action-button delete"
+                            th:onclick="'return confirm(\'' + #{alert.confirm.delete} + '\');'"
+                            th:text="#{button.delete}">
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <div class="pagination">
+        <a th:if="${pageSettings.page > 0}"
+           th:href="@{/ingredients(page=${pageSettings.page - 1},
+                       size=${pageSettings.size},
+                       sortField=${pageSettings.sortField},
+                       sortDirection=${pageSettings.sortDirection})}"
+           class="pagination-button"
+           th:text="#{button.previous}"></a>
+
+        <span th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
+        <a th:if="${page != pageSettings.page}"
+           th:href="@{/ingredients(page=${page},
+                           size=${pageSettings.size},
+                           sortField=${pageSettings.sortField},
+                           sortDirection=${pageSettings.sortDirection})}"
+           class="pagination-button"
+           th:text="${page + 1}"></a>
+        <span th:unless="${page != pageSettings.page}"
+              class="pagination-current"
+              th:text="${page + 1}"></span>
+        </span>
+        <a th:if="${pageSettings.page < totalPages - 1}"
+           th:href="@{/ingredients(page=${pageSettings.page + 1},
+                       size=${pageSettings.size},
+                       sortField=${pageSettings.sortField},
+                       sortDirection=${pageSettings.sortDirection})}"
+           class="pagination-button"
+           th:text="#{button.next}"></a>
+
+        <form class="pagination-size-form"
+              th:action="@{/ingredients}"
+              method="get">
+            <input type="hidden" name="page" th:value="0">
+            <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
+            <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
+            <input type="number"
+                   name="size"
+                   th:value="${pageSettings.size}"
+                   min="1"
+                   max="100"
+                   class="pagination-size-input"
+                   th:title="#{pagination.size.title}">
+            <button type="submit"
+                    class="pagination-size-button"
+                    th:text="#{button.send}"></button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

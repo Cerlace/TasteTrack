@@ -5,7 +5,7 @@ import cerlace.tastetrack.entity.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring", uses = RoleMapper.class)
 public interface UserMapper extends IMapper<UserDTO, UserEntity> {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 }

@@ -1,6 +1,5 @@
 package cerlace.tastetrack.dto;
 
-import cerlace.tastetrack.utils.interfaces.Identifiable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +9,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @Data
-public abstract class BaseDTO implements Identifiable {
+public abstract class BaseDTO {
     private Long id;
 }

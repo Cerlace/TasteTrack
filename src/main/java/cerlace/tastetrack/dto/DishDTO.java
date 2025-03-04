@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
@@ -20,4 +22,5 @@ public class DishDTO extends BaseDTO {
     private Float fats;
     private Float carbohydrates;
     private String recipe;
+    private Set<DishIngredientDTO> dishIngredients;
 }

@@ -1,0 +1,528 @@
+body {
+    background-color: #ffffff; /* Белый фон */
+    font-family: Arial, sans-serif; /* Шрифт */
+    margin: 0;
+    padding: 20px;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    overflow-x: hidden;
+    background-color: #f4f4f4; /* Светлый фон для боковой панели */
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Тень для боковой панели */
+}
+
+.content {
+    margin-left: 180px;
+    padding-left: 20px; /* Отступы внутри основного контента */
+}
+
+.column-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 0 25%;
+}
+
+.column-container-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.line-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.lang-switcher {
+    display: flex;
+    border-radius: 5px; /* Закругленные углы */
+    width: 160px;
+    height: 40px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+h1, h2 {
+    color: #4CAF50; /* Зеленый цвет заголовков */
+}
+
+button {
+    background-color: #4CAF50; /* Зеленая кнопка */
+    color: white; /* Белый текст на кнопках */
+    border: none;
+    padding: 10px 15px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    border-radius: 5px; /* Закругленные углы */
+    transition: background-color 0.3s, color 0.3s; /* Плавный переход */
+}
+
+button:hover {
+    background-color: #3d8f3f; /* Более темный зеленый при наведении */
+}
+
+button:disabled,
+button[disabled] {
+    background-color: #dfdfdf;
+    color: #666;
+    cursor: default;
+}
+
+/* Стили для кнопок языка */
+.lang-button {
+    font-size: 0.8em;
+    width: 50%;
+    height: 40px;
+    border-radius: 0;
+}
+
+/* Стили для кнопок меню */
+.menu-button {
+    font-size: 1em; /* Увеличенный размер шрифта */
+    margin: 10px 0; /* Отступы между кнопками */
+    width: 100%;
+    min-height: 60px;
+}
+
+/* Стили для кнопок действий */
+.medium-action-button {
+    font-size: 1em; /* Размер шрифта для кнопок действий */
+    margin: 10px; /* Отступы между кнопками действий */
+    width: 150px;
+    min-height: 60px;
+}
+
+/* Стили для кнопок действий */
+.small-action-button {
+    font-size: 0.8em; /* Размер шрифта для кнопок действий */
+    margin: 5px; /* Отступы между кнопками действий */
+    min-width: 80px;
+    max-width: 130px;
+    min-height: 40px;
+}
+
+.small-action-button.update,
+.medium-action-button.update {
+    background-color: #009688;
+}
+
+.small-action-button.update:hover,
+.medium-action-button.update:hover {
+    background-color: #00796B;
+}
+
+.small-action-button.delete,
+.medium-action-button.delete {
+    background-color: #d32f2f;
+}
+
+.small-action-button.delete:hover,
+.medium-action-button.delete:hover {
+    background-color: #b71c1c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Убирает двойные границы */
+    text-align: center;
+}
+
+th {
+    padding: 10px;
+    border: 1px solid #ddd; /* Согласуется с границами ячеек */
+    background-color: #4CAF50; /* Основной зеленый цвет как у кнопок и заголовков */
+    color: white; /* Белый текст для контраста */
+    font-weight: bold; /* Выделение текста */
+    text-align: center; /* Центрирование как в td */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень для разделения при прокрутке */
+}
+
+td {
+    padding: 10px;
+    border: 1px solid #ddd; /* Светло-серая граница */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Светло-серый фон для четных строк */
+}
+
+form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex; /* Используем Flexbox для формы */
+    flex-direction: column; /* Вертикальное направление для элементов формы */
+    align-items: center;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="date"],
+textarea {
+    border: 1px solid #4CAF50; /* Зеленая рамка */
+    border-radius: 5px; /* Закругленные углы */
+    padding: 10px; /* Отступы внутри поля */
+    font-size: 16px; /* Размер шрифта */
+    width: 300px; /* Фиксированная ширина */
+    height: 40px; /* Фиксированная высота */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+    margin-bottom: 10px; /* Отступ между полями */
+    color: #44583E; /* Цвет текста внутри поля ввода */
+}
+
+textarea {
+    border: 1px solid #4CAF50; /* Зеленая рамка */
+    border-radius: 5px; /* Закругленные углы */
+    padding: 10px; /* Отступы внутри поля */
+    font-size: 16px; /* Размер шрифта */
+    width: 800px; /* Фиксированная ширина */
+    height: 200px; /* Фиксированная высота */
+    resize: none; /* Запрет на изменение размера пользователем */
+    overflow-y: auto; /* Вертикальная прокрутка при переполнении */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+    color: #44583E; /* Цвет текста внутри поля ввода */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+    border-color: #45a049; /* Более темная рамка при фокусе */
+    outline: none; /* Убираем стандартное выделение */
+}
+
+input[type="radio"] {
+    margin-right: 5px; /* Отступ справа от радио-кнопки */
+}
+
+/* Для меток (label) рядом с радио-кнопками */
+label {
+    display: block;
+    color: #4CAF50; /* Зеленый цвет текста меток */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: normal;
+}
+
+.label-radio {
+    display: flex;
+    align-items: flex-start;
+}
+
+.input-group {
+    margin-bottom: 5px; /* Отступ между группами полей */
+    color: #4CAF50; /* Зеленый цвет текста меток */
+    font-size: 16px; /* Размер шрифта */
+    font-weight: bold;
+}
+
+/* Стили для кнопок увеличения/уменьшения значений в input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-inner-spin-button {
+    cursor: pointer; /* Курсор при наведении */
+}
+
+select {
+    border: 1px solid #4CAF50; /* Зеленая рамка */
+    border-radius: 5px; /* Закругленные углы */
+    padding: 10px; /* Отступы внутри поля */
+    font-size: 16px; /* Размер шрифта */
+    width: 300px; /* Фиксированная ширина */
+    height: 40px; /* Фиксированная высота */
+    box-sizing: border-box; /* Учитываем отступы и границы в ширине */
+    margin-bottom: 10px; /* Отступ между полями */
+    color: #44583E; /* Цвет текста внутри поля ввода */
+    appearance: none; /* Убираем стандартный стиль браузера для select */
+    background-color: white; /* Фоновый цвет */
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10"%3E%3Cpolygon points="0,0 10,0 5,5" fill="%234CAF50"/%3E%3C/svg%3E'); /* Стрелка вниз */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Позиция стрелки */
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: #45a049; /* Более темная рамка при фокусе */
+    outline: none; /* Убираем стандартное выделение */
+}
+
+option {
+    padding: 10px; /* Отступы для опций (не всегда работает во всех браузерах) */
+    font-family: Arial, sans-serif; /* Шрифт для опций */
+    font-size: 16px; /* Размер шрифта для опций */
+}
+
+.alert_block {
+    z-index: 2;
+    position: fixed;
+    right: 0;
+    overflow-x: hidden;
+    width: 30%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.alert {
+    padding: 20px;
+    box-shadow: 15px 5px 10px #000000;
+    color: white;
+    opacity: 1;
+    transition: opacity 0.6s;
+    margin-bottom: 15px;
+    pointer-events: all;
+}
+
+.alert.success {
+    background-color: #3a773c;
+}
+
+.alert.info {
+    background-color: #316a99;
+}
+
+.alert.warning {
+    background-color: #a07534;
+}
+
+.alert.error {
+    background-color: #a32d24;
+}
+
+.close-button {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-button:hover {
+    color: black;
+}
+
+/* Стили для сортировки */
+.sortable-header a {
+    color: white; /* Белый текст для контраста */
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    align-items: center;
+}
+
+.sortable-header a:hover {
+    color: lightgray;
+    text-decoration: underline;
+}
+
+/* Стили пагинации */
+.pagination {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+.pagination-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.pagination-button:hover {
+    background-color: #3d8f3f;
+    text-decoration: none;
+}
+
+.pagination-current {
+    background-color: #3d8f3f;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+/* Стили для формы ввода размера страницы */
+.pagination-size-form {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-left: 15px;
+}
+
+.pagination-size-input {
+    border: 1px solid #4CAF50 !important;
+    border-radius: 4px !important;
+    padding: 6px 12px !important;
+    width: 70px !important;
+    height: 30px !important;
+    color: #44583E !important;
+    text-align: center !important;
+    margin-bottom: 0 !important;
+}
+
+.pagination-size-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+}
+
+.pagination-size-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.pagination-size-button:hover {
+    background-color: #3d8f3f;
+}
+
+/* Стили формы фильтрации */
+.filter-form {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 25px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 220px;
+}
+
+.filter-group label {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+/* Множественный выбор */
+.filter-group select[multiple] {
+    height: 120px;
+    padding: 8px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    background: white;
+    background-image: none; /* Убираем стрелку для множественного выбора */
+}
+
+.filter-group select[multiple] option {
+    padding: 8px;
+    margin: 2px 0;
+    border-radius: 3px;
+    transition: background 0.3s;
+}
+
+.filter-group select[multiple] option:hover {
+    background: #f0faf0;
+}
+
+/* Группа диапазона */
+.range-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.range-group input {
+    width: 100px;
+    padding: 8px 12px;
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.range-group span {
+    color: #666;
+    font-weight: bold;
+}
+
+/* Кнопки фильтров */
+.filter-actions {
+    display: flex;
+    gap: 12px;
+    margin-left: auto;
+}
+
+.filter-actions-button {
+    font-size: 1em;
+    margin: 10px;
+    width: 150px;
+    min-height: 60px;
+    padding: 10px 25px;
+}
+
+.filter-actions-button.delete {
+    background: #d32f2f;
+}
+
+.filter-actions-button.delete:hover {
+    background: #b71c1c;
+}
+
+.filter-actions a {
+    background: #d32f2f;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.filter-actions a:hover {
+    background: #b71c1c;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        min-width: auto;
+    }
+
+    .filter-actions {
+        margin-left: 0;
+        justify-content: flex-end;
+    }
+}

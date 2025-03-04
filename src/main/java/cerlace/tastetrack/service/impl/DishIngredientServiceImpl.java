@@ -1,25 +1,48 @@
 package cerlace.tastetrack.service.impl;
 
-import cerlace.tastetrack.dao.DishIngredientDAO;
-import cerlace.tastetrack.dao.impl.DishIngredientDAOImpl;
 import cerlace.tastetrack.dto.DishIngredientDTO;
+import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.DishIngredientEntity;
 import cerlace.tastetrack.mapper.DishIngredientMapper;
+import cerlace.tastetrack.repository.DishIngredientRepository;
 import cerlace.tastetrack.service.DishIngredientService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class DishIngredientServiceImpl
-        extends AbstractService<DishIngredientDTO, DishIngredientEntity, DishIngredientDAO>
-        implements DishIngredientService {
+@Service
+@RequiredArgsConstructor
+public class DishIngredientServiceImpl implements DishIngredientService {
 
-    public DishIngredientServiceImpl() {
-        super(new DishIngredientDAOImpl(), DishIngredientMapper.INSTANCE);
+    private final DishIngredientRepository repository;
+    private final DishIngredientMapper mapper;
+
+    @Override
+    public DishIngredientDTO saveOrUpdate(DishIngredientDTO dto) {
+        DishIngredientEntity entity = mapper.toEntity(dto);
+        return mapper.toDTO(repository.save(entity));
     }
 
     @Override
-    public List<DishIngredientDTO> getAllIngredientsOfDish(Long dishId) {
-        return getMapper().toDTOList(getDao().getAllIngredientOfDish(dishId));
+    public DishIngredientDTO get(Long id) {
+        return repository.findById(id)
+                .map(mapper::toDTO)
+                .orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public List<DishIngredientDTO> getIngredientsByDish(Long dishId) {
+        return mapper.toDTOList(repository.findByDishId(dishId));
     }
 }
 

@@ -8,8 +8,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,12 +19,17 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class UserDTO extends BaseDTO {
+    private String username;
+    private String oldPassword;
+    private String password;
+    private String passwordConfirm;
     private String fullName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
     private Gender gender;
-    private String email;
     private Float height;
     private Float weight;
     private Activity activity;
     private Goal goal;
+    private Set<RoleDTO> roles;
 }

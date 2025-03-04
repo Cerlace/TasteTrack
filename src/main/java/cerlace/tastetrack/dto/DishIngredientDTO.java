@@ -2,6 +2,7 @@ package cerlace.tastetrack.dto;
 
 import cerlace.tastetrack.enums.MeasureUnit;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,10 @@ import lombok.experimental.SuperBuilder;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class DishIngredientDTO extends BaseDTO {
-    private DishDTO dish;
-    private IngredientDTO ingredient;
+    @Builder.Default
+    private DishDTO dish = new DishDTO();
+    @Builder.Default
+    private IngredientDTO ingredient = new IngredientDTO();
     private Float amount;
     private MeasureUnit measureUnit;
 }

@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${meal.id == null} ? #{table.meal.save} : #{table.meal.update}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <form name="update"
+          method="post"
+          th:object="${meal}"
+          th:action="@{/users/{userId}/meals/save(userId=${userId})}">
+        <h2 th:text="${meal.id == null} ? #{table.meal.save} : #{table.meal.update}"></h2>
+        <input type="hidden"
+               th:field="*{id}"
+               required>
+        <input type="hidden"
+               th:name="user.id"
+               th:value="${userId}"
+               required>
+        <div class="input-group">
+            <label for="date-input" th:text="#{table.meal.column.date} + ':' "></label>
+            <input id="date-input"
+                   type="date"
+                   th:field="*{date}"
+                   required>
+        </div>
+        <div class="input-group">
+            <span th:text="#{table.meal.column.meal-time} + ':' "></span>
+            <div class="label-radio"
+                 th:each="mealTimeValue : ${mealTimes}">
+                <input type="radio"
+                       th:id="${mealTimeValue}"
+                       th:field="*{mealTime}"
+                       th:value="${mealTimeValue}"
+                       required>
+                <label th:text="#{${mealTimeValue.messageKey}}"
+                       th:for="${mealTimeValue}">
+                </label>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="dish-select" th:text="#{table.dish.column.name} + ':' "></label>
+            <select id="dish-select"
+                    th:field="*{dish.id}"
+                    required>
+                <option th:each="dish : ${dishesList}"
+                        th:value="${dish.id}"
+                        th:text="${dish.name}">
+                </option>
+            </select>
+        </div>
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{button.send}">
+        </button>
+    </form>
+    <form name="list-meals"
+          method="get"
+          th:action="@{/users/{userId}/meals(userId=${userId})}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{table.meal.return}">
+        </button>
+    </form>
+</div>
+</body>
+</html>

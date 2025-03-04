@@ -19,16 +19,8 @@
      <module name="TreeWalker">
          <property name="fileExtensions" value="java"/>
 
-         <!-- Проверяет, что нет операторов импорта, использующих*нотацию -->
-         <module name="AvoidStarImport">
-             <property name="excludes" value="java.io,java.net,java.lang.Math"/>
-         </module>
-
          <!-- Проверка на избыточные импорты -->
          <module name="RedundantImport"/>
-
-         <!-- Проверка на статические импорты -->
-         <module name="AvoidStaticImport"/>
 
          <!-- Проверка на неиспользуемые импорты -->
          <module name="UnusedImports">

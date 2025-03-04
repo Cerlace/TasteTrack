@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.30.xsd">
+
+    <changeSet id="01-03-2025-user-role-table-create-1" author="Daniil">
+        <createTable tableName="user_role">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="01-03-2025-user-role-add-primary-key-2" author="Daniil">
+        <addPrimaryKey columnNames="user_id, role_id"
+                       tableName="user_role"
+                       constraintName="PK_user_role"/>
+    </changeSet>
+
+    <changeSet id="01-03-2025-user-role-add-fk-user-id-3" author="Daniil">
+        <addForeignKeyConstraint
+                baseTableName="user_role"
+                baseColumnNames="user_id"
+                referencedTableName="user"
+                referencedColumnNames="id"
+                constraintName="FK_user_role_user"
+                onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="01-03-2025-user-role-add-fk-role-id-4" author="Daniil">
+        <addForeignKeyConstraint
+                baseTableName="user_role"
+                baseColumnNames="role_id"
+                referencedTableName="role"
+                referencedColumnNames="id"
+                constraintName="FK_user_role_role"
+                onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

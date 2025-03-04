@@ -1,0 +1,59 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{label.profile} + ': ' + ${user.username}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <div class="column-container-left">
+        <div class="line-container">
+            <h1 th:text="#{label.profile}"></h1>
+            <form name="edit"
+                  method="get"
+                  th:action="@{/profile/edit}">
+                <button type="submit"
+                        class="medium-action-button update"
+                        th:text="#{button.edit}">
+                </button>
+            </form>
+        </div>
+        <div class="line-container">
+            <div>
+                <h2 th:text="#{table.user.column.username} + ': ' + ${user.username}"></h2>
+                <h2 th:text="#{table.user.column.full-name} + ': ' + ${user.fullName}"></h2>
+            </div>
+            <form name="change-password"
+                  method="get"
+                  th:action="@{/profile/change-password}">
+                <button type="submit"
+                        class="medium-action-button update"
+                        th:text="#{button.change-password}">
+                </button>
+            </form>
+        </div>
+        <h2 th:text="#{table.user.column.birth-date} + ': ' + ${user.birthDate}"></h2>
+        <h2 th:text="#{table.user.column.gender} + ': ' + #{${user.gender.messageKey}}"></h2>
+        <h2 th:text="#{table.user.column.height} + ': ' + ${user.height} + ' ' + #{table.user.column.height.unit}"></h2>
+        <h2 th:text="#{table.user.column.weight} + ': ' + ${user.weight} + ' ' + #{table.user.column.weight.unit}"></h2>
+        <h2 th:text="#{table.user.column.activity} + ': ' + #{${user.activity.messageKey}}"></h2>
+        <div class="line-container">
+            <h2 th:text="#{table.user.column.goal} + ': ' + #{${user.goal.messageKey}}"></h2>
+            <form name="remove"
+                  method="post"
+                  th:action="@{/profile/remove}">
+                <button type="submit"
+                        class="medium-action-button delete"
+                        th:onclick="'return confirm(\'' + #{alert.confirm.delete-account} + '\');'"
+                        th:text="#{button.remove}">
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
