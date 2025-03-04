@@ -62,6 +62,15 @@
                     th:text="#{table.dish.label}">
             </button>
         </form>
+        <form sec:authorize="hasRole('USER')"
+              name="diet-diary"
+              method="get"
+              th:action="@{/diary}">
+            <button type="submit"
+                    class="menu-button"
+                    th:text="#{label.diary}">
+            </button>
+        </form>
         <form sec:authorize="hasRole('ADMIN')"
               name="list-ingredients"
               method="get"

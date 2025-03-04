@@ -1,11 +1,13 @@
 package cerlace.tastetrack.service;
 
+import cerlace.tastetrack.dto.DietDiaryDTO;
 import cerlace.tastetrack.dto.DishIngredientDTO;
 import cerlace.tastetrack.dto.MealDTO;
 import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.MealEntity;
 import org.springframework.data.domain.Page;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface MealService {
@@ -51,4 +53,14 @@ public interface MealService {
      * @return страница объектов {@link DishIngredientDTO}
      */
     Page<MealDTO> getPageOfMealsByUser(PageSettings pageSettings, Long userId);
+
+    /**
+     * Получает объект дневника питания, который содержит приемы пищи
+     * в определенном промежутки и данные о калорийности.
+     *
+     * @param username  имя пользователя.
+     * @param date дата из промежутка
+     * @return дневник питания пользователя.
+     */
+    DietDiaryDTO getDietDiary(String username, LocalDate date);
 }

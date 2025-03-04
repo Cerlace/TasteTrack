@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{label.diary}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <h1 th:text="#{label.diary} + ':' "></h1>
+    <div>
+        <a th:href="@{/diary(startDate=${previousWeek})}">← Предыдущая неделя</a>
+        <span th:text="${#temporals.format(startDate, 'dd.MM.yyyy')} + ' - ' +
+                        ${#temporals.format(startDate.plusDays(6), 'dd.MM.yyyy')}"></span>
+        <a th:href="@{/diary(startDate=${nextWeek})}">Следующая неделя →</a>
+    </div>
+    <div class="line-container">
+        <div th:each="day : ${diary.weekDates}">
+            <h3 th:text="${#temporals.dayOfWeek(day)} + ', ' + ${#temporals.format(day, 'dd MMMM')}"></h3>
+            <div>
+                Калории:
+                <span th:text="${(diary.caloriesByDate?.get(day) ?: 0) + ' / ' + diary.dailyLimit}"></span>
+            </div>
+
+            <div th:each="mealTime : ${T(cerlace.tastetrack.enums.MealTime).values()}">
+                <h4 th:text="#{${mealTime.messageKey}}"></h4>
+                <ul th:if="${diary.groupedMeals.get(day)?.get(mealTime)}">
+                    <a th:each="meal : ${diary.groupedMeals.get(day).get(mealTime)}"
+                       th:href="@{/dishes/{dishId}(dishId=${meal.dish.id})}">
+                        <li th:text="${meal.dish.name}"></li>
+                    </a>
+                </ul>
+                <p th:unless="${diary.groupedMeals.get(day)?.get(mealTime)}">Нет записей</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

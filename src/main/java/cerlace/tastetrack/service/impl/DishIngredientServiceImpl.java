@@ -1,16 +1,11 @@
 package cerlace.tastetrack.service.impl;
 
 import cerlace.tastetrack.dto.DishIngredientDTO;
-import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.DishIngredientEntity;
 import cerlace.tastetrack.mapper.DishIngredientMapper;
 import cerlace.tastetrack.repository.DishIngredientRepository;
 import cerlace.tastetrack.service.DishIngredientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

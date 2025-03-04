@@ -1,9 +1,7 @@
 package cerlace.tastetrack.service;
 
 import cerlace.tastetrack.dto.DishIngredientDTO;
-import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.DishIngredientEntity;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 

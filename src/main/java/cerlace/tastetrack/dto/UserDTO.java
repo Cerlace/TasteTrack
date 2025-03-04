@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -25,7 +25,7 @@ public class UserDTO extends BaseDTO {
     private String passwordConfirm;
     private String fullName;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date birthDate;
+    private LocalDate birthDate;
     private Gender gender;
     private Float height;
     private Float weight;
