@@ -63,8 +63,8 @@ public class DishSpecifications {
                             .get(IngredientEntity_.ID).in(ingredientIds))
                     .groupBy(diRoot.get(DishIngredientEntity_.DISH))
                     .having(cb.equal(cb.countDistinct(
-                            diRoot.get(DishIngredientEntity_.INGREDIENT).get(IngredientEntity_.ID))
-                            , ingredientIds.size()));
+                                    diRoot.get(DishIngredientEntity_.INGREDIENT).get(IngredientEntity_.ID)),
+                            ingredientIds.size()));
 
             return root.get(DishEntity_.ID).in(subquery);
         };
