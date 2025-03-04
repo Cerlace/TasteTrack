@@ -64,8 +64,9 @@ public class AuthUserController {
     /**
      * Обрабатывает отправку формы редактирования профиля пользователя.
      *
-     * @param userDetails объект {@link UserDetails}, содержащий информацию о текущем пользователе.
-     * @param user        объект {@link UserDTO}, содержащий обновленные данные пользователя.
+     * @param userDetails        объект {@link UserDetails}, содержащий информацию о текущем пользователе.
+     * @param user               объект {@link UserDTO}, содержащий обновленные данные пользователя.
+     * @param redirectAttributes объект {@link RedirectAttributes} для передачи сообщений через перенаправление.
      * @return перенаправление на страницу профиля.
      */
     @PostMapping("/profile/edit")
@@ -96,8 +97,9 @@ public class AuthUserController {
     /**
      * Обрабатывает отправку формы смены пароля пользователя.
      *
-     * @param userDetails объект {@link UserDetails}, содержащий информацию о текущем пользователе.
-     * @param user        объект {@link UserDTO}, содержащий данные для смены пароля.
+     * @param userDetails        объект {@link UserDetails}, содержащий информацию о текущем пользователе.
+     * @param user               объект {@link UserDTO}, содержащий данные для смены пароля.
+     * @param redirectAttributes объект {@link RedirectAttributes} для передачи сообщений через перенаправление.
      * @return перенаправление на страницу профиля.
      */
     @PostMapping("/profile/change-password")
