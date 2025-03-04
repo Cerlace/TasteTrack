@@ -27,8 +27,8 @@ import jakarta.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,7 +50,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     private String fullName;
     @Column(name = "birth_date", nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
     @Column(nullable = false)
     @Enumerated
     private Gender gender;

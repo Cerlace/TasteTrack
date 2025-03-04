@@ -17,7 +17,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import java.util.Date;
+
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,7 +31,7 @@ import java.util.Date;
 public class MealEntity extends BaseEntity {
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private LocalDate date;
     @Column(name = "meal_time", nullable = false)
     @Enumerated
     private MealTime mealTime;
