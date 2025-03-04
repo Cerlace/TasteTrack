@@ -41,14 +41,5 @@ public interface DishIngredientService {
      * @return список ингредиентов в формате {@code List<DishIngredientDTO>}
      */
     List<DishIngredientDTO> getIngredientsByDish(Long dishId);
-
-    /**
-     * Получает страницу {@code DishIngredientDTO}, которые относятся к блюду.
-     *
-     * @param pageSettings объект содержащий параметры страницы.
-     * @param dishId       идентификатор блюда.
-     * @return страница объектов {@link DishIngredientDTO}
-     */
-    Page<DishIngredientDTO> getPageOfIngredientsByDish(PageSettings pageSettings, Long dishId);
 }
 

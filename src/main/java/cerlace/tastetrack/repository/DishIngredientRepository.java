@@ -17,13 +17,4 @@ public interface DishIngredientRepository extends JpaRepository<DishIngredientEn
      * @return список ингредиентов в формате {@code List<DishIngredientEntity>}
      */
     List<DishIngredientEntity> findByDishId(Long dishId);
-
-    /**
-     * Получает страницу {@code DishIngredientEntity}, которые относятся к блюду
-     *
-     * @param pageable запрос на получение страницы.
-     * @param dishId   идентификатор блюда.
-     * @return список приемов пищи в формате {@code List<MealEntity>}
-     */
-    Page<DishIngredientEntity> findByDishId(Pageable pageable, Long dishId);
 }

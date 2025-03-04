@@ -42,22 +42,17 @@ public class DishIngredientController {
     }
 
     /**
-     * Отображает страницу ингредиентов для указанного блюда.
+     * Отображает список ингредиентов для указанного блюда.
      *
-     * @param pageSettings параметры для запроса страницы
      * @param dishId       идентификатор блюда, для которого нужно отобразить ингредиенты.
      * @param model        объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения списка ингредиентов блюда.
      */
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-    public String listDishIngredients(@ModelAttribute PageSettings pageSettings,
-                                      @PathVariable("dishId") Long dishId,
+    public String listDishIngredients(@PathVariable("dishId") Long dishId,
                                       Model model) {
-        Page<DishIngredientDTO> page = dishIngredientService.getPageOfIngredientsByDish(pageSettings, dishId);
-        model.addAttribute("dishIngredientList", page.getContent());
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("pageSettings", pageSettings);
+        model.addAttribute("dishIngredientList", dishIngredientService.getIngredientsByDish(dishId));
         return "dish-ingredient/list-dish-ingredient";
     }
 

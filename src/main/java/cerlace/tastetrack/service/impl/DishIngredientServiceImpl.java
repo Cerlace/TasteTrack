@@ -44,16 +44,5 @@ public class DishIngredientServiceImpl implements DishIngredientService {
     public List<DishIngredientDTO> getIngredientsByDish(Long dishId) {
         return mapper.toDTOList(repository.findByDishId(dishId));
     }
-
-    @Override
-    public Page<DishIngredientDTO> getPageOfIngredientsByDish(PageSettings pageSettings, Long dishId) {
-        Pageable pageable = PageRequest.of(
-                pageSettings.getPage(),
-                pageSettings.getSize(),
-                Sort.by(Sort.Direction.fromString(
-                        pageSettings.getSortDirection()), pageSettings.getSortField()));
-
-        return repository.findByDishId(pageable, dishId).map(mapper::toDTO);
-    }
 }
 
