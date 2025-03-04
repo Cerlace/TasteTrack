@@ -1,6 +1,7 @@
 package cerlace.tastetrack.controller;
 
 import cerlace.tastetrack.dto.AlertDTO;
+import cerlace.tastetrack.dto.DietDiaryDTO;
 import cerlace.tastetrack.dto.UserDTO;
 import cerlace.tastetrack.enums.Activity;
 import cerlace.tastetrack.enums.AlertCode;
@@ -8,10 +9,12 @@ import cerlace.tastetrack.enums.AlertMessage;
 import cerlace.tastetrack.enums.Gender;
 import cerlace.tastetrack.enums.Goal;
 import cerlace.tastetrack.mapper.UserMapper;
+import cerlace.tastetrack.service.MealService;
 import cerlace.tastetrack.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,15 +23,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @Controller
 @PreAuthorize("isAuthenticated()")
 public class AuthUserController {
 
+    private final MealService mealService;
     private final UserService userService;
-    private final UserMapper userMapper;
 
     /**
      * Отображает профиль пользователя.
@@ -135,5 +141,18 @@ public class AuthUserController {
                 .alertMessage(AlertMessage.ACCOUNT_DELETED)
                 .build());
         return "redirect:/dishes";
+    }
+
+    @GetMapping("/diary")
+    public String getUserDietDiary(@AuthenticationPrincipal UserDetails userDetails,
+                                   @RequestParam(required = false)
+                                   @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate inputDate,
+                                   Model model) {
+        DietDiaryDTO diary = mealService.getDietDiary(userDetails.getUsername(), inputDate);
+        model.addAttribute("diary", diary);
+        model.addAttribute("startDate", diary.getStartDate());
+        model.addAttribute("previousWeek", diary.getStartDate().minusWeeks(1));
+        model.addAttribute("nextWeek", diary.getStartDate().plusWeeks(1));
+        return "meal/diary";
     }
 }
