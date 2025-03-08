@@ -76,7 +76,7 @@ public class WelcomeController {
         userService.saveOrUpdate(user);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)
-                .alertMessage(AlertMessage.SAVED)
+                .alertMessage(AlertMessage.REGISTERED)
                 .build());
         return "redirect:/login";
     }
