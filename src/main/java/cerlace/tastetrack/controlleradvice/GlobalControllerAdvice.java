@@ -10,6 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.NoSuchElementException;
 
 @ControllerAdvice
 public class GlobalControllerAdvice {
@@ -49,10 +50,34 @@ public class GlobalControllerAdvice {
      * @return перенаправление на предыдущую страницу.
      */
     @ExceptionHandler(PasswordConfirmException.class)
-    public String handlePasswordConfirmException(WebRequest request, RedirectAttributes redirectAttributes) {
+    public String handlePasswordConfirmException(WebRequest request,
+                                                 RedirectAttributes redirectAttributes) {
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.WARNING)
                 .alertMessage(AlertMessage.PASSWORD_CONFIRM)
+                .build());
+
+        return "redirect:" + request.getHeader("referer");
+    }
+
+    /**
+     * Обрабатывает исключение {@link NoSuchElementException}, которое возникает
+     * при попытке извлечь из базы данных несуществующей записи.
+     *
+     * <p>Добавляет атрибут "alert" в {@link RedirectAttributes}, который содержит информацию
+     * о предупреждении, и перенаправляет пользователя на предыдущую страницу.</p>
+     *
+     * @param request            объект {@link WebRequest}, содержащий информацию о запросе.
+     * @param redirectAttributes объект {@link RedirectAttributes}, используемый для передачи
+     *                           атрибутов между запросами.
+     * @return перенаправление на предыдущую страницу.
+     */
+    @ExceptionHandler(NoSuchElementException.class)
+    public String handleNoSuchElementException(WebRequest request,
+                                               RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
+                .alertCode(AlertCode.ERROR)
+                .alertMessage(AlertMessage.NOT_FOUND)
                 .build());
 
         return "redirect:" + request.getHeader("referer");

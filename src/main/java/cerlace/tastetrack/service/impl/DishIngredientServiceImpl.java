@@ -27,7 +27,7 @@ public class DishIngredientServiceImpl implements DishIngredientService {
     public DishIngredientDTO get(Long id) {
         return repository.findById(id)
                 .map(mapper::toDTO)
-                .orElse(null);
+                .orElseThrow();
     }
 
     @Override
