@@ -9,7 +9,7 @@
 <div th:replace="~{fragments :: sidebar}"></div>
 <div th:replace="~{fragments :: alert-block(${alert})}"></div>
 <div class="content">
-    <h1 th:text="#{label.diary} + ':' "></h1>
+    <h1 th:text="#{label.user-diary} + ' ' + ${diary.username} + ':' "></h1>
     <div class="line-container">
         <form method="get"
               th:action="@{/diary}">
@@ -58,8 +58,10 @@
                             <p th:text="${meal.dish.name}"></p>
                         </a>
                         <form method="post"
-                              th:action="@{/diary/delete}">
-                            <input type="hidden" name="mealId" th:value="${meal.id}">
+                              th:action="@{/users/{userId}/meals/delete/{mealId}
+                                            (userId=${userId},
+                                             mealId=${meal.id})}">
+                            <input type="hidden" th:name="userId" th:value="${userId}">
                             <input type="hidden" name="inputDate" th:value="${day}">
                             <button type="submit"
                                     class="small-action-button delete cross"
@@ -78,7 +80,7 @@
             <td th:each="day : ${diary.weekDates}"
                 class="week-day-container">
                 <form method="get"
-                      th:action="@{/diary/create}">
+                      th:action="@{/users/{userId}/meals/create(userId=${userId})}">
                     <input type="hidden" name="date" th:value="${day}">
                     <button type="submit"
                             class="small-action-button"

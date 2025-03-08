@@ -62,6 +62,9 @@
          <!-- Обнаруживает пустые операторы -->
          <module name="EmptyStatement"/>
 
+         <!-- Проверяет, что нет магических чисел -->
+         <module name="MagicNumber"/>
+
          <!-- Проверяет, используются ли лишние скобки -->
          <module name="UnnecessaryParentheses"/>
 

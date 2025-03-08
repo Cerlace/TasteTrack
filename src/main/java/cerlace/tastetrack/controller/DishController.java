@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -45,15 +46,18 @@ public class DishController {
     /**
      * Отображает детали о блюде
      *
-     * @param dishId идентификатор блюда.
-     * @param model  объект {@link Model}, используемый для передачи данных в представление.
+     * @param dishId  идентификатор блюда.
+     * @param request объект {@link WebRequest}, содержащий информацию о запросе.
+     * @param model   объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения деталей блюда.
      */
     @GetMapping("/{dishId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String details(@PathVariable("dishId") Long dishId,
+                          WebRequest request,
                           Model model) {
         model.addAttribute("dish", dishService.getDetailed(dishId));
+        model.addAttribute("referer", request.getHeader("referer"));
         return "dish/show-dish";
     }
 

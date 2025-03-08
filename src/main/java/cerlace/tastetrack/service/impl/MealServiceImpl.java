@@ -2,7 +2,6 @@ package cerlace.tastetrack.service.impl;
 
 import cerlace.tastetrack.dto.DietDiaryDTO;
 import cerlace.tastetrack.dto.MealDTO;
-import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.MealEntity;
 import cerlace.tastetrack.entity.UserEntity;
 import cerlace.tastetrack.enums.MealTime;
@@ -11,11 +10,8 @@ import cerlace.tastetrack.repository.MealRepository;
 import cerlace.tastetrack.repository.UserRepository;
 import cerlace.tastetrack.service.MealService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -30,12 +26,21 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class MealServiceImpl implements MealService {
 
+    public static final int DAYS_IN_WEEK = 7;
+    public static final int ONE_DAY = 1;
+    public static final int SIX_DAYS = 6;
+    public static final int WEIGHT_MULTIPLIER = 10;
+    public static final double HEIGHT_MULTIPLIER = 6.25;
+    public static final int AGE_MULTIPLIER = 5;
+    public static final int MALE_CORRECTION_VALUE = 5;
+    public static final int FEMALE_CORRECTION_VALUE = -161;
+
     private final MealRepository mealRepository;
     private final UserRepository userRepository;
     private final MealMapper mealMapper;
 
     @Override
-    public MealDTO saveOrUpdate(MealDTO dto) {
+    public MealDTO save(MealDTO dto) {
         MealEntity entity = mealMapper.toEntity(dto);
         return mealMapper.toDTO(mealRepository.save(entity));
     }
@@ -52,41 +57,16 @@ public class MealServiceImpl implements MealService {
         mealRepository.deleteById(id);
     }
 
-    @Override
-    public List<MealDTO> getMealsByUser(Long userId) {
-        return mealMapper.toDTOList(mealRepository.findByUserId(userId));
-    }
-
-    @Override
-    public Page<MealDTO> getPageOfMealsByUser(PageSettings pageSettings, Long userId) {
-        Pageable pageable = PageRequest.of(
-                pageSettings.getPage(),
-                pageSettings.getSize(),
-                Sort.by(Sort.Direction.fromString(
-                        pageSettings.getSortDirection()), pageSettings.getSortField()));
-
-        return mealRepository.findByUserId(pageable, userId).map(mealMapper::toDTO);
-    }
-
-    /**
-     * Возвращает дневник диеты для указанного пользователя за неделю,
-     * указанной даты или с текущей недели, если дата не указана.
-     *
-     * @param username  имя пользователя, для которого создается дневник диеты
-     * @param inputDate дата, определяющая неделю; если null, используется понедельник текущей недели
-     * @return объект {@link DietDiaryDTO}, содержащий:
-     * - суточную норму калорий для пользователя
-     * - список дат недели
-     * - приемы пищи, сгруппированные по дате и времени приема
-     * - общее количество калорий, потребленных за каждый день недели
-     */
+    @Transactional(readOnly = true)
     @Override
     public DietDiaryDTO getDietDiary(String username, LocalDate inputDate) {
+
+        UserEntity user = userRepository.findByUsername(username).orElseThrow();
 
         LocalDate startDate = (inputDate != null) ? inputDate.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
                 : LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
 
-        LocalDate endDate = startDate.plusDays(6);
+        LocalDate endDate = startDate.plusDays(SIX_DAYS);
         List<MealEntity> meals = mealRepository.findByUserUsernameAndDateBetween(username, startDate, endDate);
 
         Map<LocalDate, Map<MealTime, List<MealDTO>>> groupedMeals = meals.stream()
@@ -94,19 +74,18 @@ public class MealServiceImpl implements MealService {
                 .collect(Collectors.groupingBy(MealDTO::getDate,
                         Collectors.groupingBy(MealDTO::getMealTime)));
 
-        List<LocalDate> weekDates = Stream.iterate(startDate, date -> date.plusDays(1))
-                .limit(7)
+        List<LocalDate> weekDates = Stream.iterate(startDate, date -> date.plusDays(ONE_DAY))
+                .limit(DAYS_IN_WEEK)
                 .toList();
 
-        Map<LocalDate, Double> caloriesByDate = meals.stream()
+        Map<LocalDate, Integer> caloriesByDate = meals.stream()
                 .collect(Collectors.groupingBy(
                         MealEntity::getDate,
-                        Collectors.summingDouble(meal -> meal.getDish().getCalories())
+                        Collectors.summingInt(meal -> meal.getDish().getCalories().intValue())
                 ));
 
-        UserEntity user = userRepository.findByUsername(username);
-
         return DietDiaryDTO.builder()
+                .username(username)
                 .startDate(startDate)
                 .dailyLimit(calculateDailyCalories(user))
                 .weekDates(weekDates)
@@ -115,17 +94,28 @@ public class MealServiceImpl implements MealService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public DietDiaryDTO getDietDiary(Long userId, LocalDate date) {
+        UserEntity user = userRepository.findById(userId).orElseThrow();
+        return getDietDiary(user.getUsername(), date);
+    }
+
     /**
      * Рассчитывает необходимый дневной уровень калорий по формуле Миффлина-Сан Жеора
      *
      * @param user пользователь
      * @return дневная норма калорий в питании.
      */
-    public int calculateDailyCalories(UserEntity user) {
+    private int calculateDailyCalories(UserEntity user) {
         int userAge = Period.between(user.getBirthDate(), LocalDate.now()).getYears();
         double bmr = switch (user.getGender()) {
-            case MALE -> 10 * user.getWeight() + 6.25 * user.getHeight() - 5 * userAge + 5;
-            case FEMALE -> 10 * user.getWeight() + 6.25 * user.getHeight() - 5 * userAge - 161;
+            case MALE -> WEIGHT_MULTIPLIER * user.getWeight()
+                    + HEIGHT_MULTIPLIER * user.getHeight()
+                    - AGE_MULTIPLIER * userAge + MALE_CORRECTION_VALUE;
+            case FEMALE -> WEIGHT_MULTIPLIER * user.getWeight()
+                    + HEIGHT_MULTIPLIER * user.getHeight()
+                    - AGE_MULTIPLIER * userAge + FEMALE_CORRECTION_VALUE;
         };
         return (int) Math.round(bmr * user.getActivity().getMultiplier()) +
                 user.getGoal().getCaloriesCorrection();

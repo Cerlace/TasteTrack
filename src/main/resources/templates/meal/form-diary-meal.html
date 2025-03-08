@@ -12,7 +12,7 @@
     <form name="create"
           method="post"
           th:object="${meal}"
-          th:action="@{/users/{userId}/meals/save(userId=${userId})}">
+          th:action="@{/diary/save}">
         <h2 th:text="#{table.meal.save}"></h2>
         <input type="hidden"
                th:field="*{user.id}"
@@ -57,7 +57,7 @@
     </form>
     <form name="list-meals"
           method="get"
-          th:action="@{/users/{userId}/meals(userId=${userId})}">
+          th:action="@{/diary}">
         <input type="hidden" name="inputDate" th:value="${meal.date}">
         <button type="submit"
                 class="medium-action-button"
