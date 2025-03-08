@@ -13,6 +13,9 @@
           method="post"
           th:action="@{/login}">
         <h2 th:text="#{label.sign-up}"></h2>
+        <h3 th:if="${param.error}"
+            th:text="#{label.login-error}"
+            style="color: #a32d24"></h3>
         <input th:name="username" type="text"
                th:placeholder="#{table.user.column.username}"
                autofocus
