@@ -29,5 +29,5 @@ public class UserDTO extends BaseDTO {
     private Float weight;
     private Activity activity;
     private Goal goal;
-    private Set<RoleDTO> roles;
+    private Set<RoleDTO> authorities;
 }

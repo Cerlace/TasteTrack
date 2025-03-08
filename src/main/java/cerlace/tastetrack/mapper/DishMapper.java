@@ -4,10 +4,14 @@ import cerlace.tastetrack.dto.DishDTO;
 import cerlace.tastetrack.entity.DishEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring")
-public interface DishMapper extends IMapper<DishDTO, DishEntity> {
+import java.util.List;
+
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface DishMapper {
     DishMapper INSTANCE = Mappers.getMapper(DishMapper.class);
 
     /**
@@ -29,4 +33,13 @@ public interface DishMapper extends IMapper<DishDTO, DishEntity> {
      */
     @Mapping(target = "dishIngredients", ignore = true)
     DishEntity toEntity(DishDTO dto);
+
+    /**
+     * Метод конвертирует список объектов {@code Entity} в
+     * список объектов {@code DTO}
+     *
+     * @param entityList входной список объектов типа {@code Entity}
+     * @return список объектов типа {@code DTO}
+     */
+    List<DishDTO> toDTOList(List<DishEntity> entityList);
 }
