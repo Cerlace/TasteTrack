@@ -15,9 +15,11 @@
         <h2 th:text="#{label.sign-up}"></h2>
         <input th:name="username" type="text"
                th:placeholder="#{table.user.column.username}"
-               autofocus/>
+               autofocus
+               required/>
         <input th:name="password" type="password"
-               th:placeholder="#{table.user.column.password}"/>
+               th:placeholder="#{table.user.column.password}"
+               required/>
         <button type="submit"
                 class="medium-action-button"
                 th:text="#{button.send}"></button>

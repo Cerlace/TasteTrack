@@ -16,13 +16,6 @@
           th:action="@{/profile/edit}">
         <h2 th:text="#{button.edit}"></h2>
         <div class="input-group">
-            <label for="username-input" th:text="#{table.user.column.username} + ':' "></label>
-            <input id="username-input"
-                   type="text"
-                   th:field="*{username}"
-                   required>
-        </div>
-        <div class="input-group">
             <label for="name-input" th:text="#{table.user.column.full-name} + ':' "></label>
             <input id="name-input"
                    type="text"

@@ -18,7 +18,8 @@
                type="hidden"
                th:field="*{id}"
                required>
-        <div class="input-group">
+        <div th:if="${user.id == null}"
+             class="input-group">
             <label for="username-input" th:text="#{table.user.column.username} + ':' "></label>
             <input id="username-input"
                    type="text"
