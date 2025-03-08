@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -24,7 +23,6 @@ public class UserDTO extends BaseDTO {
     private String password;
     private String passwordConfirm;
     private String fullName;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
     private Gender gender;
     private Float height;

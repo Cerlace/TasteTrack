@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -17,7 +16,6 @@ import java.time.LocalDate;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MealDTO extends BaseDTO {
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
     private MealTime mealTime;
     @Builder.Default

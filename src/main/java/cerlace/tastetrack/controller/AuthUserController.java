@@ -151,8 +151,7 @@ public class AuthUserController {
      */
     @GetMapping("/diary")
     public String getUserDietDiary(@AuthenticationPrincipal UserDetails userDetails,
-                                   @RequestParam(required = false)
-                                   @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate inputDate,
+                                   @RequestParam(required = false) LocalDate inputDate,
                                    Model model) {
         DietDiaryDTO diary = mealService.getDietDiary(userDetails.getUsername(), inputDate);
         model.addAttribute("diary", diary);
