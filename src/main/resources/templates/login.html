@@ -1,0 +1,33 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{button.sign-in}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <form name="form"
+          method="post"
+          th:action="@{/login}">
+        <h2 th:text="#{label.sign-up}"></h2>
+        <input th:name="username" type="text"
+               th:placeholder="#{table.user.column.username}"
+               autofocus/>
+        <input th:name="password" type="password"
+               th:placeholder="#{table.user.column.password}"/>
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{button.send}"></button>
+        <div>
+            <span th:text="#{label.first-time} + ' '">
+            </span>
+            <a th:href="@{/registration}"
+               th:text="#{label.register}"></a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
