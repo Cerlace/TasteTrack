@@ -9,4 +9,5 @@
     <include file="/db_migrations/v-0.4/01-03-2025-02-role-table-setup.xml"/>
     <include file="/db_migrations/v-0.4/01-03-2025-03-user-role-join-table-setup.xml"/>
     <include file="/db_migrations/v-0.4/01-03-2025-04-role-insert.xml"/>
+    <include file="/db_migrations/v-0.4/05-03-2025-01-user-column-change.xml"/>
 </databaseChangeLog>

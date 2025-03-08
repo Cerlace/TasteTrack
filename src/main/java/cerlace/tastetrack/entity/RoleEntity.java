@@ -30,7 +30,7 @@ public class RoleEntity extends BaseEntity implements GrantedAuthority {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
     private Set<UserEntity> users;
 
     @Override

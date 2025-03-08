@@ -41,12 +41,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDTO saveOrUpdate(UserDTO dto) {
         UserEntity entity = mapper.toEntity(dto);
         if (entity.getId() == null) {
-            entity.setRoles(Collections.singleton(roleRepository.findByName(ROLE_USER)));
-            entity.setEncodedPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
+            entity.setAuthorities(Collections.singleton(roleRepository.findByName(ROLE_USER)));
+            entity.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         } else {
             UserEntity entityFromDb = userRepository.findById(entity.getId()).orElseThrow();
-            entity.setRoles(entityFromDb.getRoles());
-            entity.setEncodedPassword(entityFromDb.getEncodedPassword());
+            entity.setAuthorities(entityFromDb.getAuthorities());
+            entity.setPassword(entityFromDb.getPassword());
         }
         return mapper.toDTO(userRepository.save(entity));
     }
@@ -96,10 +96,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDTO changePassword(UserDTO dto) {
         UserEntity entity = userRepository.findByUsername(dto.getUsername()).orElseThrow();
         if (!Objects.equals(dto.getPassword(), dto.getPasswordConfirm()) ||
-                !bCryptPasswordEncoder.matches(dto.getOldPassword(), entity.getEncodedPassword())) {
+                !bCryptPasswordEncoder.matches(dto.getOldPassword(), entity.getPassword())) {
             throw new PasswordConfirmException(PASSWORD_CONFIRM_EXCEPTION_MESSAGE);
         }
-        entity.setEncodedPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
+        entity.setPassword(bCryptPasswordEncoder.encode(dto.getPassword()));
         return mapper.toDTO(userRepository.save(entity));
     }
 
