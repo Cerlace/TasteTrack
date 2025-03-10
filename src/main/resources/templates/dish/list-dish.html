@@ -114,8 +114,7 @@
             <th th:text="#{table.dish.column.proteins}"></th>
             <th th:text="#{table.dish.column.fats}"></th>
             <th th:text="#{table.dish.column.carbohydrates}"></th>
-            <th sec:authorize="isAuthenticated()"
-                th:text="#{label.details}"></th>
+            <th th:text="#{label.details}"></th>
             <th sec:authorize="hasRole('ADMIN')"
                 th:text="#{label.action}" colspan="2"></th>
         </tr>
@@ -136,7 +135,7 @@
             <td th:text="${dish.proteins}"></td>
             <td th:text="${dish.fats}"></td>
             <td th:text="${dish.carbohydrates}"></td>
-            <td sec:authorize="isAuthenticated()">
+            <td>
                 <form name="details"
                       method="get"
                       th:action="@{/dishes/{dishId}(dishId=${dish.id})}">

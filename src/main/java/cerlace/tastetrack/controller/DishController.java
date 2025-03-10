@@ -51,7 +51,6 @@ public class DishController {
      * @return имя представления для отображения деталей блюда.
      */
     @GetMapping("/{dishId}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String details(@PathVariable("dishId") Long dishId,
                           WebRequest request,
                           Model model) {
