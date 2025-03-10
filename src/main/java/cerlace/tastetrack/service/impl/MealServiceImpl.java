@@ -109,14 +109,13 @@ public class MealServiceImpl implements MealService {
      */
     private int calculateDailyCalories(UserEntity user) {
         int userAge = Period.between(user.getBirthDate(), LocalDate.now()).getYears();
-        double bmr = switch (user.getGender()) {
-            case MALE -> WEIGHT_MULTIPLIER * user.getWeight()
-                    + HEIGHT_MULTIPLIER * user.getHeight()
-                    - AGE_MULTIPLIER * userAge + MALE_CORRECTION_VALUE;
-            case FEMALE -> WEIGHT_MULTIPLIER * user.getWeight()
-                    + HEIGHT_MULTIPLIER * user.getHeight()
-                    - AGE_MULTIPLIER * userAge + FEMALE_CORRECTION_VALUE;
+        int correctionValue = switch (user.getGender()) {
+            case MALE -> MALE_CORRECTION_VALUE;
+            case FEMALE -> FEMALE_CORRECTION_VALUE;
         };
+        double bmr = WEIGHT_MULTIPLIER * user.getWeight()
+                + HEIGHT_MULTIPLIER * user.getHeight()
+                - AGE_MULTIPLIER * userAge + correctionValue;
         return (int) Math.round(bmr * user.getActivity().getMultiplier()) +
                 user.getGoal().getCaloriesCorrection();
     }
