@@ -72,7 +72,7 @@
             <td th:text="${user.birthDate}"></td>
             <td th:text="#{${user.gender.messageKey}}"></td>
             <td>
-                <p th:each="role : ${user.roles}" th:text="${role.name}"></p>
+                <p th:each="role : ${user.authorities}" th:text="${role.name}"></p>
             </td>
             <td>
                 <form name="list-meals"

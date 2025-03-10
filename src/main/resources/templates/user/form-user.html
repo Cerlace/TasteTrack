@@ -26,6 +26,10 @@
                    th:field="*{username}"
                    required>
         </div>
+        <input th:unless="${user.id == null}"
+               type="hidden"
+               th:field="*{username}"
+               required>
         <div th:if="${user.id == null}"
              class="input-group">
             <label for="password-input" th:text="#{table.user.column.password} + ':' "></label>
