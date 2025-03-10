@@ -30,7 +30,7 @@
             <select id="type-input"
                     th:field="*{dishType}"
                     required>
-                <option th:each="dishTypeValue : ${dishTypes}"
+                <option th:each="dishTypeValue : ${T(cerlace.tastetrack.enums.DishType).values()}"
                         th:value="${dishTypeValue}"
                         th:text="#{${dishTypeValue.messageKey}}">
                 </option>

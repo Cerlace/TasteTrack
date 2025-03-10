@@ -41,7 +41,7 @@
             <div class="filter-group">
                 <label th:text="#{table.dish.column.type}"></label>
                 <select name="dishTypes" multiple th:field="*{dishTypes}">
-                    <option th:each="type : ${dishTypes}"
+                    <option th:each="type : ${T(cerlace.tastetrack.enums.DishType).values()}"
                             th:value="${type}"
                             th:text="#{${type.messageKey}}">
                     </option>

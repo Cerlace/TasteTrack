@@ -7,7 +7,6 @@ import cerlace.tastetrack.dto.IngredientDTO;
 import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
-import cerlace.tastetrack.enums.DishType;
 import cerlace.tastetrack.service.DishService;
 import cerlace.tastetrack.service.IngredientService;
 import lombok.RequiredArgsConstructor;
@@ -76,7 +75,6 @@ public class DishController {
         Page<DishDTO> page = dishService.getFilteredPage(pageSettings, filter);
         model.addAttribute("dishList", page.getContent());
         model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("dishTypes", DishType.values());
         model.addAttribute("filter", filter);
         model.addAttribute("pageSettings", pageSettings);
         return "dish/list-dish";
@@ -92,7 +90,6 @@ public class DishController {
     @PreAuthorize("hasRole('ADMIN')")
     public String showCreateForm(Model model) {
         model.addAttribute("dish", new DishDTO());
-        model.addAttribute("dishTypes", DishType.values());
         return "dish/form-dish";
     }
 
@@ -107,7 +104,6 @@ public class DishController {
     @PreAuthorize("hasRole('ADMIN')")
     public String showEditForm(@PathVariable("dishId") Long dishId, Model model) {
         model.addAttribute("dish", dishService.get(dishId));
-        model.addAttribute("dishTypes", DishType.values());
         return "dish/form-dish";
     }
 

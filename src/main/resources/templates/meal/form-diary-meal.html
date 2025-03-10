@@ -27,7 +27,7 @@
         <div class="input-group">
             <span th:text="#{table.meal.column.meal-time} + ':' "></span>
             <div class="label-radio"
-                 th:each="mealTimeValue : ${mealTimes}">
+                 th:each="mealTimeValue : ${T(cerlace.tastetrack.enums.MealTime).values()}">
                 <input type="radio"
                        th:id="${mealTimeValue}"
                        th:field="*{mealTime}"

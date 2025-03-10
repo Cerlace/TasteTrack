@@ -5,7 +5,6 @@ import cerlace.tastetrack.dto.IngredientDTO;
 import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
-import cerlace.tastetrack.enums.ProductType;
 import cerlace.tastetrack.service.IngredientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -53,7 +52,6 @@ public class IngredientController {
     @GetMapping("/create")
     public String showCreateForm(Model model) {
         model.addAttribute("ingredient", new IngredientDTO());
-        model.addAttribute("productTypes", ProductType.values());
         return "ingredient/form-ingredient";
     }
 
@@ -67,7 +65,6 @@ public class IngredientController {
     @GetMapping("/edit/{ingredientId}")
     public String showEditForm(@PathVariable("ingredientId") Long ingredientId, Model model) {
         model.addAttribute("ingredient", ingredientService.get(ingredientId));
-        model.addAttribute("productTypes", ProductType.values());
         return "ingredient/form-ingredient";
     }
 

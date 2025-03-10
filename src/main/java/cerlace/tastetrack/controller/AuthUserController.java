@@ -6,7 +6,6 @@ import cerlace.tastetrack.dto.MealDTO;
 import cerlace.tastetrack.dto.UserDTO;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
-import cerlace.tastetrack.enums.MealTime;
 import cerlace.tastetrack.service.DishService;
 import cerlace.tastetrack.service.MealService;
 import cerlace.tastetrack.service.UserService;
@@ -186,7 +185,6 @@ public class AuthUserController {
                 .date(date)
                 .build();
         model.addAttribute("meal", newMeal);
-        model.addAttribute("mealTimes", MealTime.values());
         model.addAttribute("dishesList", dishService.getAll());
         return "meal/form-diary-meal";
     }
