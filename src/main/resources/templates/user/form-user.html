@@ -18,6 +18,9 @@
                type="hidden"
                th:field="*{id}"
                required>
+        <div th:if="${#fields.hasErrors('username')}">
+            <span th:errors="*{username}" class="error"></span>
+        </div>
         <div th:if="${user.id == null}"
              class="input-group">
             <label for="username-input" th:text="#{table.user.column.username} + ':' "></label>
@@ -38,12 +41,18 @@
                    th:field="*{password}"
                    required>
         </div>
+        <div th:if="${#fields.hasErrors('fullName')}">
+            <span th:errors="*{fullName}" class="error"></span>
+        </div>
         <div class="input-group">
             <label for="name-input" th:text="#{table.user.column.full-name} + ':' "></label>
             <input id="name-input"
                    type="text"
                    th:field="*{fullName}"
                    required>
+        </div>
+        <div th:if="${#fields.hasErrors('birthDate')}">
+            <span th:errors="*{birthDate}" class="error"></span>
         </div>
         <div class="input-group">
             <label for="birthdate-input" th:text="#{table.user.column.birth-date} + ':' "></label>
@@ -55,7 +64,7 @@
         <div class="input-group">
             <span th:text="#{table.user.column.gender} + ':' "></span>
             <div class="label-radio"
-                 th:each="genderValue : ${genders}">
+                 th:each="genderValue : ${T(cerlace.tastetrack.enums.Gender).values()}">
                 <input type="radio"
                        th:id="${genderValue}"
                        th:field="*{gender}"
@@ -87,7 +96,7 @@
         <div class="input-group">
             <span th:text="#{table.user.column.activity} + ':' "></span>
             <div class="label-radio"
-                 th:each="activityValue : ${activityLevels}">
+                 th:each="activityValue : ${T(cerlace.tastetrack.enums.Activity).values()}">
                 <input type="radio"
                        th:id="${activityValue}"
                        th:field="*{activity}"
@@ -102,7 +111,7 @@
         <div class="input-group">
             <span th:text="#{table.user.column.goal} + ':' "></span>
             <div class="label-radio"
-                 th:each="goalValue : ${goals}">
+                 th:each="goalValue : ${T(cerlace.tastetrack.enums.Goal).values()}">
                 <input type="radio"
                        th:id="${goalValue}"
                        th:field="*{goal}"

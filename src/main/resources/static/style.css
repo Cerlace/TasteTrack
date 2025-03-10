@@ -75,6 +75,10 @@ body {
     overflow: hidden;
 }
 
+.error {
+    color: #c52828;
+}
+
 h1, h2 {
     color: #4CAF50; /* Зеленый цвет заголовков */
 }

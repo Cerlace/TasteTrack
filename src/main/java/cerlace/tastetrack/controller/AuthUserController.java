@@ -4,23 +4,22 @@ import cerlace.tastetrack.dto.AlertDTO;
 import cerlace.tastetrack.dto.DietDiaryDTO;
 import cerlace.tastetrack.dto.MealDTO;
 import cerlace.tastetrack.dto.UserDTO;
-import cerlace.tastetrack.enums.Activity;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
-import cerlace.tastetrack.enums.Gender;
-import cerlace.tastetrack.enums.Goal;
 import cerlace.tastetrack.enums.MealTime;
 import cerlace.tastetrack.service.DishService;
 import cerlace.tastetrack.service.MealService;
 import cerlace.tastetrack.service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,9 +62,6 @@ public class AuthUserController {
     public String showEditForm(@AuthenticationPrincipal UserDetails userDetails,
                                Model model) {
         model.addAttribute("user", userService.getByUsername(userDetails.getUsername()));
-        model.addAttribute("genders", Gender.values());
-        model.addAttribute("activityLevels", Activity.values());
-        model.addAttribute("goals", Goal.values());
         return "user/form-profile";
     }
 
@@ -74,14 +70,21 @@ public class AuthUserController {
      *
      * @param userDetails        объект {@link UserDetails}, содержащий информацию о текущем пользователе.
      * @param user               объект {@link UserDTO}, содержащий обновленные данные пользователя.
+     * @param bindingResult      объект {@link BindingResult}, содержащий результаты валидации и ошибки,
+     *                           связанные с объектом {@link UserDTO}.
      * @param redirectAttributes объект {@link RedirectAttributes} для передачи сообщений через перенаправление.
      * @return перенаправление на страницу профиля.
      */
     @PostMapping("/profile/edit")
     public String edit(@AuthenticationPrincipal UserDetails userDetails,
+                       @Valid
                        @ModelAttribute("user") UserDTO user,
+                       BindingResult bindingResult,
                        RedirectAttributes redirectAttributes) {
         user.setUsername(userDetails.getUsername());
+        if (bindingResult.hasErrors()) {
+            return "user/form-profile";
+        }
         userService.editDetails(user);
         redirectAttributes.addFlashAttribute("alert", AlertDTO.builder()
                 .alertCode(AlertCode.SUCCESS)
@@ -99,7 +102,7 @@ public class AuthUserController {
     @GetMapping("/profile/change-password")
     public String showChangePasswordForm(Model model) {
         model.addAttribute("user", new UserDTO());
-        return "user/form-profile";
+        return "user/form-password";
     }
 
     /**
@@ -168,8 +171,8 @@ public class AuthUserController {
      * Отображает форму для создания нового приема пищи.
      *
      * @param userDetails объект {@link UserDetails}, содержащий информацию о текущем пользователе.
-     * @param date  дата, для которой необходимо создать прием пищи.
-     * @param model объект {@link Model}, используемый для передачи данных в представление.
+     * @param date        дата, для которой необходимо создать прием пищи.
+     * @param model       объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения формы создания приема пищи.
      */
     @GetMapping("/diary/create")
