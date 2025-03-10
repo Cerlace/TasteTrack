@@ -46,15 +46,6 @@ public interface DishService {
     List<DishDTO> getAll();
 
     /**
-     * Получает из слоя Repository страницу объектов {@link DishEntity} в БД,
-     * конвертирует их в объекты {@link DishDTO}.
-     *
-     * @param pageSettings объект содержащий параметры страницы.
-     * @return страница объектов {@link DishDTO}
-     */
-    Page<DishDTO> getPage(PageSettings pageSettings);
-
-    /**
      * Получает из слоя Repository страницу объектов {@link DishEntity},
      * отфильтрованную по критериям и конвертирует их в объекты {@link DishDTO}.
      *

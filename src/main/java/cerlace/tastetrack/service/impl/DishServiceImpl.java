@@ -56,17 +56,6 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Page<DishDTO> getPage(PageSettings pageSettings) {
-        Pageable pageable = PageRequest.of(
-                pageSettings.getPage(),
-                pageSettings.getSize(),
-                Sort.by(Sort.Direction.fromString(
-                        pageSettings.getSortDirection()), pageSettings.getSortField()));
-
-        return repository.findAll(pageable).map(dishMapper::toDTO);
-    }
-
-    @Override
     public Page<DishDTO> getFilteredPage(PageSettings pageSettings, DishFilter filter) {
         fixCaloriesRange(filter);
 
