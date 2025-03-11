@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-class DishIngredientServiceImplIntegrationTest {
+class DishIngredientServiceImplTest {
 
     @Autowired
     private DishIngredientService dishIngredientService;

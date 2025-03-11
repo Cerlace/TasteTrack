@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
-class IngredientServiceImplIntegrationTest {
+class IngredientServiceImplTest {
 
     @Autowired
     private IngredientService ingredientService;
@@ -78,7 +78,7 @@ class IngredientServiceImplIntegrationTest {
     }
 
     @Test
-    void delete_shouldRemoveEntity() {
+    void testDelete_shouldRemoveEntity() {
         Long targetId = ingredientRepository.findByName(TestConstants.INGREDIENT_1_NAME).getId();
 
         assertTrue(ingredientRepository.existsById(targetId));
