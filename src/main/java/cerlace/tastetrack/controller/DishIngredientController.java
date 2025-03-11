@@ -23,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/dishes/{dishId}/dish-ingredients")
+@PreAuthorize("hasRole('ADMIN')")
 public class DishIngredientController {
 
     private final DishIngredientService dishIngredientService;
@@ -46,7 +47,6 @@ public class DishIngredientController {
      * @return имя представления для отображения списка ингредиентов блюда.
      */
     @GetMapping
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String listDishIngredients(@PathVariable("dishId") Long dishId,
                                       Model model) {
         model.addAttribute("dishIngredientList", dishIngredientService.getIngredientsByDish(dishId));
@@ -61,7 +61,6 @@ public class DishIngredientController {
      * @return имя представления для отображения формы создания ингредиента блюда.
      */
     @GetMapping("/create")
-    @PreAuthorize("hasRole('ADMIN')")
     public String showCreateForm(@PathVariable("dishId") Long dishId, Model model) {
         model.addAttribute("dishIngredient", new DishIngredientDTO());
         return "dish-ingredient/form-dish-ingredient";
@@ -76,7 +75,6 @@ public class DishIngredientController {
      * @return имя представления для отображения формы редактирования ингредиента блюда.
      */
     @GetMapping("/edit/{dishIngredientId}")
-    @PreAuthorize("hasRole('ADMIN')")
     public String showEditForm(@PathVariable("dishId") Long dishId,
                                @PathVariable("dishIngredientId") Long dishIngredientId,
                                Model model) {
@@ -93,7 +91,6 @@ public class DishIngredientController {
      * @return перенаправление на страницу со списком ингредиентов блюда.
      */
     @PostMapping("/save")
-    @PreAuthorize("hasRole('ADMIN')")
     public String saveOrUpdate(@PathVariable("dishId") Long dishId,
                                @ModelAttribute("dishIngredient") DishIngredientDTO dishIngredient,
                                RedirectAttributes redirectAttributes) {
@@ -114,7 +111,6 @@ public class DishIngredientController {
      * @return перенаправление на страницу со списком ингредиентов блюда.
      */
     @PostMapping("/delete/{dishIngredientId}")
-    @PreAuthorize("hasRole('ADMIN')")
     public String delete(@PathVariable("dishId") Long dishId,
                          @PathVariable Long dishIngredientId,
                          RedirectAttributes redirectAttributes) {
