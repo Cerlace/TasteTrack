@@ -7,5 +7,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DishRepository extends JpaRepository<DishEntity, Long>,
-                                        JpaSpecificationExecutor<DishEntity> {
+        JpaSpecificationExecutor<DishEntity> {
+    /**
+     * Метод находит блюдо по имени.
+     *
+     * @param name имя ингредиента
+     * @return найденный ингредиент.
+     */
+    DishEntity findByName(String name);
 }

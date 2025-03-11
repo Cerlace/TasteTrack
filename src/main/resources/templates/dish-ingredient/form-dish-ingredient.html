@@ -47,7 +47,7 @@
             <select id="unit-input"
                     th:field="*{measureUnit}"
                     required>
-                <option th:each="measureUnitValue : ${measureUnits}"
+                <option th:each="measureUnitValue : ${T(cerlace.tastetrack.enums.MeasureUnit).values()}"
                         th:value="${measureUnitValue}"
                         th:text="#{${measureUnitValue.getMessageKey()}}"></option>
             </select>

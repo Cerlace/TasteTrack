@@ -34,12 +34,12 @@
         <h2 th:text="#{table.dish.column.recipe} + ':'"></h2>
         <p th:text="${dish.recipe}"></p>
     </div>
-    <form name="list-dishes"
+    <form name="return"
           method="get"
-          th:action="@{/dishes}">
+          th:action="@{${referer}}">
         <button type="submit"
                 class="medium-action-button"
-                th:text="#{table.dish.return}">
+                th:text="#{button.return}">
         </button>
     </form>
 </div>

@@ -1,14 +1,10 @@
 package cerlace.tastetrack.service;
 
 import cerlace.tastetrack.dto.DietDiaryDTO;
-import cerlace.tastetrack.dto.DishIngredientDTO;
 import cerlace.tastetrack.dto.MealDTO;
-import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.MealEntity;
-import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public interface MealService {
     /**
@@ -18,7 +14,7 @@ public interface MealService {
      * @param dto {@link MealDTO}, который нужно записать в БД
      * @return записанный в БД {@link MealDTO} с id
      */
-    MealDTO saveOrUpdate(MealDTO dto);
+    MealDTO save(MealDTO dto);
 
     /**
      * Получает из слоя Repository объект {@link MealEntity} по id и
@@ -38,29 +34,22 @@ public interface MealService {
     void delete(Long id);
 
     /**
-     * Получает все {@code MealDTO}, которые относятся к пользователю
+     * Получает объект дневника питания, который содержит приемы пищи
+     * в определенном промежутки и данные о калорийности.
      *
-     * @param userId идентификатор пользователя
-     * @return список приемов пищи в формате {@code List<MealDTO>}
+     * @param username имя пользователя.
+     * @param date     дата из промежутка
+     * @return дневник питания пользователя.
      */
-    List<MealDTO> getMealsByUser(Long userId);
-
-    /**
-     * Получает страницу {@code MealDTO}, которые относятся к пользователю
-     *
-     * @param pageSettings объект содержащий параметры страницы.
-     * @param userId       идентификатор пользователя.
-     * @return страница объектов {@link DishIngredientDTO}
-     */
-    Page<MealDTO> getPageOfMealsByUser(PageSettings pageSettings, Long userId);
+    DietDiaryDTO getDietDiary(String username, LocalDate date);
 
     /**
      * Получает объект дневника питания, который содержит приемы пищи
      * в определенном промежутки и данные о калорийности.
      *
-     * @param username  имя пользователя.
-     * @param date дата из промежутка
+     * @param userId идентификатор пользователя.
+     * @param date   дата из промежутка
      * @return дневник питания пользователя.
      */
-    DietDiaryDTO getDietDiary(String username, LocalDate date);
+    DietDiaryDTO getDietDiary(Long userId, LocalDate date);
 }

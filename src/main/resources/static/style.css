@@ -27,6 +27,27 @@ body {
     padding-left: 20px; /* Отступы внутри основного контента */
 }
 
+.week-day-container {
+    width: 14%;
+    align-content: flex-start;
+}
+
+.week-day-container a {
+    color: lightslategrey;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.week-day-container a:hover {
+    color: gray;
+    text-decoration: underline;
+}
+
+.week-day-container p {
+    color: lightslategrey;
+    font-weight: bold;
+}
+
 .column-container {
     display: flex;
     flex-direction: column;
@@ -52,6 +73,10 @@ body {
     height: 40px;
     margin-bottom: 20px;
     overflow: hidden;
+}
+
+.error {
+    color: #c52828;
 }
 
 h1, h2 {
@@ -114,6 +139,12 @@ button[disabled] {
     min-width: 80px;
     max-width: 130px;
     min-height: 40px;
+}
+
+.small-action-button.delete.cross {
+    min-width: auto;
+    min-height: auto;
+    padding: 5px 10px;
 }
 
 .small-action-button.update,

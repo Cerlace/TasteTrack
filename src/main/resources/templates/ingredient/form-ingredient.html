@@ -29,7 +29,7 @@
             <select id="type-input"
                     th:field="*{productType}"
                     required>
-                <option th:each="productTypeValue : ${productTypes}"
+                <option th:each="productTypeValue : ${T(cerlace.tastetrack.enums.ProductType).values()}"
                         th:value="${productTypeValue}"
                         th:text="#{${productTypeValue.messageKey}}">
                 </option>

@@ -39,12 +39,12 @@ public class DishServiceImpl implements DishService {
     public DishDTO get(Long id) {
         return repository.findById(id)
                 .map(dishMapper::toDTO)
-                .orElse(null);
+                .orElseThrow();
     }
 
     @Override
     public DishDTO getDetailed(Long id) {
-        DishEntity entity = repository.findById(id).orElse(null);
+        DishEntity entity = repository.findById(id).orElseThrow();
         DishDTO dto = dishMapper.toDTO(entity);
         dto.setDishIngredients(dishIngredientMapper.toDTOSet(entity.getDishIngredients()));
         return dto;
@@ -53,17 +53,6 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<DishDTO> getAll() {
         return dishMapper.toDTOList(repository.findAll());
-    }
-
-    @Override
-    public Page<DishDTO> getPage(PageSettings pageSettings) {
-        Pageable pageable = PageRequest.of(
-                pageSettings.getPage(),
-                pageSettings.getSize(),
-                Sort.by(Sort.Direction.fromString(
-                        pageSettings.getSortDirection()), pageSettings.getSortField()));
-
-        return repository.findAll(pageable).map(dishMapper::toDTO);
     }
 
     @Override

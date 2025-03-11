@@ -32,7 +32,7 @@ public class IngredientServiceImpl implements IngredientService {
     public IngredientDTO get(Long id) {
         return repository.findById(id)
                 .map(mapper::toDTO)
-                .orElse(null);
+                .orElseThrow();
     }
 
     @Override

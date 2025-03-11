@@ -5,7 +5,6 @@ import cerlace.tastetrack.dto.DishIngredientDTO;
 import cerlace.tastetrack.dto.IngredientDTO;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
-import cerlace.tastetrack.enums.MeasureUnit;
 import cerlace.tastetrack.service.DishIngredientService;
 import cerlace.tastetrack.service.IngredientService;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +64,6 @@ public class DishIngredientController {
     @PreAuthorize("hasRole('ADMIN')")
     public String showCreateForm(@PathVariable("dishId") Long dishId, Model model) {
         model.addAttribute("dishIngredient", new DishIngredientDTO());
-        model.addAttribute("measureUnits", MeasureUnit.values());
         return "dish-ingredient/form-dish-ingredient";
     }
 
@@ -83,7 +81,6 @@ public class DishIngredientController {
                                @PathVariable("dishIngredientId") Long dishIngredientId,
                                Model model) {
         model.addAttribute("dishIngredient", dishIngredientService.get(dishIngredientId));
-        model.addAttribute("measureUnits", MeasureUnit.values());
         return "dish-ingredient/form-dish-ingredient";
     }
 

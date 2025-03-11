@@ -10,32 +10,84 @@
 <div th:replace="~{fragments :: alert-block(${alert})}"></div>
 <div class="content">
     <h1 th:text="#{label.diary} + ':' "></h1>
-    <div>
-        <a th:href="@{/diary(startDate=${previousWeek})}">← Предыдущая неделя</a>
-        <span th:text="${#temporals.format(startDate, 'dd.MM.yyyy')} + ' - ' +
-                        ${#temporals.format(startDate.plusDays(6), 'dd.MM.yyyy')}"></span>
-        <a th:href="@{/diary(startDate=${nextWeek})}">Следующая неделя →</a>
-    </div>
     <div class="line-container">
-        <div th:each="day : ${diary.weekDates}">
-            <h3 th:text="${#temporals.dayOfWeek(day)} + ', ' + ${#temporals.format(day, 'dd MMMM')}"></h3>
-            <div>
-                Калории:
-                <span th:text="${(diary.caloriesByDate?.get(day) ?: 0) + ' / ' + diary.dailyLimit}"></span>
-            </div>
-
-            <div th:each="mealTime : ${T(cerlace.tastetrack.enums.MealTime).values()}">
-                <h4 th:text="#{${mealTime.messageKey}}"></h4>
-                <ul th:if="${diary.groupedMeals.get(day)?.get(mealTime)}">
-                    <a th:each="meal : ${diary.groupedMeals.get(day).get(mealTime)}"
-                       th:href="@{/dishes/{dishId}(dishId=${meal.dish.id})}">
-                        <li th:text="${meal.dish.name}"></li>
-                    </a>
-                </ul>
-                <p th:unless="${diary.groupedMeals.get(day)?.get(mealTime)}">Нет записей</p>
-            </div>
-        </div>
+        <form method="get"
+              th:action="@{/diary}">
+            <input type="hidden" name="inputDate" th:value="${previousWeek}">
+            <button type="submit"
+                    class="medium-action-button"
+                    th:text="#{button.week.previous}"></button>
+        </form>
+        <h2 th:text="${#temporals.format(diary.startDate, 'dd.MM.yyyy')} + ' - ' +
+                        ${#temporals.format(diary.startDate.plusDays(6), 'dd.MM.yyyy')}"></h2>
+        <form method="get"
+              th:action="@{/diary}">
+            <input type="hidden" name="inputDate" th:value="${nextWeek}">
+            <button type="submit"
+                    class="medium-action-button"
+                    th:text="#{button.week.next}"></button>
+        </form>
     </div>
+    <table>
+        <tr>
+            <th th:each="day : ${diary.weekDates}"
+                class="week-day-container"
+                th:style="${day.equals(#temporals.createToday())} ? 'background-color: #009688'">
+                <span th:text="${#temporals.format(day, 'EEE dd MMMM')}"></span>
+                <br>
+                <span th:if="${day.equals(#temporals.createToday())}"
+                      th:text="#{label.today}"></span>
+            </th>
+        </tr>
+        <tr>
+            <td th:each="day : ${diary.weekDates}"
+                class="week-day-container">
+                <b th:text="#{table.dish.column.calories} + ': ' +
+                 ${(diary.caloriesByDate?.get(day) ?: 0) + ' / ' + diary.dailyLimit}"></b>
+            </td>
+        </tr>
+        <tr th:each="mealTime : ${T(cerlace.tastetrack.enums.MealTime).values()}">
+            <td th:each="day : ${diary.weekDates}"
+                class="week-day-container">
+                <b th:text="#{${mealTime.messageKey}}"></b>
+                <div th:if="${diary.groupedMeals.get(day)?.get(mealTime)}">
+                    <div class="line-container"
+                         style="text-align: start"
+                         th:each="meal : ${diary.groupedMeals.get(day).get(mealTime)}">
+                        <a th:href="@{/dishes/{dishId}(dishId=${meal.dish.id})}">
+                            <p th:text="${meal.dish.name}"></p>
+                        </a>
+                        <form method="post"
+                              th:action="@{/diary/delete}">
+                            <input type="hidden" name="mealId" th:value="${meal.id}">
+                            <input type="hidden" name="inputDate" th:value="${day}">
+                            <button type="submit"
+                                    class="small-action-button delete cross"
+                                    th:onclick="'return confirm(\'' + #{alert.confirm.delete} + '\');'"
+                                    th:title="#{button.delete}">
+                                &#10006;
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <p th:unless="${diary.groupedMeals.get(day)?.get(mealTime)}"
+                   th:text="#{label.empty}"></p>
+            </td>
+        </tr>
+        <tr>
+            <td th:each="day : ${diary.weekDates}"
+                class="week-day-container">
+                <form method="get"
+                      th:action="@{/diary/create}">
+                    <input type="hidden" name="date" th:value="${day}">
+                    <button type="submit"
+                            class="small-action-button"
+                            th:text="#{table.meal.save}">
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

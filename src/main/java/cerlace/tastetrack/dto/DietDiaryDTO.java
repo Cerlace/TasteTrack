@@ -15,9 +15,10 @@ import java.util.Map;
 @Builder
 @Data
 public class DietDiaryDTO {
+    private String username;
     private LocalDate startDate;
     private Integer dailyLimit;
     private List<LocalDate> weekDates;
     private Map<LocalDate, Map<MealTime, List<MealDTO>>> groupedMeals;
-    private Map<LocalDate, Double> caloriesByDate;
+    private Map<LocalDate, Integer> caloriesByDate;
 }

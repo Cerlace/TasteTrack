@@ -13,7 +13,10 @@ public enum AlertMessage {
     LOGOUT("alert.message.logout"),
     ACCOUNT_DELETED("alert.message.account-deleted"),
     PASSWORD_CHANGED("alert.message.password-changed"),
-    PROFILE_UPDATED("alert.message.profile-updated");
+    PROFILE_UPDATED("alert.message.profile-updated"),
+    NOT_FOUND("alert.message.not-found"),
+    BAD_REQUEST("alert.message.bad-request"),
+    REGISTERED("alert.message.registered");
 
     private final String messageKey;
 }

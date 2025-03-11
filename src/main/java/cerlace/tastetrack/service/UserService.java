@@ -5,8 +5,6 @@ import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.entity.UserEntity;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 public interface UserService {
     /**
      * Конвертирует {@link UserDTO} в {@link UserEntity}
@@ -34,14 +32,6 @@ public interface UserService {
      * @return полученная запись или null в случае, если запись не найдена
      */
     UserDTO getByUsername(String username);
-
-    /**
-     * Получает из слоя Repository список всех объектов {@link UserEntity} в БД,
-     * конвертирует их в объекты {@link UserDTO}.
-     *
-     * @return список объектов {@link UserDTO}
-     */
-    List<UserDTO> getAll();
 
     /**
      * Получает из слоя Repository страницу объектов {@link UserEntity} в БД,

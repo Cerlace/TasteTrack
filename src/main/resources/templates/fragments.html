@@ -50,8 +50,11 @@
         </div>
         <div sec:authorize="isAnonymous()">
             <h2 th:text="#{label.guest}"></h2>
-            <form name="logout" method="get" th:action="@{/login}">
+            <form name="login" method="get" th:action="@{/login}">
                 <button type="submit" class="small-action-button update" th:text="#{button.login}"></button>
+            </form>
+            <form name="register" method="get" th:action="@{/registration}">
+                <button type="submit" class="small-action-button" th:text="#{button.register}"></button>
             </form>
         </div>
         <form name="list-dishes"

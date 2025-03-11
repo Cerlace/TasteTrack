@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{table.meal.save}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <form name="create"
+          method="post"
+          th:object="${meal}"
+          th:action="@{/diary/save}">
+        <h2 th:text="#{table.meal.save}"></h2>
+        <input type="hidden"
+               th:field="*{user.id}"
+               required>
+        <div class="input-group">
+            <label for="date-input" th:text="#{table.meal.column.date} + ':' "></label>
+            <input id="date-input"
+                   type="date"
+                   th:field="*{date}"
+                   required>
+        </div>
+        <div class="input-group">
+            <span th:text="#{table.meal.column.meal-time} + ':' "></span>
+            <div class="label-radio"
+                 th:each="mealTimeValue : ${T(cerlace.tastetrack.enums.MealTime).values()}">
+                <input type="radio"
+                       th:id="${mealTimeValue}"
+                       th:field="*{mealTime}"
+                       th:value="${mealTimeValue}"
+                       required>
+                <label th:text="#{${mealTimeValue.messageKey}}"
+                       th:for="${mealTimeValue}">
+                </label>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="dish-select" th:text="#{table.dish.column.name} + ':' "></label>
+            <select id="dish-select"
+                    th:field="*{dish.id}"
+                    required>
+                <option th:each="dish : ${dishesList}"
+                        th:value="${dish.id}"
+                        th:text="${dish.name}">
+                </option>
+            </select>
+        </div>
+        <input type="hidden" name="inputDate" th:value="${meal.date}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{button.send}">
+        </button>
+    </form>
+    <form name="list-meals"
+          method="get"
+          th:action="@{/diary}">
+        <input type="hidden" name="inputDate" th:value="${meal.date}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{table.meal.return}">
+        </button>
+    </form>
+</div>
+</body>
+</html>

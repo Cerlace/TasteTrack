@@ -7,7 +7,6 @@ import cerlace.tastetrack.dto.IngredientDTO;
 import cerlace.tastetrack.dto.PageSettings;
 import cerlace.tastetrack.enums.AlertCode;
 import cerlace.tastetrack.enums.AlertMessage;
-import cerlace.tastetrack.enums.DishType;
 import cerlace.tastetrack.service.DishService;
 import cerlace.tastetrack.service.IngredientService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -45,15 +45,17 @@ public class DishController {
     /**
      * Отображает детали о блюде
      *
-     * @param dishId идентификатор блюда.
-     * @param model  объект {@link Model}, используемый для передачи данных в представление.
+     * @param dishId  идентификатор блюда.
+     * @param request объект {@link WebRequest}, содержащий информацию о запросе.
+     * @param model   объект {@link Model}, используемый для передачи данных в представление.
      * @return имя представления для отображения деталей блюда.
      */
     @GetMapping("/{dishId}")
-    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public String details(@PathVariable("dishId") Long dishId,
+                          WebRequest request,
                           Model model) {
         model.addAttribute("dish", dishService.getDetailed(dishId));
+        model.addAttribute("referer", request.getHeader("referer"));
         return "dish/show-dish";
     }
 
@@ -72,7 +74,6 @@ public class DishController {
         Page<DishDTO> page = dishService.getFilteredPage(pageSettings, filter);
         model.addAttribute("dishList", page.getContent());
         model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("dishTypes", DishType.values());
         model.addAttribute("filter", filter);
         model.addAttribute("pageSettings", pageSettings);
         return "dish/list-dish";
@@ -88,7 +89,6 @@ public class DishController {
     @PreAuthorize("hasRole('ADMIN')")
     public String showCreateForm(Model model) {
         model.addAttribute("dish", new DishDTO());
-        model.addAttribute("dishTypes", DishType.values());
         return "dish/form-dish";
     }
 
@@ -103,7 +103,6 @@ public class DishController {
     @PreAuthorize("hasRole('ADMIN')")
     public String showEditForm(@PathVariable("dishId") Long dishId, Model model) {
         model.addAttribute("dish", dishService.get(dishId));
-        model.addAttribute("dishTypes", DishType.values());
         return "dish/form-dish";
     }
 
