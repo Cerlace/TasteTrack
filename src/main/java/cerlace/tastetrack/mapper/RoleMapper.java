@@ -3,11 +3,13 @@ package cerlace.tastetrack.mapper;
 import cerlace.tastetrack.dto.RoleDTO;
 import cerlace.tastetrack.entity.RoleEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RoleMapper {
     RoleMapper INSTANCE = Mappers.getMapper(RoleMapper.class);
 
