@@ -1,6 +1,6 @@
-package cerlace.tastetrack.entity;
+package cerlace.tastetrack.persistence.entity;
 
-import cerlace.tastetrack.enums.DishType;
+import cerlace.tastetrack.persistence.enums.DishType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

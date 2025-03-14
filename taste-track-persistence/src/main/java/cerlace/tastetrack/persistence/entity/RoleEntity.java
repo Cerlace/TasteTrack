@@ -1,4 +1,4 @@
-package cerlace.tastetrack.entity;
+package cerlace.tastetrack.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;
 
@@ -25,16 +24,11 @@ import java.util.Set;
 @EqualsAndHashCode(exclude = "users", callSuper = true)
 @Entity
 @Table(name = "role")
-public class RoleEntity extends BaseEntity implements GrantedAuthority {
+public class RoleEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
     private Set<UserEntity> users;
-
-    @Override
-    public String getAuthority() {
-        return getName();
-    }
 }

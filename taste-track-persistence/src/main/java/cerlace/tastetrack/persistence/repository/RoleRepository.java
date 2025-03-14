@@ -1,6 +1,6 @@
-package cerlace.tastetrack.repository;
+package cerlace.tastetrack.persistence.repository;
 
-import cerlace.tastetrack.entity.RoleEntity;
+import cerlace.tastetrack.persistence.entity.RoleEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

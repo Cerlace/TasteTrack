@@ -1,4 +1,4 @@
-package cerlace.tastetrack.entity;
+package cerlace.tastetrack.persistence.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

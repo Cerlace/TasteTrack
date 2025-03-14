@@ -1,6 +1,8 @@
-package cerlace.tastetrack.entity;
+package cerlace.tastetrack.persistence.entity;
 
-import cerlace.tastetrack.enums.MeasureUnit;
+import cerlace.tastetrack.persistence.enums.MealTime;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,24 +18,27 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "dish_ingredient", uniqueConstraints =
-@UniqueConstraint(columnNames = {"dish_id", "ingredient_id"}))
-public class DishIngredientEntity extends BaseEntity {
+@Table(name = "meal", uniqueConstraints =
+@UniqueConstraint(columnNames = {"user_id", "dish_id", "meal_time", "date"}))
+public class MealEntity extends BaseEntity {
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private LocalDate date;
+    @Column(name = "meal_time", nullable = false)
+    @Enumerated
+    private MealTime mealTime;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "dish_id", nullable = false)
     private DishEntity dish;
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "ingredient_id", nullable = false)
-    private IngredientEntity ingredient;
-    @Column(nullable = false)
-    private Float amount;
-    @Column(name = "measure_unit", nullable = false)
-    @Enumerated
-    private MeasureUnit measureUnit;
 }

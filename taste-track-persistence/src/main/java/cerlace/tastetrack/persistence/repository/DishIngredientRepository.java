@@ -1,6 +1,6 @@
-package cerlace.tastetrack.repository;
+package cerlace.tastetrack.persistence.repository;
 
-import cerlace.tastetrack.entity.DishIngredientEntity;
+import cerlace.tastetrack.persistence.entity.DishIngredientEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,11 +1,11 @@
-package cerlace.tastetrack.specification;
+package cerlace.tastetrack.persistence.specification;
 
-import cerlace.tastetrack.entity.DishEntity;
-import cerlace.tastetrack.entity.DishEntity_;
-import cerlace.tastetrack.entity.DishIngredientEntity;
-import cerlace.tastetrack.entity.DishIngredientEntity_;
-import cerlace.tastetrack.entity.IngredientEntity_;
-import cerlace.tastetrack.enums.DishType;
+import cerlace.tastetrack.persistence.entity.DishEntity;
+import cerlace.tastetrack.persistence.entity.DishEntity_;
+import cerlace.tastetrack.persistence.entity.DishIngredientEntity;
+import cerlace.tastetrack.persistence.entity.DishIngredientEntity_;
+import cerlace.tastetrack.persistence.entity.IngredientEntity_;
+import cerlace.tastetrack.persistence.enums.DishType;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Subquery;
 import org.springframework.data.jpa.domain.Specification;

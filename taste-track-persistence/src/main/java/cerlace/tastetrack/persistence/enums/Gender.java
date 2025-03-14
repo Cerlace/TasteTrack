@@ -1,4 +1,4 @@
-package cerlace.tastetrack.enums;
+package cerlace.tastetrack.persistence.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
