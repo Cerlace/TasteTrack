@@ -1,0 +1,97 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${dish.id == null} ? #{table.dish.save} : #{table.dish.update}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <form name="update"
+          method="post"
+          th:object="${dish}"
+          th:action="@{/dishes/save}">
+        <h2 th:text="${dish.id == null} ? #{table.dish.save} : #{table.dish.update}"></h2>
+        <input id="id-input"
+               type="hidden"
+               th:field="*{id}"
+               required>
+        <div class="input-group">
+            <label for="name-input" th:text="#{table.dish.column.name} + ':' "></label>
+            <input id="name-input"
+                   type="text"
+                   th:field="*{name}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="type-input" th:text="#{table.dish.column.type} +':' "></label>
+            <select id="type-input"
+                    th:field="*{dishType}"
+                    required>
+                <option th:each="dishTypeValue : ${T(cerlace.tastetrack.persistence.enums.DishType).values()}"
+                        th:value="${dishTypeValue}"
+                        th:text="#{${dishTypeValue.messageKey}}">
+                </option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="calories-input" th:text="#{table.dish.column.calories} + ':' "></label>
+            <input id="calories-input"
+                   type="number"
+                   step="0.1"
+                   min="0"
+                   th:field="*{calories}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="proteins-input" th:text="#{table.dish.column.proteins} + ':' "></label>
+            <input id="proteins-input"
+                   type="number"
+                   step="0.1"
+                   min="0"
+                   th:field="*{proteins}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="fats-input" th:text="#{table.dish.column.fats} + ':' "></label>
+            <input id="fats-input"
+                   type="number"
+                   step="0.1"
+                   min="0"
+                   th:field="*{fats}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="carbs-input" th:text="#{table.dish.column.carbohydrates} + ':' "></label>
+            <input id="carbs-input"
+                   type="number"
+                   step="0.1"
+                   min="0"
+                   th:field="*{carbohydrates}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="recipe-input" th:text="#{table.dish.column.recipe} + ':' "></label>
+            <textarea rows="10"
+                      id="recipe-input"
+                      th:field="*{recipe}"
+                      required></textarea>
+        </div>
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{button.send}">
+        </button>
+    </form>
+    <form name="list-dishes"
+          method="get"
+          th:action="@{/dishes}">
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{table.dish.return}">
+        </button>
+    </form>
+</div>
+</body>
+</html>

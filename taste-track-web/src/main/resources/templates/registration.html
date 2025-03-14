@@ -1,0 +1,121 @@
+form-user.html
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{button.register}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <form name="form"
+          method="post"
+          th:object="${user}"
+          th:action="@{/registration}">
+        <h2 th:text="#{label.register}"></h2>
+        <div class="input-group">
+            <label for="username-input" th:text="#{table.user.column.username} + ':' "></label>
+            <input id="username-input"
+                   type="text"
+                   th:field="*{username}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="password-input" th:text="#{table.user.column.password} + ':' "></label>
+            <input id="password-input"
+                   type="password"
+                   th:field="*{password}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="password-confirm-input" th:text="#{table.user.column.password-confirm} + ':' "></label>
+            <input id="password-confirm-input"
+                   type="password"
+                   th:field="*{passwordConfirm}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="name-input" th:text="#{table.user.column.full-name} + ':' "></label>
+            <input id="name-input"
+                   type="text"
+                   th:field="*{fullName}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="birthdate-input" th:text="#{table.user.column.birth-date} + ':' "></label>
+            <input id="birthdate-input"
+                   type="date"
+                   th:field="*{birthDate}"
+                   required>
+        </div>
+        <div class="input-group">
+            <span th:text="#{table.user.column.gender} + ':' "></span>
+            <div class="label-radio"
+                 th:each="genderValue : ${T(cerlace.tastetrack.persistence.enums.Gender).values()}">
+                <input type="radio"
+                       th:id="${genderValue}"
+                       th:field="*{gender}"
+                       th:value="${genderValue}"
+                       required>
+                <label th:text="#{${genderValue.messageKey}}"
+                       th:for="${genderValue}">
+                </label>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="height-input" th:text="#{table.user.column.height} + ':' "></label>
+            <input id="height-input"
+                   type="number"
+                   step="0.1"
+                   min="0.1"
+                   th:field="*{height}"
+                   required>
+        </div>
+        <div class="input-group">
+            <label for="weight-input" th:text="#{table.user.column.weight} + ':' "></label>
+            <input id="weight-input"
+                   type="number"
+                   step="0.1"
+                   min="0.1"
+                   th:field="*{weight}"
+                   required>
+        </div>
+        <div class="input-group">
+            <span th:text="#{table.user.column.activity} + ':' "></span>
+            <div class="label-radio"
+                 th:each="activityValue : ${T(cerlace.tastetrack.persistence.enums.Activity).values()}">
+                <input type="radio"
+                       th:id="${activityValue}"
+                       th:field="*{activity}"
+                       th:value="${activityValue}"
+                       required>
+                <label th:text="#{${activityValue.messageKey}}"
+                       th:for="${activityValue}">
+                </label>
+
+            </div>
+        </div>
+        <div class="input-group">
+            <span th:text="#{table.user.column.goal} + ':' "></span>
+            <div class="label-radio"
+                 th:each="goalValue : ${T(cerlace.tastetrack.persistence.enums.Goal).values()}">
+                <input type="radio"
+                       th:id="${goalValue}"
+                       th:field="*{goal}"
+                       th:value="${goalValue}"
+                       required>
+                <label th:text="#{${goalValue.messageKey}}"
+                       th:for="${goalValue}">
+                </label>
+            </div>
+        </div>
+        <button type="submit"
+                class="medium-action-button"
+                th:text="#{button.send}">
+        </button>
+    </form>
+</div>
+</body>
+</html>

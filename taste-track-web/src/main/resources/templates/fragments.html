@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<body>
+<div th:fragment="alert-block(alert)"
+     th:if="${alert != null}"
+     class="alert_block">
+    <script>
+        function closeAlert(closeButton) {
+            const alert = closeButton.parentElement;
+            alert.style.opacity = "0";
+            setTimeout(function () {
+                alert.style.display = "none";
+            }, 600);
+        }
+    </script>
+    <div th:if="${alert.alertCode == T(cerlace.tastetrack.web.alert.AlertCode).SUCCESS}" class="alert success">
+        <span class="close-button" onclick="closeAlert(this)">&times;</span>
+        <strong th:text="#{alert.type.success}"></strong> <span th:text="#{${alert.alertMessage.messageKey}}"></span>
+    </div>
+    <div th:if="${alert.alertCode == T(cerlace.tastetrack.web.alert.AlertCode).INFO}" class="alert info">
+        <span class="close-button" onclick="closeAlert(this)">&times;</span>
+        <strong th:text="#{alert.type.info}">Info message.</strong> <span
+            th:text="#{${alert.alertMessage.messageKey}}"></span>
+    </div>
+    <div th:if="${alert.alertCode == T(cerlace.tastetrack.web.alert.AlertCode).WARNING}" class="alert warning">
+        <span class="close-button" onclick="closeAlert(this)">&times;</span>
+        <strong th:text="#{alert.type.warning}">Warning!</strong> <span
+            th:text="#{${alert.alertMessage.messageKey}}"></span>
+    </div>
+    <div th:if="${alert.alertCode == T(cerlace.tastetrack.web.alert.AlertCode).ERROR}" class="alert error">
+        <span class="close-button" onclick="closeAlert(this)">&times;</span>
+        <strong th:text="#{alert.type.error}">Error!</strong> <span
+            th:text="#{${alert.alertMessage.messageKey}}"></span>
+    </div>
+</div>
+<div th:fragment="sidebar" class="sidebar">
+    <div style="display: flex; flex-direction: column;">
+        <div sec:authorize="isAuthenticated()">
+            <h2 sec:authorize="hasRole('ADMIN')"
+                  th:text="#{label.admin} + ': ' + ${ #authentication.name }"></h2>
+            <h2 sec:authorize="hasRole('USER') && !hasRole('ADMIN')"
+                  th:text="#{label.user} + ': ' + ${#authentication.name}"></h2>
+            <form name="profile" method="get" th:action="@{/profile}">
+                <button type="submit" class="small-action-button" th:text="#{button.profile}"></button>
+            </form>
+            <form name="logout" method="get" th:action="@{/logout}">
+                <button type="submit" class="small-action-button delete" th:text="#{button.logout}"></button>
+            </form>
+        </div>
+        <div sec:authorize="isAnonymous()">
+            <h2 th:text="#{label.guest}"></h2>
+            <form name="login" method="get" th:action="@{/login}">
+                <button type="submit" class="small-action-button update" th:text="#{button.login}"></button>
+            </form>
+            <form name="register" method="get" th:action="@{/registration}">
+                <button type="submit" class="small-action-button" th:text="#{button.register}"></button>
+            </form>
+        </div>
+        <form name="list-dishes"
+              method="get"
+              th:action="@{/dishes}">
+            <button type="submit"
+                    class="menu-button"
+                    th:text="#{table.dish.label}">
+            </button>
+        </form>
+        <form sec:authorize="hasRole('USER')"
+              name="diet-diary"
+              method="get"
+              th:action="@{/diary}">
+            <button type="submit"
+                    class="menu-button"
+                    th:text="#{label.diary}">
+            </button>
+        </form>
+        <form sec:authorize="hasRole('ADMIN')"
+              name="list-ingredients"
+              method="get"
+              th:action="@{/ingredients}">
+            <button type="submit"
+                    class="menu-button"
+                    th:text="#{table.ingredient.label}">
+            </button>
+        </form>
+        <form sec:authorize="hasRole('ADMIN')"
+              name="list-users"
+              method="get"
+              th:action="@{/users}">
+            <button type="submit"
+                    class="menu-button"
+                    th:text="#{table.user.label}">
+            </button>
+        </form>
+    </div>
+    <div th:replace="~{:: language-switch}"></div>
+</div>
+<div th:fragment="language-switch" class="lang-switcher">
+    <form id="lang-form" method="get" action="">
+        <input type="hidden" th:each="requestParam : ${param}"
+               th:if="${requestParam.key != 'lang'}"
+               th:name="${requestParam.key}"
+               th:value="${requestParam.value[0]}"/>
+    </form>
+    <button type="submit" class="lang-button" form="lang-form"
+            th:name="lang"
+            th:value="en"
+            th:disabled="${#locale.language == 'en'}"
+            th:text="#{lang.en}">
+    </button>
+    <button type="submit" class="lang-button" form="lang-form"
+            th:name="lang"
+            th:value="ru"
+            th:disabled="${#locale.language == 'ru'}"
+            th:text="#{lang.ru}">
+    </button>
+</div>
+
+</body>
+</html>
