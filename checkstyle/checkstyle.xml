@@ -8,7 +8,7 @@
     <property name="charset" value="UTF-8"/>
 
     <module name="SuppressionFilter">
-        <property name="file" value="src/main/resources/checkstyle/suppressions.xml"/>
+        <property name="file" value="checkstyle/suppressions.xml"/>
     </module>
 
     <!-- Ограничивает длину строки -->
