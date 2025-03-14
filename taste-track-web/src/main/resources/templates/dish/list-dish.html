@@ -1,0 +1,237 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title th:text="#{table.dish.list}"></title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media='screen'
+          th:href="@{/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments :: sidebar}"></div>
+<div th:replace="~{fragments :: alert-block(${alert})}"></div>
+<div class="content">
+    <div class="line-container">
+        <h1 th:text="#{table.dish.list}"></h1>
+        <form sec:authorize="hasRole('ADMIN')"
+              name="save-dish"
+              method="get"
+              th:action="@{/dishes/create}">
+            <button type="submit"
+                    class="medium-action-button"
+                    th:text="#{table.dish.save}"></button>
+        </form>
+    </div>
+    <form th:action="@{/dishes}" method="get" class="filter-form" th:object="${filter}">
+        <input type="hidden" name="page" th:value="0">
+        <input type="hidden" name="size" th:value="${pageSettings.size}">
+        <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
+        <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label th:text="#{table.dish.column.name}"></label>
+                <input type="text" name="name" th:field="*{name}" style="width: auto;">
+
+                <label th:text="#{table.dish.column.calories}"></label>
+                <div class="range-group">
+                    <input type="number" name="minCalories" th:field="*{minCalories}">
+                    <span>-</span>
+                    <input type="number" name="maxCalories" th:field="*{maxCalories}">
+                </div>
+            </div>
+            <div class="filter-group">
+                <label th:text="#{table.dish.column.type}"></label>
+                <select name="dishTypes" multiple th:field="*{dishTypes}">
+                    <option th:each="type : ${T(cerlace.tastetrack.persistence.enums.DishType).values()}"
+                            th:value="${type}"
+                            th:text="#{${type.messageKey}}">
+                    </option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label th:text="#{table.ingredient.label}"></label>
+                <select name="ingredientIds" multiple th:field="*{ingredientIds}">
+                    <option th:each="ingredient : ${ingredientsList}"
+                            th:value="${ingredient.id}"
+                            th:text="${ingredient.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="filter-actions-button"
+                        th:text="#{button.apply}"></button>
+                <button type="submit" class="filter-actions-button delete" form="filter-reset-form"
+                        th:text="#{button.reset}"></button>
+            </div>
+        </div>
+    </form>
+    <form id="filter-reset-form"
+          th:action="@{/dishes}"
+          method="get">
+        <input type="hidden" name="page" th:value="0">
+        <input type="hidden" name="size" th:value="${pageSettings.size}">
+        <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
+        <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
+    </form>
+    <table>
+        <tr>
+            <th class="sortable-header">
+                <a th:href="@{/dishes(page=0,
+                              size=${pageSettings.size},
+                              sortField='name',
+                              sortDirection=${pageSettings.sortField == 'name' ?
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'},
+                              name=${filter.name},
+                              dishTypes=${filter.dishTypes},
+                              minCalories=${filter.minCalories},
+                              maxCalories=${filter.maxCalories})}">
+                    <span th:text="#{table.dish.column.name}  + ' ' "></span>
+                    <span
+                            th:if="${pageSettings.sortField == 'name'}"
+                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
+                    </span>
+                </a>
+            </th>
+            <th th:text="#{table.dish.column.type}"></th>
+            <th sec:authorize="hasRole('ADMIN')"
+                th:text="#{table.dish-ingredient.label}"></th>
+            <th class="sortable-header">
+                <a th:href="@{/dishes(page=0,
+                              size=${pageSettings.size},
+                              sortField='calories',
+                              sortDirection=${pageSettings.sortField == 'calories' ?
+                                  (pageSettings.sortDirection == 'asc' ? 'desc' : 'asc') : 'asc'},
+                              name=${filter.name},
+                              dishTypes=${filter.dishTypes},
+                              minCalories=${filter.minCalories},
+                              maxCalories=${filter.maxCalories})}">
+                    <span th:text="#{table.dish.column.calories}  + ' ' "></span>
+                    <span
+                            th:if="${pageSettings.sortField == 'calories'}"
+                            th:text="${pageSettings.sortDirection == 'asc' ? '&#9650;' : '&#9660;'}">
+                    </span>
+                </a>
+            </th>
+            <th th:text="#{table.dish.column.proteins}"></th>
+            <th th:text="#{table.dish.column.fats}"></th>
+            <th th:text="#{table.dish.column.carbohydrates}"></th>
+            <th th:text="#{label.details}"></th>
+            <th sec:authorize="hasRole('ADMIN')"
+                th:text="#{label.action}" colspan="2"></th>
+        </tr>
+        <tr th:each="dish : ${dishList}">
+            <td th:text="${dish.name}">/td>
+            <td th:text="#{${dish.dishType.messageKey}}"></td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <form name="list-dish-ingredients"
+                      method="get"
+                      th:action="@{/dishes/{dishId}/dish-ingredients(dishId=${dish.id})}">
+                    <button type="submit"
+                            class="small-action-button"
+                            th:text="#{table.dish-ingredient.list}">
+                    </button>
+                </form>
+            </td>
+            <td th:text="${dish.calories}"></td>
+            <td th:text="${dish.proteins}"></td>
+            <td th:text="${dish.fats}"></td>
+            <td th:text="${dish.carbohydrates}"></td>
+            <td>
+                <form name="details"
+                      method="get"
+                      th:action="@{/dishes/{dishId}(dishId=${dish.id})}">
+                    <button type="submit"
+                            class="small-action-button"
+                            th:text="#{button.view}">
+                    </button>
+                </form>
+            </td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <form name="update"
+                      method="get"
+                      th:action="@{/dishes/edit/{dishId}(dishId=${dish.id})}">
+                    <button type="submit"
+                            class="small-action-button update"
+                            th:text="#{button.update}">
+                    </button>
+                </form>
+            </td>
+            <td sec:authorize="hasRole('ADMIN')">
+                <form name="delete"
+                      method="post"
+                      th:action="@{/dishes/delete/{dishId}(dishId=${dish.id})}">
+                    <button type="submit"
+                            class="small-action-button delete"
+                            th:onclick="'return confirm(\'' + #{alert.confirm.delete} + '\');'"
+                            th:text="#{button.delete}">
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <div class="pagination">
+        <a th:if="${pageSettings.page > 0}"
+           th:href="@{/dishes(page=${pageSettings.page - 1},
+                       size=${pageSettings.size},
+                       sortField=${pageSettings.sortField},
+                       sortDirection=${pageSettings.sortDirection},
+                       name=${filter.name},
+                       dishTypes=${filter.dishTypes},
+                       minCalories=${filter.minCalories},
+                       maxCalories=${filter.maxCalories})}"
+           class="pagination-button"
+           th:text="#{button.previous}"></a>
+
+        <span th:each="page : ${#numbers.sequence(0, totalPages - 1)}">
+        <a th:if="${page != pageSettings.page}"
+           th:href="@{/dishes(page=${page},
+                       size=${pageSettings.size},
+                       sortField=${pageSettings.sortField},
+                       sortDirection=${pageSettings.sortDirection},
+                       name=${filter.name},
+                       dishTypes=${filter.dishTypes},
+                       minCalories=${filter.minCalories},
+                       maxCalories=${filter.maxCalories})}"
+           class="pagination-button"
+           th:text="${page + 1}"></a>
+        <span th:unless="${page != pageSettings.page}"
+              class="pagination-current"
+              th:text="${page + 1}"></span>
+        </span>
+        <a th:if="${pageSettings.page < totalPages - 1}"
+           th:href="@{/dishes(page=${pageSettings.page + 1},
+                       size=${pageSettings.size},
+                       sortField=${pageSettings.sortField},
+                       sortDirection=${pageSettings.sortDirection},
+                       name=${filter.name},
+                       dishTypes=${filter.dishTypes},
+                       minCalories=${filter.minCalories},
+                       maxCalories=${filter.maxCalories})}"
+           class="pagination-button"
+           th:text="#{button.next}"></a>
+
+        <form class="pagination-size-form"
+              th:action="@{/dishes}"
+              method="get">
+            <input type="hidden" name="page" th:value="0">
+            <input type="hidden" name="sortField" th:value="${pageSettings.sortField}">
+            <input type="hidden" name="sortDirection" th:value="${pageSettings.sortDirection}">
+            <input type="number"
+                   name="size"
+                   th:value="${pageSettings.size}"
+                   min="1"
+                   max="100"
+                   class="pagination-size-input"
+                   th:title="#{pagination.size.title}">
+            <input type="hidden" name="name" th:value="${filter.name}">
+            <input th:each="dishType : ${filter.dishTypes}"
+                   type="hidden" name="dishTypes" th:value="${dishType}">
+            <input type="hidden" name="minCalories" th:value="${filter.minCalories}">
+            <input type="hidden" name="maxCalories" th:value="${filter.maxCalories}">
+            <button type="submit"
+                    class="pagination-size-button"
+                    th:text="#{button.send}"></button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
