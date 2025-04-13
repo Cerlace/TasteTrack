@@ -1,12 +1,12 @@
 package cerlace.tastetrack.web.service.impl;
 
-import cerlace.tastetrack.web.TestConstants;
 import cerlace.tastetrack.core.dto.DishDTO;
 import cerlace.tastetrack.core.dto.DishFilter;
 import cerlace.tastetrack.core.dto.PageSettings;
 import cerlace.tastetrack.persistence.repository.DishRepository;
 import cerlace.tastetrack.persistence.repository.IngredientRepository;
 import cerlace.tastetrack.core.service.DishService;
+import cerlace.tastetrack.web.service.TestConstants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,10 +20,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(classes = {
-        DishService.class,
-        DishRepository.class,
-        IngredientRepository.class})
+@SpringBootTest
 @ActiveProfiles("test")
 @Transactional
 class DishServiceImplTest {
