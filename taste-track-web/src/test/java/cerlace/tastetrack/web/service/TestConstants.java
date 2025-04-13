@@ -1,4 +1,4 @@
-package cerlace.tastetrack.web;
+package cerlace.tastetrack.web.service;
 
 import cerlace.tastetrack.core.dto.DishDTO;
 import cerlace.tastetrack.core.dto.DishFilter;
